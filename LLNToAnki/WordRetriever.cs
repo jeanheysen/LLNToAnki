@@ -5,14 +5,15 @@ namespace LLNToAnki
 {
     public class WordRetriever
     {
-        public string GetTitle(string item)
+        public Word GetWord(string item)
         {
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(item);
 
-            var titleNode = new HTMLInterpreter(htmlDocument).GetNodeByNameAndAttribute("div", "dc-title\"\"");
+            var hTMLInterpreter = new HTMLInterpreter(htmlDocument);
+            var titleNode = hTMLInterpreter.GetNodeByNameAndAttribute("div", "dc-title\"\"");
 
-            return titleNode.LastChild.InnerText;
+            return new Word() { EpisodTitle = titleNode.LastChild.InnerText };
         }
     }
 }

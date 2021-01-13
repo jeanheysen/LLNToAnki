@@ -63,9 +63,9 @@ namespace ZXTests
             var splittedContent = new Splitter().Split(text);
 
             //Act
-            var title = new WordRetriever().GetTitle(splittedContent[0]);
+            var word = new WordRetriever().GetWord(splittedContent[0]);
 
-            Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", title);
+            Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", word.EpisodTitle);
         }
     }
 }
