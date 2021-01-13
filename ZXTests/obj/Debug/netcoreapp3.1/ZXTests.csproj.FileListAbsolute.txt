@@ -92,8 +92,9 @@ C:\Users\felix\source\repos\LLNToAnki\ZXTests\bin\Debug\netcoreapp3.1\LLNToAnki.
 C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.csprojAssemblyReference.cache
 C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.AssemblyInfoInputs.cache
 C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.AssemblyInfo.cs
-C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.csproj.CoreCompileInputs.cache
 C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.csproj.CopyComplete
 C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.dll
 C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.pdb
 C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.genruntimeconfig.cache
+C:\Users\felix\source\repos\LLNToAnki\ZXTests\bin\Debug\netcoreapp3.1\HtmlAgilityPack.NetCore.dll
+C:\Users\felix\source\repos\LLNToAnki\ZXTests\obj\Debug\netcoreapp3.1\ZXTests.csproj.CoreCompileInputs.cache

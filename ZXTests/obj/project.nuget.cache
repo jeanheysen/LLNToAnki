@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "efzpDdHkdNMbH+2XJAD7MG50IHG1uEUSrh9ojqXnM85wwwaCRwnjew45iYq/FDGT/HDfo97d8R0A9wKY2FVEBA==",
+  "dgSpecHash": "n5ybigOby+QwLUXd+R14BdXabFNl0EZ7c/CSFt73MW66aG1XDCDeu35pynhRm9Ab6mXamOnzmX1iqM/s1tfzoA==",
   "success": true,
   "projectFilePath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\ZXTests\\ZXTests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\felix\\.nuget\\packages\\htmlagilitypack.netcore\\1.5.0.1\\htmlagilitypack.netcore.1.5.0.1.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.codecoverage\\16.4.0\\microsoft.codecoverage.16.4.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.dotnet.internalabstractions\\1.0.0\\microsoft.dotnet.internalabstractions.1.0.0.nupkg.sha512",
