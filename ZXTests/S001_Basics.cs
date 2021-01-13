@@ -20,7 +20,7 @@ namespace ZXTests
         public void T001_ReadLocalFile()
         {
             //Act
-            string text = new Reader().Read(singleWord_squeezeURL);
+            string text = new Reader().Read(singleWord_squeezeURL); 
 
             //Assert
             Assert.AreEqual("\"<style>\n\n    html,\n    body {", text.Substring(0, 30));
