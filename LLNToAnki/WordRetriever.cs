@@ -10,8 +10,8 @@ namespace LLNToAnki
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(item);
 
-            var interpreter = new HTMLInterpreter();
-            var titleNode = interpreter.GetTitle(htmlDocument);
+            var titleNode = new HTMLInterpreter(htmlDocument).GetNodeByNameAndAttribute("div", "dc-title\"\"");
+
             return titleNode.LastChild.InnerText;
         }
     }

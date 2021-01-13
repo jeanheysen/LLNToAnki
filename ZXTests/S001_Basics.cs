@@ -40,7 +40,7 @@ namespace ZXTests
        
 
         [Test]
-        public void T003_ReadHTMLPartInCsv()
+        public void T003_HTMLInterpreter_TitleIsInsideDivDcTitleAttribute()
         {
             //Arrange
             var htmlOnlyURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
@@ -49,14 +49,14 @@ namespace ZXTests
             htmlDoc.LoadHtml(text);
 
             //Act
-            var titleNode = new HTMLInterpreter().GetTitle(htmlDoc);
+            var titleNode = new HTMLInterpreter(htmlDoc).GetNodeByNameAndAttribute("div", "dc-title\"\"");
 
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", titleNode.LastChild.InnerText);
         }
 
         [Test]
-        public void T004_RetrieveTheWord()
+        public void T004_RetrieveTheTitle()
         {
             //Arrange
             string text = new Reader().Read(singleWord_squeezeURL);

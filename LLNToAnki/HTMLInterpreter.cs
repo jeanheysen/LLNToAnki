@@ -5,7 +5,14 @@ namespace LLNToAnki
 {
     public class HTMLInterpreter
     {
-        public HtmlNode GetTitle(HtmlDocument htmlDoc)
+        private readonly HtmlDocument htmlDoc;
+
+        public HTMLInterpreter(HtmlDocument htmlDoc)
+        {
+            this.htmlDoc = htmlDoc;
+        }
+
+        public HtmlNode GetNodeByNameAndAttribute(string name, string attribute)
         {
             var divs = htmlDoc.DocumentNode.Descendants().Where(n => n.Name == "div").ToList();
 
