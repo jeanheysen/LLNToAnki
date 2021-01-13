@@ -65,10 +65,24 @@ namespace ZXTests
             //Act
             var node = new HTMLInterpreter(htmlDoc).GetNodeByNameAndAttribute("span", "dc-gap\"\"");
 
-            var allNodes = htmlDoc.DocumentNode.Descendants().ToList();
-
-
+            //Assert
             Assert.AreEqual("squeeze", node.LastChild.InnerText);
+        }
+
+        [Test]
+        public void T003c_HTMLInterpreter_TranslationIsInDivDcLineDcTranslation()
+        {
+            //Arrange
+            var htmlOnlyURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
+            string text = new Reader().Read(htmlOnlyURL);
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            htmlDoc.LoadHtml(text);
+
+            //Act
+            var node = new HTMLInterpreter(htmlDoc).GetNodeByNameAndAttribute("div", "dc-translation");
+
+            //Assert
+            Assert.AreEqual("Et appuyez doucement sur la gâchette.", node.LastChild.InnerText);
         }
 
         [Test]
@@ -95,6 +109,24 @@ namespace ZXTests
             var word = new WordRetriever().GetWord(splittedContent[0]);
 
             Assert.AreEqual("squeeze", word.Text);
+        }
+
+        [Test]
+        public void T006_GetTheHTMLQuestionWithNoFrenchInIt()
+        {
+            //Arrange
+            string text = new Reader().Read(singleWord_squeezeURL);
+            var splittedContent = new Splitter().Split(text);
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            htmlDoc.LoadHtml(text);
+
+            //Act
+            var output = new QuestionBuilder().Build(htmlDoc.DocumentNode);
+
+            //Assert
+            Assert.That(output, Does.Contain("squeeze"));
+            Assert.That(output, Does.Contain("The Crown S4:E2 L'épreuve de Balmoral"));
+            Assert.That(output, Does.Not.Contain("Et appuyez doucement sur la gâchette."));
         }
     }
 }
