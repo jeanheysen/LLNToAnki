@@ -20,7 +20,7 @@ namespace ZXTests
         public void T001_ReadLocalFile()
         {
             //Act
-            string text = new Reader().Read(singleWord_squeezeURL); 
+            string text = new Reader().Read(singleWord_squeezeURL);
 
             //Assert
             Assert.AreEqual("\"<style>\n\n    html,\n    body {", text.Substring(0, 30));
@@ -36,8 +36,6 @@ namespace ZXTests
 
             Assert.AreEqual(3, splittedContent.Count);
         }
-
-       
 
         [Test]
         public void T003_HTMLInterpreter_TitleIsInsideDivDcTitleAttribute()
@@ -56,6 +54,24 @@ namespace ZXTests
         }
 
         [Test]
+        public void T003b_HTMLInterpreter_WordIsInsideDcGap()
+        {
+            //Arrange
+            var htmlOnlyURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
+            string text = new Reader().Read(htmlOnlyURL);
+            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+            htmlDoc.LoadHtml(text);
+
+            //Act
+            var node = new HTMLInterpreter(htmlDoc).GetNodeByNameAndAttribute("span", "dc-gap\"\"");
+
+            var allNodes = htmlDoc.DocumentNode.Descendants().ToList();
+
+
+            Assert.AreEqual("squeeze", node.LastChild.InnerText);
+        }
+
+        [Test]
         public void T004_RetrieveTheTitle()
         {
             //Arrange
@@ -66,6 +82,19 @@ namespace ZXTests
             var word = new WordRetriever().GetWord(splittedContent[0]);
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", word.EpisodTitle);
+        }
+
+        [Test]
+        public void T005_RetrieveTheWordSqueeze()
+        {
+            //Arrange
+            string text = new Reader().Read(singleWord_squeezeURL);
+            var splittedContent = new Splitter().Split(text);
+
+            //Act
+            var word = new WordRetriever().GetWord(splittedContent[0]);
+
+            Assert.AreEqual("squeeze", word.Text);
         }
     }
 }

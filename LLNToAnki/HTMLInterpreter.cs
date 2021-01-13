@@ -14,13 +14,13 @@ namespace LLNToAnki
 
         public HtmlNode GetNodeByNameAndAttribute(string name, string attribute)
         {
-            var divs = htmlDoc.DocumentNode.Descendants().Where(n => n.Name == "div").ToList();
+            var divs = htmlDoc.DocumentNode.Descendants().Where(n => n.Name == name).ToList();
 
             foreach (var div in divs)
             {
                 foreach (var att in div.Attributes)
                 {
-                    if (att.Name == "dc-title\"\"")
+                    if (att.Name == attribute)
                     {
                         return div;
                     }

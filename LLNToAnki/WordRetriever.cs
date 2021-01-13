@@ -11,9 +11,15 @@ namespace LLNToAnki
             htmlDocument.LoadHtml(item);
 
             var hTMLInterpreter = new HTMLInterpreter(htmlDocument);
+            
             var titleNode = hTMLInterpreter.GetNodeByNameAndAttribute("div", "dc-title\"\"");
+            var wordTextNode = hTMLInterpreter.GetNodeByNameAndAttribute("span", "dc-gap\"\"");
 
-            return new Word() { EpisodTitle = titleNode.LastChild.InnerText };
+            return new Word()
+            {
+                EpisodTitle = titleNode.LastChild.InnerText,
+                Text = wordTextNode.LastChild.InnerText
+            };
         }
     }
 }
