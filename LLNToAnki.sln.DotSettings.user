@@ -2,5 +2,6 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1ee6e98d_002D99b8_002D432d_002Da655_002Df868b7d868d3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="T001_ReadLocalFile" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::084A000A-F469-4843-8A2C-52EA42CC6F74::.NETCoreApp,Version=v3.1::ZXTests.Tests.T001_ReadLocalFile&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::084A000A-F469-4843-8A2C-52EA42CC6F74::.NETCoreApp,Version=v3.1::ZXTests.Tests.T002_SplitStringWithBackSlashT&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
