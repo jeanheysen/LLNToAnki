@@ -93,7 +93,7 @@ namespace ZXTests
             var splittedContent = new Splitter().Split(text);
 
             //Act
-            var word = new WordRetriever().GetWord(splittedContent[0]);
+            var word = new WordBuilder().GetWord(splittedContent[0]);
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", word.EpisodTitle);
         }
@@ -106,7 +106,7 @@ namespace ZXTests
             var splittedContent = new Splitter().Split(text);
 
             //Act
-            var word = new WordRetriever().GetWord(splittedContent[0]);
+            var word = new WordBuilder().GetWord(splittedContent[0]);
 
             Assert.AreEqual("squeeze", word.Text);
         }
@@ -127,6 +127,26 @@ namespace ZXTests
             Assert.That(output, Does.Contain("squeeze"));
             Assert.That(output, Does.Contain("The Crown S4:E2 L'épreuve de Balmoral"));
             Assert.That(output, Does.Not.Contain("Et appuyez doucement sur la gâchette."));
+        }
+
+        [Test]
+        public void T007_AnkiNoteContainsQuestionFromQuestionBuilder()
+        {
+            //Arrange
+            var expectedQuestionURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_expectedQuestion.txt";
+            string expectedQuestion = new Reader().Read(expectedQuestionURL);
+            expectedQuestion = expectedQuestion.Replace("\r", "");
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(new Reader().Read(singleWord_squeezeURL));
+
+            //Act
+            var note = new AnkiNoteBuilder().Build(htmlDoc.DocumentNode);
+
+            //Assert
+            var exp = expectedQuestion;
+            var res = note.Question;
+
+            Assert.AreEqual(exp, res);
         }
     }
 }

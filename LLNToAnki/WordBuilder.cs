@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LLNToAnki
 {
-    public class WordRetriever
+    public class WordBuilder
     {
         public Word GetWord(string item)
         {
@@ -14,6 +14,7 @@ namespace LLNToAnki
             
             var titleNode = hTMLInterpreter.GetNodeByNameAndAttribute("div", "dc-title\"\"");
             var wordTextNode = hTMLInterpreter.GetNodeByNameAndAttribute("span", "dc-gap\"\"");
+            var question = new QuestionBuilder().Build(htmlDocument.DocumentNode);
 
             return new Word()
             {
