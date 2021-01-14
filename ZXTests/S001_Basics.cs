@@ -1,5 +1,6 @@
 using HtmlAgilityPack;
 using LLNToAnki;
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -147,6 +148,29 @@ namespace ZXTests
             var res = note.Question;
 
             Assert.AreEqual(exp, res);
+        }
+
+        [Test]
+        public void T008_ExporterSeparatesWithTab()
+        {
+            //Arrange
+            var notes = new AnkiNote()
+            {
+                Question = "Quelle est la couleur du cheval blanc d'Henri IV ?",
+                Answer = "blanc",
+                Before="rien avant"
+            };
+
+            var fileWriterMock = new Mock<IFileWriter>() { DefaultValue = DefaultValue.Mock };
+            var path = "whateverPath";
+            var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	rien avant	blanc";
+
+            //Act
+            new AnkiNoteCsvExporter(fileWriterMock.Object).Export(path, notes);
+
+
+            //Assert
+            fileWriterMock.Verify(w => w.Write(path, expectedContent), Times.Once());
         }
     }
 }
