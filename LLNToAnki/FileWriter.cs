@@ -11,7 +11,7 @@ namespace LLNToAnki
     {
         public void Write(string path, string content)
         {
-            File.WriteAllText(path, content);
+            File.WriteAllText(path, content, System.Text.Encoding.ASCII);
         }
     }
 }

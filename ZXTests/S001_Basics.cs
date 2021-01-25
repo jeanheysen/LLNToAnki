@@ -3,7 +3,10 @@ using LLNToAnki;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ZXTests
 {
@@ -122,36 +125,16 @@ namespace ZXTests
             htmlDoc.LoadHtml(text);
 
             //Act
-            var output = new QuestionBuilder().Build(htmlDoc.DocumentNode);
+            var question = new QuestionBuilder().Build(htmlDoc.DocumentNode);
 
             //Assert
-            Assert.That(output, Does.Contain("squeeze"));
-            Assert.That(output, Does.Contain("The Crown S4:E2 L'épreuve de Balmoral"));
-            Assert.That(output, Does.Not.Contain("Et appuyez doucement sur la gâchette."));
+            Assert.That(question, Does.Contain("squeeze"));
+            Assert.That(question, Does.Contain("The Crown S4:E2 L'épreuve de Balmoral"));
+            Assert.That(question, Does.Not.Contain("Et appuyez doucement sur la gâchette."));
         }
 
         [Test]
-        public void T007_AnkiNoteContainsQuestionFromQuestionBuilder()
-        {
-            //Arrange
-            var expectedQuestionURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_expectedQuestion.txt";
-            string expectedQuestion = new Reader().Read(expectedQuestionURL);
-            expectedQuestion = expectedQuestion.Replace("\r", "");
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(new Reader().Read(singleWord_squeezeURL));
-
-            //Act
-            var note = new AnkiNoteBuilder().Build(htmlDoc.DocumentNode);
-
-            //Assert
-            var exp = expectedQuestion;
-            var res = note.Question;
-
-            Assert.AreEqual(exp, res);
-        }
-
-        [Test]
-        public void T008_ExporterSeparatesWithTab()
+        public void T007_ExporterSeparatesWithTab()
         {
             //Arrange
             var notes = new AnkiNote()
@@ -171,6 +154,39 @@ namespace ZXTests
 
             //Assert
             fileWriterMock.Verify(w => w.Write(path, expectedContent), Times.Once());
+        }
+
+        [Test]
+        public void T008_EndToEnd()
+        {
+            //get html
+            var htmlDoc = new HtmlDocument();
+            Reader reader = new Reader();
+            string text = reader.Read(this.singleWord_squeezeURL);
+            var splittedContent = new Splitter().Split(text);
+            htmlDoc.LoadHtml(splittedContent[0]);
+
+            //build word
+            var word = new WordBuilder().GetWord(splittedContent[0]);
+
+            //build question
+            var question = new QuestionBuilder().Build(htmlDoc.DocumentNode);
+
+
+            //build note
+            var ankinote = new AnkiNote()
+            {
+                Question=question,
+                Answer = word.Text,
+                Before=""
+            };
+
+            //export note
+            var exportFilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp_export.txt";
+            new AnkiNoteCsvExporter(new FileWriter()).Export(exportFilePath, ankinote);
+
+            var reffilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_ExpectedNote.txt";
+            Assert.AreEqual(reader.Read(reffilePath), reader.Read(exportFilePath));
         }
     }
 }

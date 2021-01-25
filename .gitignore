@@ -3,3 +3,6 @@ ZXTests/bin
 ZXTests/obj
 LLNToAnki/bin/Debug
 LLNToAnki/obj
+*.dll
+*.pdb
+*.cache

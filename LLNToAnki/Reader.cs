@@ -7,7 +7,7 @@ namespace LLNToAnki
 
         public string Read(string url)
         {
-            return File.ReadAllText(url);
+            return File.ReadAllText(url, System.Text.Encoding.UTF8);
         }
     }
 }
