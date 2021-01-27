@@ -5,7 +5,7 @@ namespace LLNToAnki
     public class Reader
     {
 
-        public string Read(string url)
+        public string ReadFileFromPath(string url)
         {
             return File.ReadAllText(url, System.Text.Encoding.UTF8);
         }

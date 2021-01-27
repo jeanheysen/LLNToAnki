@@ -12,29 +12,49 @@ namespace ZXTests
 {
     public class Tests
     {
-        string singleWord_squeezeURL;
+        string singleWordSqueezeCsvPath;
+        private string exportFilePath;
+        private string referenceFileSqueezePath;
+        private string squeezeHtmlOnlyPath;
+        private Reader reader;
+        private Splitter splitter;
+        private FileWriter fileWriter;
+        private wordItemBuilder wordItemBuilder;
+        private AnkiNoteCsvExporter ankiNoteCsvExporter;
+        private AnkiNoteItemMapper mapper;
 
         [SetUp]
         public void Setup()
         {
-            singleWord_squeezeURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze.csv";
+            singleWordSqueezeCsvPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze.csv";
+            exportFilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp_export.txt";
+            referenceFileSqueezePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_ExpectedNote.txt";
+            squeezeHtmlOnlyPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
+
+
+            reader = new Reader();
+            splitter = new Splitter();
+            fileWriter = new FileWriter();
+            wordItemBuilder = new wordItemBuilder();
+            ankiNoteCsvExporter = new AnkiNoteCsvExporter(fileWriter);
+            mapper = new AnkiNoteItemMapper();
         }
 
         [Test]
-        public void T001_ReadLocalFile()
+        public void T001_TheReaderReadsTheBeginningOfTheFileCorrectly()
         {
             //Act
-            string text = new Reader().Read(singleWord_squeezeURL);
+            string text = new Reader().ReadFileFromPath(singleWordSqueezeCsvPath);
 
             //Assert
             Assert.AreEqual("\"<style>\n\n    html,\n    body {", text.Substring(0, 30));
         }
 
         [Test]
-        public void T002_SplitStringWithBackSlashT()
+        public void T002_TheSplitterSplitsTheCsvInThreePieces()
         {
             //Arrange
-            string text = new Reader().Read(singleWord_squeezeURL);
+            string text = new Reader().ReadFileFromPath(singleWordSqueezeCsvPath);
 
             var splittedContent = new Splitter().Split(text);
 
@@ -42,84 +62,80 @@ namespace ZXTests
         }
 
         [Test]
-        public void T003_HTMLInterpreter_TitleIsInsideDivDcTitleAttribute()
+        public void T003_TheHTMLInterpreterPermitsToReturnTheTitleInsideDivDc()
         {
             //Arrange
-            var htmlOnlyURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
-            string text = new Reader().Read(htmlOnlyURL);
-            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(text);
+            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
+            var extractor = new WordItemExtractor(hTMLInterpreter);
 
             //Act
-            var titleNode = new HTMLInterpreter(htmlDoc).GetNodeByNameAndAttribute("div", "dc-title\"\"");
+            
+            var r = extractor.GetTitle();
 
 
-            Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", titleNode.LastChild.InnerText);
+            Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", r);
         }
 
         [Test]
-        public void T003b_HTMLInterpreter_WordIsInsideDcGap()
+        public void T003b_TheInterperterPermitsToReturnTheWordInsideSpanGap()
         {
             //Arrange
-            var htmlOnlyURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
-            string text = new Reader().Read(htmlOnlyURL);
-            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(text);
+            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
+            var extractor = new WordItemExtractor(hTMLInterpreter);
 
             //Act
-            var node = new HTMLInterpreter(htmlDoc).GetNodeByNameAndAttribute("span", "dc-gap\"\"");
+
+            var r = extractor.GetWord();
 
             //Assert
-            Assert.AreEqual("squeeze", node.LastChild.InnerText);
+            Assert.AreEqual("squeeze", r);
         }
 
         [Test]
-        public void T003c_HTMLInterpreter_TranslationIsInDivDcLineDcTranslation()
+        public void T003c_TheInterpreterReturnsTheTranslation()
         {
             //Arrange
-            var htmlOnlyURL = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
-            string text = new Reader().Read(htmlOnlyURL);
-            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(text);
+            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
+            var extractor = new WordItemExtractor(hTMLInterpreter);
 
             //Act
-            var node = new HTMLInterpreter(htmlDoc).GetNodeByNameAndAttribute("div", "dc-translation");
+            var r = extractor.GetTranslation();
 
             //Assert
-            Assert.AreEqual("Et appuyez doucement sur la gâchette.", node.LastChild.InnerText);
+            Assert.AreEqual("Et appuyez doucement sur la gâchette.", r);
         }
 
         [Test]
-        public void T004_RetrieveTheTitle()
+        public void T004_TheTitleIsInsideTitleOfTheWord()
         {
             //Arrange
-            string text = new Reader().Read(singleWord_squeezeURL);
+            string text = reader.ReadFileFromPath(singleWordSqueezeCsvPath);
+            var splittedContent = splitter.Split(text);
+
+            //Act
+            var item = new wordItemBuilder().Build(splittedContent[0]);
+
+            Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", item.Context.EpisodTitle);
+        }
+
+        [Test]
+        public void T005_TheWordBuilderReturnsTheWord()
+        {
+            //Arrange
+            string text = new Reader().ReadFileFromPath(singleWordSqueezeCsvPath);
             var splittedContent = new Splitter().Split(text);
 
             //Act
-            var word = new WordBuilder().GetWord(splittedContent[0]);
+            var word = new wordItemBuilder().Build(splittedContent[0]);
 
-            Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", word.EpisodTitle);
-        }
-
-        [Test]
-        public void T005_RetrieveTheWordSqueeze()
-        {
-            //Arrange
-            string text = new Reader().Read(singleWord_squeezeURL);
-            var splittedContent = new Splitter().Split(text);
-
-            //Act
-            var word = new WordBuilder().GetWord(splittedContent[0]);
-
-            Assert.AreEqual("squeeze", word.Text);
+            Assert.AreEqual("squeeze", word.Word);
         }
 
         [Test]
         public void T006_GetTheHTMLQuestionWithNoFrenchInIt()
         {
             //Arrange
-            string text = new Reader().Read(singleWord_squeezeURL);
+            string text = new Reader().ReadFileFromPath(singleWordSqueezeCsvPath);
             var splittedContent = new Splitter().Split(text);
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(text);
@@ -160,33 +176,16 @@ namespace ZXTests
         public void T008_EndToEnd()
         {
             //get html
-            var htmlDoc = new HtmlDocument();
-            Reader reader = new Reader();
-            string text = reader.Read(this.singleWord_squeezeURL);
-            var splittedContent = new Splitter().Split(text);
-            htmlDoc.LoadHtml(splittedContent[0]);
-
-            //build word
-            var word = new WordBuilder().GetWord(splittedContent[0]);
-
-            //build question
-            var question = new QuestionBuilder().Build(htmlDoc.DocumentNode);
-
-
-            //build note
-            var ankinote = new AnkiNote()
-            {
-                Question=question,
-                Answer = word.Text,
-                Before=""
-            };
+            string text = reader.ReadFileFromPath(singleWordSqueezeCsvPath);
+            var html = splitter.Split(text)[0];
+            var item = wordItemBuilder.Build(html);
+            var ankiNote = mapper.Map(item);
 
             //export note
-            var exportFilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp_export.txt";
-            new AnkiNoteCsvExporter(new FileWriter()).Export(exportFilePath, ankinote);
+            ankiNoteCsvExporter.Export(this.exportFilePath, ankiNote);
 
-            var reffilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_ExpectedNote.txt";
-            Assert.AreEqual(reader.Read(reffilePath), reader.Read(exportFilePath));
+            //Assert
+            Assert.AreEqual(reader.ReadFileFromPath(referenceFileSqueezePath), reader.ReadFileFromPath(exportFilePath));
         }
     }
 }

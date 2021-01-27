@@ -6,8 +6,6 @@ namespace LLNToAnki
     {
         public string Build(HtmlNode htmlContent)
         {
-            var htmldoc = new HtmlDocument();
-
             HtmlNode nodeToRemove = null;
             foreach (var node in htmlContent.Descendants())
             {
