@@ -21,7 +21,7 @@ namespace ZXTests
         private FileWriter fileWriter;
         private wordItemBuilder wordItemBuilder;
         private AnkiNoteCsvExporter ankiNoteCsvExporter;
-        private AnkiNoteItemMapper mapper;
+        private AnkiNoteBuilder ankiNoteBuilder;
 
         [SetUp]
         public void Setup()
@@ -31,7 +31,7 @@ namespace ZXTests
             fileWriter = new FileWriter();
             wordItemBuilder = new wordItemBuilder();
             ankiNoteCsvExporter = new AnkiNoteCsvExporter(fileWriter);
-            mapper = new AnkiNoteItemMapper();
+            ankiNoteBuilder = new AnkiNoteBuilder();
         }
 
         public Tests()
@@ -181,13 +181,15 @@ namespace ZXTests
             string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
             var html = splitter.Split(text)[0];
             var item = wordItemBuilder.Build(html);
-            var ankiNote = mapper.Map(item);
+            var ankiNote = ankiNoteBuilder.Builder(item);
 
             //export note
             ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
 
             //Assert
-            Assert.AreEqual(reader.ReadFileFromPath(squeezeExpectedNotePath), reader.ReadFileFromPath(tmpExportFilePath));
+            string expected = reader.ReadFileFromPath(squeezeExpectedNotePath);
+            string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
+            Assert.AreEqual(expected, actual);
         }
     }
 }

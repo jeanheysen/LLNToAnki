@@ -1,1 +1,123 @@
-		squeeze
+"<style>
+
+    html,
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .card {
+        background: rgb(255,243,248);
+        background: linear-gradient(76deg, rgba(255,243,248,1) 0%, rgba(238,246,255,1) 100%);
+    }
+
+    .nightMode.card {
+        background: black;
+    }
+    
+    .dc-card {
+        background-color: white;
+        padding-bottom: 1rem;
+        border-bottom: 0.5px solid grey;
+    }
+
+    .nightMode .dc-card {
+        background: #333;
+        border-bottom: none;
+    }
+
+    .nightMode .cloze {
+        color: #1569C7;
+    }
+
+    .dc-title {
+        color: rgb(127, 127, 127);
+        font-size: 0.8rem;
+        text-align: center;
+        padding-top: 0.65rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .dc-images {
+        text-align: center;
+        max-width: 450px;
+        margin: 0 auto 0.5rem;
+    }
+
+    .dc-image {
+       margin-left: 2px;
+       margin-right: 2px;
+        display: inline-block;
+        width: calc(50% - 10px);
+        padding-bottom: 29%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .dc-line {
+        padding: 0.4rem;
+    }
+
+    .dc-up {
+        display: block;
+        font-size: 0.75rem;
+    }
+
+    .dc-translation {
+        color: fuchsia;
+    }
+
+    .dc-layer {
+        display: inline-block;
+        text-align: center;
+        line-height: 1.3rem;
+    }
+
+    .dc-lang-zh-CN.dc-orig {
+        font-size: 1.2rem;
+    }
+    .dc-lang-zh-TW.dc-orig {
+        font-size: 1.2rem;
+    }
+    .dc-lang-ja.dc-orig {
+        font-size: 1.2rem;
+    }
+    .dc-lang-th.dc-orig {
+        font-size: 1.2rem;
+    }
+    .dc-lang-ar.dc-orig {
+        font-size: 1.2rem;
+    }
+    .dc-lang-fa.dc-orig {
+        font-size: 1.2rem;
+    }
+    .dc-lang-ur.dc-orig {
+        font-size: 1.2rem;
+    }
+
+    .dc-play {
+        margin: 0.5rem 1rem 0 auto;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.4rem;
+        height: 1.4rem;
+        border-radius: 1rem;
+        background-repeat: no-repeat;
+        background-color: blue;
+        background-position: center;
+    }
+
+    .nightMode .dc-play {
+        background-color: #1569C7;
+    }
+
+    .dc-play-svg {
+        pointer-events: none; 
+        transform: translateX(6%);
+        width: 1rem;
+        height: 1rem;
+    }
+</style><div class=""dc-bg"" onclick=""var dc_audio = document.getElementById('dc-audio'); if(dc_audio){ dc_audio.pause(); dc_audio.currentTime = 0; dc_audio.play(); }""><div class=""dc-card dc-lang-en dc-word-naked""><div class=""dc-title"">The Crown S4:E2 L'?preuve de Balmoral</div><div class=""dc-images""><div class=""dc-image dc-image-prev"" style=""background-image: url(1610544850824_prev.jpg)""></div><div class=""dc-image dc-image-next"" style=""background-image: url(1610544850824_next.jpg)""></div></div><div class=""dc-line""><span class=""dc-down dc-lang-en dc-orig"">And</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">gently</span><span class=""dc-down dc-lang-en dc-orig""> </span>{{c1::<span class=""dc-gap""><span class=""dc-down dc-lang-en dc-orig"">squeeze</span></span>}}<span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">the</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">trigger</span><span class=""dc-down dc-lang-en dc-orig"">.</span></div><div class=""dc-line dc-translation dc-lang-fr"">Et appuyez doucement sur la g?chette.</div><audio style=""display: none;"" id=""dc-audio""><source src=""1610544850824.mp3"" type=""audio/mpeg""></audio><div class=""dc-play"" preload=""auto""><svg class=""dc-play-svg"" version=""1.1"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 512 512""><path fill=""#fff"" d=""M96 64l320 192-320 192z""></path></svg></div></div></div>"		squeeze

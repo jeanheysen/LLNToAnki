@@ -13,16 +13,4 @@
         public string AddReverseQuestion { get; set; }
         public string AddReverseAnswer { get; set; }
     }
-
-    public class AnkiNoteItemMapper
-    {
-        public AnkiNote Map(WordItem item)
-        {
-            var note = new AnkiNote();
-            
-            note.Answer = item.Word;
-
-            return note;
-        }
-    }
 }

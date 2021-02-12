@@ -10,15 +10,13 @@ namespace LLNToAnki
             var hTMLInterpreter = new HTMLInterpreter(html);
 
             var extractor = new WordItemExtractor(hTMLInterpreter);
+            var word = extractor.GetWord();
+            var title = extractor.GetTitle();
+            var htmlContent = html;
 
-            var context = new WordContext();
-            context.EpisodTitle = extractor.GetTitle();
 
-            return new WordItem()
-            {
-                Word = extractor.GetWord(),
-                Context = context
-            };
+            var context = new WordContext { EpisodTitle = title,HtmlWithWordInIt=htmlContent };
+            return new WordItem() { Word = word, Context = context };
         }
     }
 }
