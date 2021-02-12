@@ -12,9 +12,9 @@ namespace ZXTests
 {
     public class Tests
     {
-        string singleWordSqueezeCsvPath;
-        private string exportFilePath;
-        private string referenceFileSqueezePath;
+        string squeezeOriginalLLNOutputPath;
+        private string tmpExportFilePath;
+        private string squeezeExpectedNotePath;
         private string squeezeHtmlOnlyPath;
         private Reader reader;
         private Splitter splitter;
@@ -26,12 +26,6 @@ namespace ZXTests
         [SetUp]
         public void Setup()
         {
-            singleWordSqueezeCsvPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze.csv";
-            exportFilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp_export.txt";
-            referenceFileSqueezePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_ExpectedNote.txt";
-            squeezeHtmlOnlyPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
-
-
             reader = new Reader();
             splitter = new Splitter();
             fileWriter = new FileWriter();
@@ -40,11 +34,19 @@ namespace ZXTests
             mapper = new AnkiNoteItemMapper();
         }
 
+        public Tests()
+        {
+            tmpExportFilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp_export.txt";
+            squeezeOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze.csv";
+            squeezeExpectedNotePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_ExpectedNote.txt";
+            squeezeHtmlOnlyPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
+        }
+
         [Test]
         public void T001_TheReaderReadsTheBeginningOfTheFileCorrectly()
         {
             //Act
-            string text = new Reader().ReadFileFromPath(singleWordSqueezeCsvPath);
+            string text = new Reader().ReadFileFromPath(squeezeOriginalLLNOutputPath);
 
             //Assert
             Assert.AreEqual("\"<style>\n\n    html,\n    body {", text.Substring(0, 30));
@@ -54,7 +56,7 @@ namespace ZXTests
         public void T002_TheSplitterSplitsTheCsvInThreePieces()
         {
             //Arrange
-            string text = new Reader().ReadFileFromPath(singleWordSqueezeCsvPath);
+            string text = new Reader().ReadFileFromPath(squeezeOriginalLLNOutputPath);
 
             var splittedContent = new Splitter().Split(text);
 
@@ -109,7 +111,7 @@ namespace ZXTests
         public void T004_TheTitleIsInsideTitleOfTheWord()
         {
             //Arrange
-            string text = reader.ReadFileFromPath(singleWordSqueezeCsvPath);
+            string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
             var splittedContent = splitter.Split(text);
 
             //Act
@@ -122,7 +124,7 @@ namespace ZXTests
         public void T005_TheWordBuilderReturnsTheWord()
         {
             //Arrange
-            string text = new Reader().ReadFileFromPath(singleWordSqueezeCsvPath);
+            string text = new Reader().ReadFileFromPath(squeezeOriginalLLNOutputPath);
             var splittedContent = new Splitter().Split(text);
 
             //Act
@@ -135,7 +137,7 @@ namespace ZXTests
         public void T006_GetTheHTMLQuestionWithNoFrenchInIt()
         {
             //Arrange
-            string text = new Reader().ReadFileFromPath(singleWordSqueezeCsvPath);
+            string text = new Reader().ReadFileFromPath(squeezeOriginalLLNOutputPath);
             var splittedContent = new Splitter().Split(text);
             var htmlDoc = new HtmlAgilityPack.HtmlDocument();
             htmlDoc.LoadHtml(text);
@@ -176,16 +178,16 @@ namespace ZXTests
         public void T008_EndToEnd()
         {
             //get html
-            string text = reader.ReadFileFromPath(singleWordSqueezeCsvPath);
+            string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
             var html = splitter.Split(text)[0];
             var item = wordItemBuilder.Build(html);
             var ankiNote = mapper.Map(item);
 
             //export note
-            ankiNoteCsvExporter.Export(this.exportFilePath, ankiNote);
+            ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
 
             //Assert
-            Assert.AreEqual(reader.ReadFileFromPath(referenceFileSqueezePath), reader.ReadFileFromPath(exportFilePath));
+            Assert.AreEqual(reader.ReadFileFromPath(squeezeExpectedNotePath), reader.ReadFileFromPath(tmpExportFilePath));
         }
     }
 }
