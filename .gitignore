@@ -6,3 +6,6 @@ LLNToAnki/obj
 *.dll
 *.pdb
 *.cache
+/.vs/LLNToAnki/DesignTimeBuild/.dtbcache.v2
+/LLNToAnki.sln.DotSettings.user
+/ZXTests/Data/tmp_export.txt

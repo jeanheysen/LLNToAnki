@@ -174,22 +174,41 @@ namespace ZXTests
             fileWriterMock.Verify(w => w.Write(path, expectedContent), Times.Once());
         }
 
+
+        [Test]
+        public void T009_GetPartToReplace()
+        {
+            //Arrange
+            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
+            var extractor = new WordItemExtractor(hTMLInterpreter);
+
+            //Act
+            var r = extractor.GetQuestion();
+
+            //Assert
+            StringAssert.DoesNotContain("{{c1::", r);
+        }
+
         [Test]
         public void T008_EndToEnd()
         {
             //get html
             string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
             var html = splitter.Split(text)[0];
-            var item = wordItemBuilder.Build(html);
-            var ankiNote = ankiNoteBuilder.Builder(item);
+            var wordItem = wordItemBuilder.Build(html);
+            var ankiNote = ankiNoteBuilder.Builder(wordItem);
 
             //export note
             ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
 
             //Assert
             string expected = reader.ReadFileFromPath(squeezeExpectedNotePath);
+            string expectedCleanCarriage = expected.Replace("\r\n", "\n");
             string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
-            Assert.AreEqual(expected, actual);
+            
+            Assert.AreEqual(expectedCleanCarriage, actual);
         }
+
+
     }
 }
