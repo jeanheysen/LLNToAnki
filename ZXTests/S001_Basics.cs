@@ -134,24 +134,6 @@ namespace ZXTests
         }
 
         [Test]
-        public void T006_GetTheHTMLQuestionWithNoFrenchInIt()
-        {
-            //Arrange
-            string text = new Reader().ReadFileFromPath(squeezeOriginalLLNOutputPath);
-            var splittedContent = new Splitter().Split(text);
-            var htmlDoc = new HtmlAgilityPack.HtmlDocument();
-            htmlDoc.LoadHtml(text);
-
-            //Act
-            var question = new QuestionBuilder().Build(htmlDoc.DocumentNode);
-
-            //Assert
-            Assert.That(question, Does.Contain("squeeze"));
-            Assert.That(question, Does.Contain("The Crown S4:E2 L'épreuve de Balmoral"));
-            Assert.That(question, Does.Not.Contain("Et appuyez doucement sur la gâchette."));
-        }
-
-        [Test]
         public void T007_ExporterSeparatesWithTab()
         {
             //Arrange
@@ -187,6 +169,7 @@ namespace ZXTests
 
             //Assert
             StringAssert.DoesNotContain("{{c1::", r);
+            StringAssert.DoesNotContain("}}", r);
         }
 
         [Test]
