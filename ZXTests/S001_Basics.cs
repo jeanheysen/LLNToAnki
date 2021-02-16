@@ -191,7 +191,5 @@ namespace ZXTests
             
             Assert.AreEqual(expectedCleanCarriage, actual);
         }
-
-
     }
 }

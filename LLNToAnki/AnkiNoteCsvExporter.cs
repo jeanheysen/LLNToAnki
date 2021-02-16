@@ -18,7 +18,9 @@ namespace LLNToAnki
             sb.Append("	");
             sb.Append(note.Before);
             sb.Append("	");
+            sb.Append("\"");
             sb.Append(note.Answer);
+            sb.Append("\"");
             this.fileWriter.Write(path, sb.ToString());
         }
     }

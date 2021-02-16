@@ -23,10 +23,17 @@
 
         public string GetQuestion()
         {
+            var translation = GetTranslation();
+
             var a1 = interpreter.Html;
             var a2 = a1.Replace("{{c1::", "");
             var a3 = a2.Replace("}}", "");
-            return a3;
+            var a4 = a3.Replace(translation, "");
+
+            var toreplace = "<span class=\"\"dc-gap\"\">";
+            var by = "<span class=\"\"dc-gap\"\" style=\"\"background-color: brown;\"\">";
+            var a5 = a4.Replace(toreplace, by);
+            return a5;
         }
 
         public string GetTranslation()

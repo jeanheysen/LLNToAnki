@@ -5,8 +5,8 @@
         public AnkiNote Builder(WordItem item)
         {
             var note = new AnkiNote();
-            note.Question = item.Context.HtmlWithWordInIt;
-            note.Answer = item.Word;
+            note.Question = item.Context.Question;
+            note.Answer = item.Context.Translation;
             note.Before = "";
             return note;
         }
