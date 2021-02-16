@@ -1,0 +1,4 @@
+d'abord faire un poc ensuite le clean
+
+clean injecter les interfaces
+clean archi hexa
