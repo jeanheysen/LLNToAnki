@@ -12,13 +12,17 @@ namespace ZXTests
 {
     public class BaseIntegrationTesting
     {
-        protected IFileReader fileReader;
-        protected ITextSplitter splitter;
-        protected IFileWriter fileWriter;
+        protected IFileReader FileReader { get; private set; }
+        protected ITextSplitter Splitter { get; private set; }
+        protected IFileWriter FileWriter { get; private set; }
+        protected string TmpExportFilePath => GetPathInData("tmp_export.txt");
+
 
         public BaseIntegrationTesting()
         {
-
+            FileReader = new FileReader();
+            Splitter = new TextSplitter();
+            FileWriter = new FileWriter();
         }
 
 
