@@ -13,8 +13,10 @@ namespace ZXTests
     public class Tests
     {
         string squeezeOriginalLLNOutputPath;
+        string waggingOriginalLLNOutputPath;
         private string tmpExportFilePath;
         private string squeezeExpectedNotePath;
+        private string waggingExpectedNotePath;
         private string squeezeHtmlOnlyPath;
         private Reader reader;
         private Splitter splitter;
@@ -38,7 +40,9 @@ namespace ZXTests
         {
             tmpExportFilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp_export.txt";
             squeezeOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze.csv";
+            waggingOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging.csv";
             squeezeExpectedNotePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_ExpectedNote.txt";
+            waggingExpectedNotePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging_ExpectedNote.txt";
             squeezeHtmlOnlyPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
         }
 
@@ -173,7 +177,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T009_EndToEnd() //TODO à bouger dans une nouvelle suite de test
+        public void T009_SqueezeEndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //get html
             string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
@@ -189,6 +193,26 @@ namespace ZXTests
             string expectedCleanCarriage = expected.Replace("\r\n", "\n");
             string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
             
+            Assert.AreEqual(expectedCleanCarriage, actual);
+        }
+
+        [Test,Ignore("formatage qui casse les couilles")]
+        public void T010_WaggingEndToEnd() //TODO à bouger dans une nouvelle suite de test
+        {
+            //get html
+            string text = reader.ReadFileFromPath(waggingOriginalLLNOutputPath);
+            var html = splitter.Split(text)[0];
+            var wordItem = wordItemBuilder.Build(html);
+            var ankiNote = ankiNoteBuilder.Builder(wordItem);
+
+            //export note
+            ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
+
+            //Assert
+            string expected = reader.ReadFileFromPath(squeezeExpectedNotePath);
+            string expectedCleanCarriage = expected.Replace("\r\n", "\n");
+            string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
+
             Assert.AreEqual(expectedCleanCarriage, actual);
         }
     }
