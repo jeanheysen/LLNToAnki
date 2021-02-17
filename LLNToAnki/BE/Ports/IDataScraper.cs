@@ -1,8 +1,8 @@
 ﻿using HtmlAgilityPack;
 
-namespace LLNToAnki.BE
+namespace LLNToAnki.BE.Ports
 {
-    public interface IHTMLScraper
+    public interface IDataScraper
     {
         HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute);
     }

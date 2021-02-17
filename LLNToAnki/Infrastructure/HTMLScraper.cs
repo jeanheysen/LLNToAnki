@@ -1,11 +1,11 @@
 ﻿using HtmlAgilityPack;
-using LLNToAnki.BE;
+using LLNToAnki.BE.Ports;
 using System.Linq;
 
 namespace LLNToAnki.Infrastructure
 {
 
-    public class HTMLScraper : IHTMLScraper
+    public class HTMLScraper : IDataScraper
     {
         public HTMLScraper()
         {

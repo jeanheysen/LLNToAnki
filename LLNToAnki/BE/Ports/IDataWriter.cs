@@ -1,6 +1,6 @@
-﻿namespace LLNToAnki.BE
+﻿namespace LLNToAnki.BE.Ports
 {
-    public interface IFileWriter
+    public interface IDataWriter
     {
         void Write(string path, string content);
     }

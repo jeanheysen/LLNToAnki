@@ -1,14 +1,9 @@
-using HtmlAgilityPack;
-using LLNToAnki;
 using LLNToAnki.BE;
+using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace ZXTests
 {
@@ -116,7 +111,7 @@ namespace ZXTests
                 Answer = "blanc"
             };
 
-            var fileWriterMock = new Mock<IFileWriter>() { DefaultValue = DefaultValue.Mock };
+            var fileWriterMock = new Mock<IDataWriter>() { DefaultValue = DefaultValue.Mock };
             var path = "whateverPath";
             var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	blanc";
 

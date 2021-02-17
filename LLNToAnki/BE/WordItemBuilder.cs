@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using System.Collections.Generic;
+﻿using LLNToAnki.BE.Ports;
 
 namespace LLNToAnki.BE
 {
@@ -11,10 +10,10 @@ namespace LLNToAnki.BE
     public class WordItemBuilder : IWordItemBuilder
     {
         //FIELDS
-        private readonly IHTMLScraper htmlScraper;
+        private readonly IDataScraper htmlScraper;
 
         //CONSTRUCTOR
-        public WordItemBuilder(IHTMLScraper htmlScraper)
+        public WordItemBuilder(IDataScraper htmlScraper)
         {
             this.htmlScraper = htmlScraper;
         }

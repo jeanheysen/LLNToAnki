@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LLNToAnki.BE.Ports;
+using System.Collections.Generic;
 using System.Text;
 
 namespace LLNToAnki.BE
@@ -11,10 +12,10 @@ namespace LLNToAnki.BE
     public class AnkiNoteExporter : IAnkiNoteExporter
     {
         //FIELDS
-        private readonly IFileWriter fileWriter;
+        private readonly IDataWriter fileWriter;
 
         //CONSTRUCTOR
-        public AnkiNoteExporter(IFileWriter fileWriter)
+        public AnkiNoteExporter(IDataWriter fileWriter)
         {
             this.fileWriter = fileWriter;
         }

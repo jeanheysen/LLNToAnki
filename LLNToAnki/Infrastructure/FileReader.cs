@@ -1,10 +1,9 @@
-﻿using LLNToAnki.BE;
+﻿using LLNToAnki.BE.Ports;
 using System.IO;
 
 namespace LLNToAnki.Infrastructure
 {
-
-    public class FileReader : IFileReader
+    public class FileReader : IDataProvider
     {
         public string ReadAllText(string url)
         {
