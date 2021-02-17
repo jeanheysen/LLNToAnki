@@ -138,7 +138,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T010_SqueezeEndToEnd() //TODO à bouger dans une nouvelle suite de test
+        public void T010_SqueezeEndToEnd()
         {
             //get html
             string text = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
@@ -156,7 +156,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T011_WaggingEndToEnd() //TODO à bouger dans une nouvelle suite de test
+        public void T011_WaggingEndToEnd()
         {
             //get html
             string text = FileReader.ReadAllText(GetPathInData("SingleWord_wagging.csv"));
@@ -177,22 +177,13 @@ namespace ZXTests
         public void T012_TwoWordsEndToEnd()
         {
             //Arrange
-            string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
-            var llnItems = lLNItemsBuilder.Build(text);
-
-            var notes = new List<IAnkiNote>() { };
-            foreach (var item in llnItems)
-            {
-                var wordItem = WordItemBuilder.Build(item.HtmlContent);
-                var ankiNote = AnkiNoteBuilder.Builder(wordItem);
-                notes.Add(ankiNote);
-            }
+            var filePath = GetPathInData("TwoWords_backbench_disregard.csv");
 
             //Act
-            AnkiNoteExporter.Export(this.TmpExportFilePath, notes);
+            Processor.Process(filePath, TmpExportFilePath);
 
             //Assert
-            string expected = FileReader.ReadAllText(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard_expected.txt");
+            string expected = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard_expected.txt"));
             string actual = this.FileReader.ReadAllText(this.TmpExportFilePath);
             Assert.AreEqual(expected, actual);
         }
@@ -204,7 +195,7 @@ namespace ZXTests
             string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
 
             //Act
-            var llnItems = lLNItemsBuilder.Build(text);
+            var llnItems = LLNItemsBuilder.Build(text);
 
             //Assert
             Assert.AreEqual(2, llnItems.Count);
@@ -217,7 +208,7 @@ namespace ZXTests
             string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
 
             //Act
-            var llnItems = lLNItemsBuilder.Build(text);
+            var llnItems = LLNItemsBuilder.Build(text);
 
             //Assert
             Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[0].HtmlContent.Substring(0, 51));

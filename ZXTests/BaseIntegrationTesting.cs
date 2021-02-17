@@ -14,7 +14,8 @@ namespace ZXTests
         protected IWordItemBuilder WordItemBuilder { get; }
         protected IAnkiNoteExporter AnkiNoteExporter { get; }
         protected IAnkiNoteBuilder AnkiNoteBuilder { get; }
-        protected ILLNItemsBuilder lLNItemsBuilder { get; }
+        protected ILLNItemsBuilder LLNItemsBuilder { get; }
+        protected IProcessor Processor { get; }
 
         protected string TmpExportFilePath => GetPathInData("tmp_export.txt");
 
@@ -35,7 +36,9 @@ namespace ZXTests
 
             AnkiNoteBuilder = new AnkiNoteBuilder();
 
-            lLNItemsBuilder = new LLNItemsBuilder();
+            LLNItemsBuilder = new LLNItemsBuilder();
+
+            Processor = new Processor(FileReader, LLNItemsBuilder, WordItemBuilder, AnkiNoteBuilder, AnkiNoteExporter);
         }
 
 
