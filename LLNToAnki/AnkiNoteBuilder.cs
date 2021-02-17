@@ -16,7 +16,7 @@
         {
             var note = new AnkiNote();
 
-            note.Question = item.Question;
+            note.Question = item.ContextWithWordColored;
 
             note.Answer = item.Translation;
 

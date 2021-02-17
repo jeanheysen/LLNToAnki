@@ -3,14 +3,14 @@ using System.Linq;
 
 namespace LLNToAnki
 {
-    public interface IHTMLInterpreter
+    public interface IHTMLScraper
     {
         HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute);
     }
 
-    public class HTMLInterpreter : IHTMLInterpreter
+    public class HTMLScraper : IHTMLScraper
     {
-        public HTMLInterpreter()
+        public HTMLScraper()
         {
         }
 

@@ -16,8 +16,7 @@ namespace ZXTests
         protected ITextSplitter TextSplitter { get; private set; }
         protected IFileWriter FileWriter { get; private set; }
 
-        protected IHTMLInterpreter HtmlInterpreter { get; private set; }
-        protected IWordItemExtractor WordItemExtractor { get; private set; }
+        protected IHTMLScraper HtmlScraper { get; private set; }
         protected IWordItemBuilder WordItemBuilder { get; private set; }
         protected IAnkiNoteExporter AnkiNoteExporter { get; private set; }
         protected IAnkiNoteBuilder AnkiNoteBuilder { get; private set; }
@@ -33,11 +32,9 @@ namespace ZXTests
             
             FileWriter = new FileWriter();
 
-            HtmlInterpreter = new HTMLInterpreter();
+            HtmlScraper = new HTMLScraper();
             
-            WordItemExtractor = new WordItemExtractor(HtmlInterpreter);
-            
-            WordItemBuilder = new WordItemBuilder(WordItemExtractor);
+            WordItemBuilder = new WordItemBuilder(HtmlScraper);
             
             AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
             

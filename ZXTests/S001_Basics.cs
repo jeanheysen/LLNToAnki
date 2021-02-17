@@ -44,13 +44,12 @@ namespace ZXTests
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
-            var extractor = new WordItemExtractor(new HTMLInterpreter());
 
             //Act
-            var r = extractor.GetTitle(html);
+            var r = WordItemBuilder.Build(html);
 
             //Assert
-            Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", r);
+            Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", r.EpisodTitle);
         }
 
         [Test]
@@ -58,13 +57,12 @@ namespace ZXTests
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
-            var extractor = new WordItemExtractor(new HTMLInterpreter());
 
             //Act
-            var r = extractor.GetWord(html);
+            var r = WordItemBuilder.Build(html);
 
             //Assert
-            Assert.AreEqual("squeeze", r);
+            Assert.AreEqual("squeeze", r.Word);
         }
 
         [Test]
@@ -72,13 +70,12 @@ namespace ZXTests
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
-            var extractor = new WordItemExtractor(new HTMLInterpreter());
-
+            
             //Act
-            var r = extractor.GetTranslation(html);
+            var r = WordItemBuilder.Build(html);
 
             //Assert
-            Assert.AreEqual("Et appuyez doucement sur la gâchette.", r);
+            Assert.AreEqual("Et appuyez doucement sur la gâchette.", r.Translation);
         }
 
         [Test]
@@ -134,14 +131,14 @@ namespace ZXTests
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
-            var extractor = new WordItemExtractor(new HTMLInterpreter());
-
+            
             //Act
-            var r = extractor.GetQuestion(html);
+            var r = WordItemBuilder.Build(html);
+
 
             //Assert
-            StringAssert.DoesNotContain("{{c1::", r);
-            StringAssert.DoesNotContain("}}", r);
+            StringAssert.DoesNotContain("{{c1::", r.ContextWithWordColored);
+            StringAssert.DoesNotContain("}}", r.ContextWithWordColored);
         }
 
         [Test]
@@ -179,8 +176,6 @@ namespace ZXTests
             string actual = this.FileReader.ReadAllText(this.TmpExportFilePath);
             Assert.AreEqual(expected, actual);
         }
-
-        
 
         [Test]
         public void T011_TwoWordsEndToEnd() //TODO à bouger dans une nouvelle suite de test
