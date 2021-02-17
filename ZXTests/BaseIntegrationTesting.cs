@@ -6,7 +6,7 @@ namespace ZXTests
 {
     public class BaseIntegrationTesting
     {
-        protected IDataProvider FileReader { get; }
+        protected IDataProvider DataProvider { get; }
         protected ITextSplitter TextSplitter { get; }
         protected IDataWriter FileWriter { get; }
 
@@ -22,7 +22,7 @@ namespace ZXTests
 
         public BaseIntegrationTesting()
         {
-            FileReader = new FileReader();
+            DataProvider = new FileReader();
 
             TextSplitter = new TextSplitter();
 
@@ -38,7 +38,7 @@ namespace ZXTests
 
             LLNItemsBuilder = new LLNItemsBuilder();
 
-            Processor = new Processor(FileReader, LLNItemsBuilder, WordItemBuilder, AnkiNoteBuilder, AnkiNoteExporter);
+            Processor = new Processor(DataProvider, LLNItemsBuilder, WordItemBuilder, AnkiNoteBuilder, AnkiNoteExporter);
         }
 
 

@@ -33,7 +33,7 @@ namespace LLNToAnki.BE
 
         public void Process(string filePath, string targetPath)
         {
-            var data = dataProvider.ReadAllText(filePath);
+            var data = dataProvider.GetAllText(filePath);
 
             var llnItems = lLNItemsBuilder.Build(data);
 

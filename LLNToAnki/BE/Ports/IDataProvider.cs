@@ -2,6 +2,6 @@
 {
     public interface IDataProvider
     {
-        string ReadAllText(string url);
+        string GetAllText(string url);
     }
 }
