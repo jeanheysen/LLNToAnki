@@ -183,7 +183,7 @@ namespace ZXTests
             var notes = new List<IAnkiNote>() { };
             foreach (var item in llnItems)
             {
-                var wordItem = WordItemBuilder.Build(item.Content);
+                var wordItem = WordItemBuilder.Build(item.HtmlContent);
                 var ankiNote = AnkiNoteBuilder.Builder(wordItem);
                 notes.Add(ankiNote);
             }
@@ -220,8 +220,8 @@ namespace ZXTests
             var llnItems = new LLNItemsBuilder(TextSplitter).Build(text);
 
             //Assert
-            Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[0].Content.Substring(0, 51));
-            Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[1].Content.Substring(0, 51));
+            Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[0].HtmlContent.Substring(0, 51));
+            Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[1].HtmlContent.Substring(0, 51));
         }
     }
 }

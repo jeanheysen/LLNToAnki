@@ -27,10 +27,22 @@ namespace LLNToAnki.BE
                 if (counter++ == 0) continue;
 
                 var content = string.Concat(separator, item);
-                r.Add(new LLNItem() { Content = content });
+                
+                r.Add(CreateItemForRawCut(content));
             }
 
             return r;
+        }
+
+        private LLNItem CreateItemForRawCut(string content)
+        {
+            var subitems = content.Split("\t");
+            return new LLNItem() 
+            {
+                HtmlContent = subitems[0],
+                Audio = subitems[1],
+                Tag = subitems[2]
+            };
         }
     }
 }
