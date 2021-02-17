@@ -1,4 +1,4 @@
-using LLNToAnki.BE;
+Ôªøusing LLNToAnki.BE;
 using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
 using Moq;
@@ -46,7 +46,7 @@ namespace ZXTests
             var r = WordItemBuilder.Build(html);
 
             //Assert
-            Assert.AreEqual("The Crown S4:E2 L'Èpreuve de Balmoral", r.EpisodTitle);
+            Assert.AreEqual("The Crown S4:E2 L'√©preuve de Balmoral", r.EpisodTitle);
         }
 
         [Test]
@@ -72,7 +72,7 @@ namespace ZXTests
             var r = WordItemBuilder.Build(html);
 
             //Assert
-            Assert.AreEqual("Et appuyez doucement sur la g‚chette.", r.Translation);
+            Assert.AreEqual("Et appuyez doucement sur la g√¢chette.", r.Translation);
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace ZXTests
             //Act
             var item = WordItemBuilder.Build(splittedContent[0]);
 
-            Assert.AreEqual("The Crown S4:E2 L'Èpreuve de Balmoral", item.EpisodTitle);
+            Assert.AreEqual("The Crown S4:E2 L'√©preuve de Balmoral", item.EpisodTitle);
         }
 
         [Test]
@@ -138,7 +138,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T010_SqueezeEndToEnd() //TODO ‡ bouger dans une nouvelle suite de test
+        public void T010_SqueezeEndToEnd() //TODO √† bouger dans une nouvelle suite de test
         {
             //get html
             string text = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
@@ -156,7 +156,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T011_WaggingEndToEnd() //TODO ‡ bouger dans une nouvelle suite de test
+        public void T011_WaggingEndToEnd() //TODO √† bouger dans une nouvelle suite de test
         {
             //get html
             string text = FileReader.ReadAllText(GetPathInData("SingleWord_wagging.csv"));
@@ -174,17 +174,19 @@ namespace ZXTests
         }
 
         [Test]
-        public void T011_TwoWordsEndToEnd() //TODO ‡ bouger dans une nouvelle suite de test
+        public void T012_TwoWordsEndToEnd() //TODO √† bouger dans une nouvelle suite de test
         {
             //Arrange
             string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
-            var html = TextSplitter.SplitOnTab(text)[0];
-            var wordItem = WordItemBuilder.Build(html);
-            var ankiNote = AnkiNoteBuilder.Builder(wordItem);
-            var html2 = TextSplitter.SplitOnTab(text)[2];
-            var wordItem2 = WordItemBuilder.Build(html2);
-            var ankiNote2 = AnkiNoteBuilder.Builder(wordItem2);
-            var notes = new List<IAnkiNote>() { ankiNote, ankiNote2 };
+            var llnItems = new LLNItemsBuilder(TextSplitter).Build(text);
+
+            var notes = new List<IAnkiNote>() { };
+            foreach (var item in llnItems)
+            {
+                var wordItem = WordItemBuilder.Build(item.Content);
+                var ankiNote = AnkiNoteBuilder.Builder(wordItem);
+                notes.Add(ankiNote);
+            }
 
             //Act
             AnkiNoteExporter.Export(this.TmpExportFilePath, notes);

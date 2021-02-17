@@ -25,11 +25,11 @@ namespace LLNToAnki.BE
             return new WordItem()
             {
                 Word = GetWord(html),
-                
+
                 EpisodTitle = GetTitle(html),
-                
+
                 ContextWithWordColored = GetContextWithWordColored(html),
-                
+
                 Translation = GetTranslation(html)
             };
         }
