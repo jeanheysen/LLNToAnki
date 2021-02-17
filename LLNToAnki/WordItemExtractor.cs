@@ -2,30 +2,30 @@
 {
     public class WordItemExtractor
     {
-        private readonly HTMLInterpreter interpreter;
+        private readonly IHTMLInterpreter interpreter;
 
-        public WordItemExtractor(HTMLInterpreter interpreter)
+        public WordItemExtractor(IHTMLInterpreter interpreter)
         {
             this.interpreter = interpreter;
         }
 
-        public string GetTitle()
+        public string GetTitle(string html)
         {
-            var node = interpreter.GetNodeByNameAndAttribute("div", "dc-title\"\"");
+            var node = interpreter.GetNodeByNameAndAttribute(html, "div", "dc-title\"\"");
             return node.LastChild.InnerText;
         }
 
-        public string GetWord()
+        public string GetWord(string html)
         {
-            var node = interpreter.GetNodeByNameAndAttribute("span", "dc-gap\"\"");
+            var node = interpreter.GetNodeByNameAndAttribute(html, "span", "dc-gap\"\"");
             return node.LastChild.InnerText;
         }
 
-        public string GetQuestion()
+        public string GetQuestion(string html)
         {
-            var translation = GetTranslation();
+            var translation = GetTranslation(html);
 
-            var a1 = interpreter.Html;
+            var a1 = html;
             var a2 = a1.Replace("{{c1::", "");
             var a3 = a2.Replace("}}", "");
             var a4 = a3.Replace(translation, "");
@@ -36,9 +36,9 @@
             return a5;
         }
 
-        public string GetTranslation()
+        public string GetTranslation(string html)
         {
-            var node = interpreter.GetNodeByNameAndAttribute("div", "dc-translation");
+            var node = interpreter.GetNodeByNameAndAttribute(html, "div", "dc-translation");
             return node.LastChild.InnerText;
         }
     }

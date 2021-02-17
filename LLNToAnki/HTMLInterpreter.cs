@@ -3,21 +3,23 @@ using System.Linq;
 
 namespace LLNToAnki
 {
-    public class HTMLInterpreter
+    public interface IHTMLInterpreter
     {
-        private readonly HtmlDocument htmlDoc;
-        public string Html { get; }
+        HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute);
+    }
 
-        public HTMLInterpreter(string html)
+    public class HTMLInterpreter : IHTMLInterpreter
+    {
+        public HTMLInterpreter()
         {
-            htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-            Html = html;
         }
 
 
-        public HtmlNode GetNodeByNameAndAttribute(string name, string attribute)
+        public HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute)
         {
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+
             var divs = htmlDoc.DocumentNode.Descendants().Where(n => n.Name == name).ToList();
 
             foreach (var div in divs)

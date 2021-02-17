@@ -13,6 +13,14 @@ namespace ZXTests
     public class BaseIntegrationTesting
     {
         protected IFileReader fileReader;
+        protected ITextSplitter splitter;
+        protected IFileWriter fileWriter;
+
+        public BaseIntegrationTesting()
+        {
+
+        }
+
 
         protected string GetPathInData(string fileNameWithExtension)
         {

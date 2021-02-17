@@ -17,9 +17,7 @@ namespace ZXTests
         string waggingOriginalLLNOutputPath;
         private string tmpExportFilePath;
         private string squeezeHtmlOnlyPath;
-        private Splitter splitter;
-        private FileWriter fileWriter;
-        private wordItemBuilder wordItemBuilder;
+        private WordItemBuilder wordItemBuilder;
         private AnkiNoteExporter ankiNoteCsvExporter;
         private AnkiNoteBuilder ankiNoteBuilder;
 
@@ -27,9 +25,9 @@ namespace ZXTests
         public void Setup()
         {
             fileReader = new FileReader();
-            splitter = new Splitter();
+            splitter = new TextSplitter();
             fileWriter = new FileWriter();
-            wordItemBuilder = new wordItemBuilder();
+            wordItemBuilder = new WordItemBuilder();
             ankiNoteCsvExporter = new AnkiNoteExporter(fileWriter);
             ankiNoteBuilder = new AnkiNoteBuilder();
         }
@@ -59,7 +57,7 @@ namespace ZXTests
             //Arrange
             string text = new FileReader().ReadAllText(squeezeOriginalLLNOutputPath);
 
-            var splittedContent = new Splitter().Split(text);
+            var splittedContent = new TextSplitter().SplitOnTab(text);
 
             Assert.AreEqual(3, splittedContent.Count);
         }
@@ -68,12 +66,11 @@ namespace ZXTests
         public void T003_TheHTMLInterpreterPermitsToReturnTheTitleInsideDivDc()
         {
             //Arrange
-            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new FileReader().ReadAllText(squeezeHtmlOnlyPath));
-            var extractor = new WordItemExtractor(hTMLInterpreter);
+            var html = fileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
+            var extractor = new WordItemExtractor(new HTMLInterpreter());
 
             //Act
-
-            var r = extractor.GetTitle();
+            var r = extractor.GetTitle(html);
 
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", r);
@@ -83,12 +80,11 @@ namespace ZXTests
         public void T003b_TheInterperterPermitsToReturnTheWordInsideSpanGap()
         {
             //Arrange
-            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new FileReader().ReadAllText(squeezeHtmlOnlyPath));
-            var extractor = new WordItemExtractor(hTMLInterpreter);
+            var html = fileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
+            var extractor = new WordItemExtractor(new HTMLInterpreter());
 
             //Act
-
-            var r = extractor.GetWord();
+            var r = extractor.GetWord(html);
 
             //Assert
             Assert.AreEqual("squeeze", r);
@@ -98,11 +94,11 @@ namespace ZXTests
         public void T003c_TheInterpreterReturnsTheTranslation()
         {
             //Arrange
-            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new FileReader().ReadAllText(squeezeHtmlOnlyPath));
-            var extractor = new WordItemExtractor(hTMLInterpreter);
+            var html = fileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
+            var extractor = new WordItemExtractor(new HTMLInterpreter());
 
             //Act
-            var r = extractor.GetTranslation();
+            var r = extractor.GetTranslation(html);
 
             //Assert
             Assert.AreEqual("Et appuyez doucement sur la gâchette.", r);
@@ -113,10 +109,10 @@ namespace ZXTests
         {
             //Arrange
             string text = fileReader.ReadAllText(squeezeOriginalLLNOutputPath);
-            var splittedContent = splitter.Split(text);
+            var splittedContent = splitter.SplitOnTab(text);
 
             //Act
-            var item = new wordItemBuilder().Build(splittedContent[0]);
+            var item = new WordItemBuilder().Build(splittedContent[0]);
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", item.Context.EpisodTitle);
         }
@@ -126,10 +122,10 @@ namespace ZXTests
         {
             //Arrange
             string text = new FileReader().ReadAllText(squeezeOriginalLLNOutputPath);
-            var splittedContent = new Splitter().Split(text);
+            var splittedContent = new TextSplitter().SplitOnTab(text);
 
             //Act
-            var word = new wordItemBuilder().Build(splittedContent[0]);
+            var word = new WordItemBuilder().Build(splittedContent[0]);
 
             Assert.AreEqual("squeeze", word.Word);
         }
@@ -161,11 +157,11 @@ namespace ZXTests
         public void T008_GetPartToReplace()
         {
             //Arrange
-            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new FileReader().ReadAllText(squeezeHtmlOnlyPath));
-            var extractor = new WordItemExtractor(hTMLInterpreter);
+            var html = fileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
+            var extractor = new WordItemExtractor(new HTMLInterpreter());
 
             //Act
-            var r = extractor.GetQuestion();
+            var r = extractor.GetQuestion(html);
 
             //Assert
             StringAssert.DoesNotContain("{{c1::", r);
@@ -177,7 +173,7 @@ namespace ZXTests
         {
             //get html
             string text = fileReader.ReadAllText(squeezeOriginalLLNOutputPath);
-            var html = splitter.Split(text)[0];
+            var html = splitter.SplitOnTab(text)[0];
             var wordItem = wordItemBuilder.Build(html);
             var note = ankiNoteBuilder.Builder(wordItem);
 
@@ -195,7 +191,7 @@ namespace ZXTests
         {
             //get html
             string text = fileReader.ReadAllText(waggingOriginalLLNOutputPath);
-            var html = splitter.Split(text)[0];
+            var html = splitter.SplitOnTab(text)[0];
             var wordItem = wordItemBuilder.Build(html);
             var note = ankiNoteBuilder.Builder(wordItem);
 
@@ -215,10 +211,10 @@ namespace ZXTests
         {
             //Arrange
             string text = fileReader.ReadAllText(twoWordsOriginalLLNOutputPath);
-            var html = splitter.Split(text)[0];
+            var html = splitter.SplitOnTab(text)[0];
             var wordItem = wordItemBuilder.Build(html);
             var ankiNote = ankiNoteBuilder.Builder(wordItem);
-            var html2 = splitter.Split(text)[2];
+            var html2 = splitter.SplitOnTab(text)[2];
             var wordItem2 = wordItemBuilder.Build(html2);
             var ankiNote2 = ankiNoteBuilder.Builder(wordItem2);
             var notes = new List<AnkiNote>() { ankiNote, ankiNote2 };
