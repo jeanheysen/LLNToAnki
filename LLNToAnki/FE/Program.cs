@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LLNToAnki
+namespace LLNToAnki.FE
 {
     class Program
     {

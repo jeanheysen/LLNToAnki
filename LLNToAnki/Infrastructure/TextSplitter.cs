@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using LLNToAnki.BE;
+using System.Collections.Generic;
 using System.Linq;
 
-public interface ITextSplitter
+namespace LLNToAnki.Infrastructure
 {
-    IReadOnlyList<string> SplitOnTab(string text);
-}
 
-public class TextSplitter : ITextSplitter
+    public class TextSplitter : ITextSplitter
 {
     public IReadOnlyList<string> SplitOnTab(string text)
     {
@@ -16,4 +15,5 @@ public class TextSplitter : ITextSplitter
 
         return r;
     }
+}
 }

@@ -1,11 +1,8 @@
-﻿using System.IO;
+﻿using LLNToAnki.BE;
+using System.IO;
 
-namespace LLNToAnki
+namespace LLNToAnki.Infrastructure
 {
-    public interface IFileWriter
-    {
-        void Write(string path, string content);
-    }
 
     public class FileWriter : IFileWriter
     {

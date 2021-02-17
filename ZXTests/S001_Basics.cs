@@ -1,5 +1,7 @@
 using HtmlAgilityPack;
 using LLNToAnki;
+using LLNToAnki.BE;
+using LLNToAnki.Infrastructure;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -30,10 +32,10 @@ namespace ZXTests
         public void T002_TheSplitterSplitsTheCsvInThreePieces()
         {
             //Arrange
-            string text = new FileReader().ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
+            string text = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
 
             //Act
-            var splittedContent = new TextSplitter().SplitOnTab(text);
+            var splittedContent = TextSplitter.SplitOnTab(text);
 
             //Assert
             Assert.AreEqual(3, splittedContent.Count);

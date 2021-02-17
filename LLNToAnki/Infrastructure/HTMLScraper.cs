@@ -1,12 +1,9 @@
 ﻿using HtmlAgilityPack;
+using LLNToAnki.BE;
 using System.Linq;
 
-namespace LLNToAnki
+namespace LLNToAnki.Infrastructure
 {
-    public interface IHTMLScraper
-    {
-        HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute);
-    }
 
     public class HTMLScraper : IHTMLScraper
     {

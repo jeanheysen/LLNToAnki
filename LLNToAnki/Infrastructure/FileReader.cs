@@ -1,11 +1,8 @@
-﻿using System.IO;
+﻿using LLNToAnki.BE;
+using System.IO;
 
-namespace LLNToAnki
+namespace LLNToAnki.Infrastructure
 {
-    public interface IFileReader
-    {
-        string ReadAllText(string url);
-    }
 
     public class FileReader : IFileReader
     {

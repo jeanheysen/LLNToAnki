@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace LLNToAnki
+namespace LLNToAnki.BE
 {
     public interface IAnkiNoteExporter
     {

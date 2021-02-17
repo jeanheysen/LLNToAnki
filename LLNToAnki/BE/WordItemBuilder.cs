@@ -1,7 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
 
-namespace LLNToAnki
+namespace LLNToAnki.BE
 {
     public interface IWordItemBuilder
     {

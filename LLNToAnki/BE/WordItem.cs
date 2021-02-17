@@ -1,4 +1,4 @@
-﻿namespace LLNToAnki
+﻿namespace LLNToAnki.BE
 {
     public interface IWordItem
     {

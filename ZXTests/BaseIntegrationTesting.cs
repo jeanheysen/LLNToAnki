@@ -1,5 +1,7 @@
 ﻿using HtmlAgilityPack;
 using LLNToAnki;
+using LLNToAnki.BE;
+using LLNToAnki.Infrastructure;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
