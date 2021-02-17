@@ -13,6 +13,7 @@ namespace ZXTests
     public class Tests
     {
         string squeezeOriginalLLNOutputPath;
+        string twoWordsOriginalLLNOutputPath;
         string waggingOriginalLLNOutputPath;
         private string tmpExportFilePath;
         private string squeezeExpectedNotePath;
@@ -40,6 +41,7 @@ namespace ZXTests
         {
             tmpExportFilePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp_export.txt";
             squeezeOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze.csv";
+            twoWordsOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard.csv";
             waggingOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging.csv";
             squeezeExpectedNotePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_ExpectedNote.txt";
             waggingExpectedNotePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging_ExpectedNote.txt";
@@ -196,7 +198,7 @@ namespace ZXTests
             Assert.AreEqual(expectedCleanCarriage, actual);
         }
 
-        [Test,Ignore("formatage qui casse les couilles")]
+        [Test]
         public void T010_WaggingEndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //get html
@@ -209,11 +211,31 @@ namespace ZXTests
             ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
 
             //Assert
-            string expected = reader.ReadFileFromPath(squeezeExpectedNotePath);
-            string expectedCleanCarriage = expected.Replace("\r\n", "\n");
+            string expected = reader.ReadFileFromPath(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging_ExpectedNote.txt"); //TODO faire une methode Data(fileName)
             string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
+            Assert.AreEqual(expected, actual);
+        }
 
-            Assert.AreEqual(expectedCleanCarriage, actual);
+        [Test]
+        public void T011_TwoWordsEndToEnd() //TODO à bouger dans une nouvelle suite de test
+        {
+            //Arrange
+            string text = reader.ReadFileFromPath(twoWordsOriginalLLNOutputPath);
+            var html = splitter.Split(text)[0];
+            var wordItem = wordItemBuilder.Build(html);
+            var ankiNote = ankiNoteBuilder.Builder(wordItem);
+            var html2 = splitter.Split(text)[2];
+            var wordItem2 = wordItemBuilder.Build(html2);
+            var ankiNote2 = ankiNoteBuilder.Builder(wordItem2);
+            var notes = new List<AnkiNote>() { ankiNote, ankiNote2 };
+
+            //Act
+            ankiNoteCsvExporter.Export(this.tmpExportFilePath, notes);
+
+            //Assert
+            string expected = reader.ReadFileFromPath(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard_expected.txt");
+            string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
+            Assert.AreEqual(expected, actual);
         }
     }
 }
