@@ -146,13 +146,12 @@ namespace ZXTests
             var notes = new AnkiNote()
             {
                 Question = "Quelle est la couleur du cheval blanc d'Henri IV ?",
-                Answer = "blanc",
-                Before="rien avant"
+                Answer = "blanc"
             };
 
             var fileWriterMock = new Mock<IFileWriter>() { DefaultValue = DefaultValue.Mock };
             var path = "whateverPath";
-            var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	rien avant	\"blanc\"";
+            var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	blanc";
 
             //Act
             new AnkiNoteCsvExporter(fileWriterMock.Object).Export(path, notes);
@@ -191,11 +190,9 @@ namespace ZXTests
             ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
 
             //Assert
-            string expected = reader.ReadFileFromPath(squeezeExpectedNotePath);
-            string expectedCleanCarriage = expected.Replace("\r\n", "\n");
+            string expected = reader.ReadFileFromPath(GetPathInData("SingleWord_squeeze_ExpectedNote.txt"));
             string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
-            
-            Assert.AreEqual(expectedCleanCarriage, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -211,9 +208,14 @@ namespace ZXTests
             ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
 
             //Assert
-            string expected = reader.ReadFileFromPath(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging_ExpectedNote.txt"); //TODO faire une methode Data(fileName)
+            string expected = reader.ReadFileFromPath(GetPathInData("SingleWord_wagging_ExpectedNote.txt"));
             string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
             Assert.AreEqual(expected, actual);
+        }
+
+        private string GetPathInData(string fileNameWithExtension)
+        {
+            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\{fileNameWithExtension}";
         }
 
         [Test]
