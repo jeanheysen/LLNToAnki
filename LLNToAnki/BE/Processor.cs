@@ -5,7 +5,7 @@ namespace LLNToAnki.BE
 {
     public interface IProcessor
     {
-        void Process(string filePath, string targetPath);
+        int Process(string filePath, string targetPath);
     }
 
     public class Processor : IProcessor
@@ -31,7 +31,7 @@ namespace LLNToAnki.BE
         }
 
 
-        public void Process(string filePath, string targetPath)
+        public int Process(string filePath, string targetPath)
         {
             var data = dataProvider.GetAllText(filePath);
 
@@ -49,6 +49,8 @@ namespace LLNToAnki.BE
             }
 
             ankiNoteExporter.Export(targetPath, notes);
+
+            return notes.Count;
         }
     }
 }

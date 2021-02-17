@@ -18,6 +18,9 @@ namespace LLNToAnki.FE
         public static IWordItemBuilder WordItemBuilder { get; private set; }
         public static IAnkiNoteExporter AnkiNoteExporter { get; private set; }
         public static IAnkiNoteBuilder AnkiNoteBuilder { get; private set; }
+        public static IProcessor Processor { get; private set; }
+        public static ILLNItemsBuilder LLNItemsBuilder { get; private set; }
+
 
         static void Main(string[] args)
         {
@@ -28,9 +31,18 @@ namespace LLNToAnki.FE
             WordItemBuilder = new WordItemBuilder(HtmlScraper);
             AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
             AnkiNoteBuilder = new AnkiNoteBuilder();
+            LLNItemsBuilder = new LLNItemsBuilder();
 
             var dataPath = Path.Combine(dataFolder, dataFileName);
             var targetPath = Path.Combine(dataFolder, targetFileName);
+            
+            Processor = new Processor(FileReader, LLNItemsBuilder, WordItemBuilder, AnkiNoteBuilder, AnkiNoteExporter);
+
+            var count = Processor.Process(dataPath, targetPath);
+
+            System.Console.WriteLine($"{count} items were generated in {targetPath}");
+            System.Console.WriteLine("Press a key to end.");
+            System.Console.ReadKey();
         }
     }
 }
