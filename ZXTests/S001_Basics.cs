@@ -10,30 +10,27 @@ using System.Text;
 
 namespace ZXTests
 {
-    public class Tests
+    public class Tests : BaseIntegrationTesting
     {
         string squeezeOriginalLLNOutputPath;
         string twoWordsOriginalLLNOutputPath;
         string waggingOriginalLLNOutputPath;
         private string tmpExportFilePath;
-        private string squeezeExpectedNotePath;
-        private string waggingExpectedNotePath;
         private string squeezeHtmlOnlyPath;
-        private Reader reader;
         private Splitter splitter;
         private FileWriter fileWriter;
         private wordItemBuilder wordItemBuilder;
-        private AnkiNoteCsvExporter ankiNoteCsvExporter;
+        private AnkiNoteExporter ankiNoteCsvExporter;
         private AnkiNoteBuilder ankiNoteBuilder;
 
         [SetUp]
         public void Setup()
         {
-            reader = new Reader();
+            fileReader = new FileReader();
             splitter = new Splitter();
             fileWriter = new FileWriter();
             wordItemBuilder = new wordItemBuilder();
-            ankiNoteCsvExporter = new AnkiNoteCsvExporter(fileWriter);
+            ankiNoteCsvExporter = new AnkiNoteExporter(fileWriter);
             ankiNoteBuilder = new AnkiNoteBuilder();
         }
 
@@ -43,8 +40,6 @@ namespace ZXTests
             squeezeOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze.csv";
             twoWordsOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard.csv";
             waggingOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging.csv";
-            squeezeExpectedNotePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_ExpectedNote.txt";
-            waggingExpectedNotePath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging_ExpectedNote.txt";
             squeezeHtmlOnlyPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze_onlyHtml.csv";
         }
 
@@ -52,7 +47,7 @@ namespace ZXTests
         public void T001_TheReaderReadsTheBeginningOfTheFileCorrectly()
         {
             //Act
-            string text = new Reader().ReadFileFromPath(squeezeOriginalLLNOutputPath);
+            string text = new FileReader().ReadAllText(squeezeOriginalLLNOutputPath);
 
             //Assert
             Assert.AreEqual("\"<style>\n\n    html,\n    body {", text.Substring(0, 30));
@@ -62,7 +57,7 @@ namespace ZXTests
         public void T002_TheSplitterSplitsTheCsvInThreePieces()
         {
             //Arrange
-            string text = new Reader().ReadFileFromPath(squeezeOriginalLLNOutputPath);
+            string text = new FileReader().ReadAllText(squeezeOriginalLLNOutputPath);
 
             var splittedContent = new Splitter().Split(text);
 
@@ -73,7 +68,7 @@ namespace ZXTests
         public void T003_TheHTMLInterpreterPermitsToReturnTheTitleInsideDivDc()
         {
             //Arrange
-            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
+            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new FileReader().ReadAllText(squeezeHtmlOnlyPath));
             var extractor = new WordItemExtractor(hTMLInterpreter);
 
             //Act
@@ -88,7 +83,7 @@ namespace ZXTests
         public void T003b_TheInterperterPermitsToReturnTheWordInsideSpanGap()
         {
             //Arrange
-            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
+            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new FileReader().ReadAllText(squeezeHtmlOnlyPath));
             var extractor = new WordItemExtractor(hTMLInterpreter);
 
             //Act
@@ -103,7 +98,7 @@ namespace ZXTests
         public void T003c_TheInterpreterReturnsTheTranslation()
         {
             //Arrange
-            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
+            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new FileReader().ReadAllText(squeezeHtmlOnlyPath));
             var extractor = new WordItemExtractor(hTMLInterpreter);
 
             //Act
@@ -117,7 +112,7 @@ namespace ZXTests
         public void T004_TheTitleIsInsideTitleOfTheWord()
         {
             //Arrange
-            string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
+            string text = fileReader.ReadAllText(squeezeOriginalLLNOutputPath);
             var splittedContent = splitter.Split(text);
 
             //Act
@@ -130,7 +125,7 @@ namespace ZXTests
         public void T005_TheWordBuilderReturnsTheWord()
         {
             //Arrange
-            string text = new Reader().ReadFileFromPath(squeezeOriginalLLNOutputPath);
+            string text = new FileReader().ReadAllText(squeezeOriginalLLNOutputPath);
             var splittedContent = new Splitter().Split(text);
 
             //Act
@@ -154,7 +149,7 @@ namespace ZXTests
             var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	blanc";
 
             //Act
-            new AnkiNoteCsvExporter(fileWriterMock.Object).Export(path, new List<AnkiNote>() { note });
+            new AnkiNoteExporter(fileWriterMock.Object).Export(path, new List<AnkiNote>() { note });
 
 
             //Assert
@@ -166,7 +161,7 @@ namespace ZXTests
         public void T008_GetPartToReplace()
         {
             //Arrange
-            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
+            HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new FileReader().ReadAllText(squeezeHtmlOnlyPath));
             var extractor = new WordItemExtractor(hTMLInterpreter);
 
             //Act
@@ -181,7 +176,7 @@ namespace ZXTests
         public void T009_SqueezeEndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //get html
-            string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
+            string text = fileReader.ReadAllText(squeezeOriginalLLNOutputPath);
             var html = splitter.Split(text)[0];
             var wordItem = wordItemBuilder.Build(html);
             var note = ankiNoteBuilder.Builder(wordItem);
@@ -190,8 +185,8 @@ namespace ZXTests
             ankiNoteCsvExporter.Export(this.tmpExportFilePath, new List<AnkiNote>() { note });
 
             //Assert
-            string expected = reader.ReadFileFromPath(GetPathInData("SingleWord_squeeze_ExpectedNote.txt"));
-            string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
+            string expected = fileReader.ReadAllText(GetPathInData("SingleWord_squeeze_ExpectedNote.txt"));
+            string actual = this.fileReader.ReadAllText(this.tmpExportFilePath);
             Assert.AreEqual(expected, actual);
         }
 
@@ -199,7 +194,7 @@ namespace ZXTests
         public void T010_WaggingEndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //get html
-            string text = reader.ReadFileFromPath(waggingOriginalLLNOutputPath);
+            string text = fileReader.ReadAllText(waggingOriginalLLNOutputPath);
             var html = splitter.Split(text)[0];
             var wordItem = wordItemBuilder.Build(html);
             var note = ankiNoteBuilder.Builder(wordItem);
@@ -208,21 +203,18 @@ namespace ZXTests
             ankiNoteCsvExporter.Export(this.tmpExportFilePath, new List<AnkiNote>() { note });
 
             //Assert
-            string expected = reader.ReadFileFromPath(GetPathInData("SingleWord_wagging_ExpectedNote.txt"));
-            string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
+            string expected = fileReader.ReadAllText(GetPathInData("SingleWord_wagging_ExpectedNote.txt"));
+            string actual = this.fileReader.ReadAllText(this.tmpExportFilePath);
             Assert.AreEqual(expected, actual);
         }
 
-        private string GetPathInData(string fileNameWithExtension)
-        {
-            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\{fileNameWithExtension}";
-        }
+        
 
         [Test]
         public void T011_TwoWordsEndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //Arrange
-            string text = reader.ReadFileFromPath(twoWordsOriginalLLNOutputPath);
+            string text = fileReader.ReadAllText(twoWordsOriginalLLNOutputPath);
             var html = splitter.Split(text)[0];
             var wordItem = wordItemBuilder.Build(html);
             var ankiNote = ankiNoteBuilder.Builder(wordItem);
@@ -235,8 +227,8 @@ namespace ZXTests
             ankiNoteCsvExporter.Export(this.tmpExportFilePath, notes);
 
             //Assert
-            string expected = reader.ReadFileFromPath(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard_expected.txt");
-            string actual = this.reader.ReadFileFromPath(this.tmpExportFilePath);
+            string expected = fileReader.ReadAllText(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard_expected.txt");
+            string actual = this.fileReader.ReadAllText(this.tmpExportFilePath);
             Assert.AreEqual(expected, actual);
         }
     }
