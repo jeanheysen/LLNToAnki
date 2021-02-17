@@ -12,12 +12,12 @@ namespace LLNToAnki.BE
     public class AnkiNoteExporter : IAnkiNoteExporter
     {
         //FIELDS
-        private readonly IDataWriter fileWriter;
+        private readonly IDataWriter dataWriter;
 
         //CONSTRUCTOR
-        public AnkiNoteExporter(IDataWriter fileWriter)
+        public AnkiNoteExporter(IDataWriter dataWriter)
         {
-            this.fileWriter = fileWriter;
+            this.dataWriter = dataWriter;
         }
 
 
@@ -44,7 +44,7 @@ namespace LLNToAnki.BE
 
         private void Write(string path, StringBuilder sb)
         {
-            this.fileWriter.Write(path, sb.ToString());
+            this.dataWriter.Write(path, sb.ToString());
         }
     }
 }
