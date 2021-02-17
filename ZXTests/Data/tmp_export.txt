@@ -95,4 +95,29 @@
     .dc-lang-ur.dc-orig {
         font-size: 1.2rem;
     }
-</style><div class=""dc-bg""><div class=""dc-card dc-lang-en dc-word-naked""><div class=""dc-title"">The Crown S4:E10 Guerre</div><div class=""dc-images""><div class=""dc-image dc-image-prev"" style=""background-image: url(1613549556074_prev.jpg)""></div><div class=""dc-image dc-image-next"" style=""background-image: url(1613549556074_next.jpg)""></div></div><div class=""dc-line""><span class=""dc-down dc-lang-en dc-orig"">'</span><span class=""dc-down dc-lang-en dc-orig"">see</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">our</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">prime</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">minister</span><span class=""dc-down dc-lang-en dc-orig"">'</span><span class=""dc-down dc-lang-en dc-orig"">s</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">finger</span><span class=""dc-down dc-lang-en dc-orig"">-</span><span class=""dc-gap"" style=""background-color: brown;""><span class=""dc-down dc-lang-en dc-orig"">wagging</span></span></div><div class=""dc-line dc-translation dc-lang-fr""></div></div></div>"		"""voient notre Première ministre donner des leçons"
+
+    .dc-play {
+        margin: 0.5rem 1rem 0 auto;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.4rem;
+        height: 1.4rem;
+        border-radius: 1rem;
+        background-repeat: no-repeat;
+        background-color: blue;
+        background-position: center;
+    }
+
+    .nightMode .dc-play {
+        background-color: #1569C7;
+    }
+
+    .dc-play-svg {
+        pointer-events: none; 
+        transform: translateX(6%);
+        width: 1rem;
+        height: 1rem;
+    }
+</style><div class=""dc-bg"" onclick=""var dc_audio = document.getElementById('dc-audio'); if(dc_audio){ dc_audio.pause(); dc_audio.currentTime = 0; dc_audio.play(); }""><div class=""dc-card dc-lang-en dc-word-naked""><div class=""dc-title"">The Crown S4:E2 L'épreuve de Balmoral</div><div class=""dc-images""><div class=""dc-image dc-image-prev"" style=""background-image: url(1610544850824_prev.jpg)""></div><div class=""dc-image dc-image-next"" style=""background-image: url(1610544850824_next.jpg)""></div></div><div class=""dc-line""><span class=""dc-down dc-lang-en dc-orig"">And</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">gently</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-gap"" style=""background-color: brown;""><span class=""dc-down dc-lang-en dc-orig"">squeeze</span></span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">the</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">trigger</span><span class=""dc-down dc-lang-en dc-orig"">.</span></div><div class=""dc-line dc-translation dc-lang-fr""></div><audio style=""display: none;"" id=""dc-audio""><source src=""1610544850824.mp3"" type=""audio/mpeg""></audio><div class=""dc-play"" preload=""auto""><svg class=""dc-play-svg"" version=""1.1"" xmlns=""http://www.w3.org/2000/svg"" viewBox=""0 0 512 512""><path fill=""#fff"" d=""M96 64l320 192-320 192z""></path></svg></div></div></div>"		"Et appuyez doucement sur la gâchette."

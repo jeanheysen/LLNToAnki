@@ -150,7 +150,7 @@ namespace ZXTests
 
             var fileWriterMock = new Mock<IFileWriter>() { DefaultValue = DefaultValue.Mock };
             var path = "whateverPath";
-            var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	rien avant	blanc";
+            var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	rien avant	\"blanc\"";
 
             //Act
             new AnkiNoteCsvExporter(fileWriterMock.Object).Export(path, notes);
