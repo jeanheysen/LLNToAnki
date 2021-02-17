@@ -158,7 +158,7 @@ namespace ZXTests
 
 
         [Test]
-        public void T009_GetPartToReplace()
+        public void T008_GetPartToReplace()
         {
             //Arrange
             HTMLInterpreter hTMLInterpreter = new HTMLInterpreter(new Reader().ReadFileFromPath(squeezeHtmlOnlyPath));
@@ -173,7 +173,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T008_EndToEnd()
+        public void T009_EndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //get html
             string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
