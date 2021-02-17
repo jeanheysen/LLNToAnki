@@ -3,7 +3,12 @@ using System.Collections.Generic;
 
 namespace LLNToAnki
 {
-    public class WordItemBuilder
+    public interface IWordItemBuilder
+    {
+        IWordItem Build(string html);
+    }
+
+    public class WordItemBuilder : IWordItemBuilder
     {
         private readonly IWordItemExtractor extractor;
 
@@ -12,9 +17,9 @@ namespace LLNToAnki
             this.extractor = wordItemExtractor;
         }
 
-        public WordItem Build(string html)
+        public IWordItem Build(string html)
         {
-            return new WordItem() 
+            return new WordItem()
             {
                 Word = extractor.GetWord(html),
                 EpisodTitle = extractor.GetTitle(html),

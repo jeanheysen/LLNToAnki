@@ -12,14 +12,6 @@ namespace ZXTests
 {
     public class S001_Basics : BaseIntegrationTesting
     {
-        
-
-        [SetUp]
-        public void Setup()
-        {
-           
-        }
-
         public S001_Basics()
         {
         }
@@ -97,7 +89,7 @@ namespace ZXTests
             var splittedContent = TextSplitter.SplitOnTab(text);
 
             //Act
-            var item = wordItemBuilder.Build(splittedContent[0]);
+            var item = WordItemBuilder.Build(splittedContent[0]);
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", item.EpisodTitle);
         }
@@ -110,7 +102,7 @@ namespace ZXTests
             var splittedContent = TextSplitter.SplitOnTab(text);
 
             //Act
-            var word = wordItemBuilder.Build(splittedContent[0]);
+            var word = WordItemBuilder.Build(splittedContent[0]);
 
             Assert.AreEqual("squeeze", word.Word);
         }
@@ -158,11 +150,11 @@ namespace ZXTests
             //get html
             string text = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
             var html = TextSplitter.SplitOnTab(text)[0];
-            var wordItem = wordItemBuilder.Build(html);
-            var note = ankiNoteBuilder.Builder(wordItem);
+            var wordItem = WordItemBuilder.Build(html);
+            var note = AnkiNoteBuilder.Builder(wordItem);
 
             //export note
-            ankiNoteCsvExporter.Export(this.TmpExportFilePath, new List<AnkiNote>() { note });
+            AnkiNoteExporter.Export(this.TmpExportFilePath, new List<IAnkiNote>() { note });
 
             //Assert
             string expected = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_ExpectedNote.txt"));
@@ -176,11 +168,11 @@ namespace ZXTests
             //get html
             string text = FileReader.ReadAllText(GetPathInData("SingleWord_wagging.csv"));
             var html = TextSplitter.SplitOnTab(text)[0];
-            var wordItem = wordItemBuilder.Build(html);
-            var note = ankiNoteBuilder.Builder(wordItem);
+            var wordItem = WordItemBuilder.Build(html);
+            var note = AnkiNoteBuilder.Builder(wordItem);
 
             //export note
-            ankiNoteCsvExporter.Export(this.TmpExportFilePath, new List<AnkiNote>() { note });
+            AnkiNoteExporter.Export(this.TmpExportFilePath, new List<IAnkiNote>() { note });
 
             //Assert
             string expected = FileReader.ReadAllText(GetPathInData("SingleWord_wagging_ExpectedNote.txt"));
@@ -196,15 +188,15 @@ namespace ZXTests
             //Arrange
             string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
             var html = TextSplitter.SplitOnTab(text)[0];
-            var wordItem = wordItemBuilder.Build(html);
-            var ankiNote = ankiNoteBuilder.Builder(wordItem);
+            var wordItem = WordItemBuilder.Build(html);
+            var ankiNote = AnkiNoteBuilder.Builder(wordItem);
             var html2 = TextSplitter.SplitOnTab(text)[2];
-            var wordItem2 = wordItemBuilder.Build(html2);
-            var ankiNote2 = ankiNoteBuilder.Builder(wordItem2);
-            var notes = new List<AnkiNote>() { ankiNote, ankiNote2 };
+            var wordItem2 = WordItemBuilder.Build(html2);
+            var ankiNote2 = AnkiNoteBuilder.Builder(wordItem2);
+            var notes = new List<IAnkiNote>() { ankiNote, ankiNote2 };
 
             //Act
-            ankiNoteCsvExporter.Export(this.TmpExportFilePath, notes);
+            AnkiNoteExporter.Export(this.TmpExportFilePath, notes);
 
             //Assert
             string expected = FileReader.ReadAllText(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard_expected.txt");

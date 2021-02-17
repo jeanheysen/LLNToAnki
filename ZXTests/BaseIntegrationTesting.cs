@@ -16,11 +16,11 @@ namespace ZXTests
         protected ITextSplitter TextSplitter { get; private set; }
         protected IFileWriter FileWriter { get; private set; }
 
-        protected IHTMLInterpreter HtmlInterpreter;
-        protected IWordItemExtractor WordItemExtractor;
-        protected WordItemBuilder wordItemBuilder;
-        protected AnkiNoteExporter ankiNoteCsvExporter;
-        protected AnkiNoteBuilder ankiNoteBuilder;
+        protected IHTMLInterpreter HtmlInterpreter { get; private set; }
+        protected IWordItemExtractor WordItemExtractor { get; private set; }
+        protected IWordItemBuilder WordItemBuilder { get; private set; }
+        protected IAnkiNoteExporter AnkiNoteExporter { get; private set; }
+        protected IAnkiNoteBuilder AnkiNoteBuilder { get; private set; }
 
         protected string TmpExportFilePath => GetPathInData("tmp_export.txt");
 
@@ -28,14 +28,20 @@ namespace ZXTests
         public BaseIntegrationTesting()
         {
             FileReader = new FileReader();
+            
             TextSplitter = new TextSplitter();
+            
             FileWriter = new FileWriter();
 
             HtmlInterpreter = new HTMLInterpreter();
+            
             WordItemExtractor = new WordItemExtractor(HtmlInterpreter);
-            wordItemBuilder = new WordItemBuilder(WordItemExtractor);
-            ankiNoteCsvExporter = new AnkiNoteExporter(FileWriter);
-            ankiNoteBuilder = new AnkiNoteBuilder();
+            
+            WordItemBuilder = new WordItemBuilder(WordItemExtractor);
+            
+            AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
+            
+            AnkiNoteBuilder = new AnkiNoteBuilder();
         }
 
 
