@@ -1,5 +1,6 @@
 ﻿using LLNToAnki.BE.Ports;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LLNToAnki.BE
 {
@@ -14,17 +15,19 @@ namespace LLNToAnki.BE
 
         public IReadOnlyList<LLNItem> Build(string rawLlnOutput)
         {
-            var all = textSplitter.SplitOnTab(rawLlnOutput);
+            var separator = "\"<style>";
 
-            int counter = 0;
+            var all = rawLlnOutput.Split(separator).ToList();
 
             var r = new List<LLNItem>();
+            int counter = 0;
 
             foreach (var item in all)
             {
-                if (counter == 0) r.Add(new LLNItem() { Content = item });
-                if (counter == 2) r.Add(new LLNItem() { Content = item });
-                counter++;
+                if (counter++ == 0) continue;
+
+                var content = string.Concat(separator, item);
+                r.Add(new LLNItem() { Content = content });
             }
 
             return r;

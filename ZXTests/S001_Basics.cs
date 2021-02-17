@@ -67,7 +67,7 @@ namespace ZXTests
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
-            
+
             //Act
             var r = WordItemBuilder.Build(html);
 
@@ -128,7 +128,7 @@ namespace ZXTests
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
-            
+
             //Act
             var r = WordItemBuilder.Build(html);
 
@@ -174,7 +174,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T012_TwoWordsEndToEnd() //TODO à bouger dans une nouvelle suite de test
+        public void T012_TwoWordsEndToEnd()
         {
             //Arrange
             string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
@@ -195,6 +195,33 @@ namespace ZXTests
             string expected = FileReader.ReadAllText(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard_expected.txt");
             string actual = this.FileReader.ReadAllText(this.TmpExportFilePath);
             Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void T013_LLNBuilderReturnsTwoItemsForTwoOutputtedWordsInLLN()
+        {
+            //Arrange
+            string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
+
+            //Act
+            var llnItems = new LLNItemsBuilder(TextSplitter).Build(text);
+
+            //Assert
+            Assert.AreEqual(2, llnItems.Count);
+        }
+
+        [Test]
+        public void T014_LLNItemsStartWithHTMLStyleBalise()
+        {
+            //Arrange
+            string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
+
+            //Act
+            var llnItems = new LLNItemsBuilder(TextSplitter).Build(text);
+
+            //Assert
+            Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[0].Content.Substring(0, 51));
+            Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[1].Content.Substring(0, 51));
         }
     }
 }
