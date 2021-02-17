@@ -77,7 +77,7 @@ namespace ZXTests
             var extractor = new WordItemExtractor(hTMLInterpreter);
 
             //Act
-            
+
             var r = extractor.GetTitle();
 
 
@@ -143,7 +143,7 @@ namespace ZXTests
         public void T007_ExporterSeparatesWithTab()
         {
             //Arrange
-            var notes = new AnkiNote()
+            var note = new AnkiNote()
             {
                 Question = "Quelle est la couleur du cheval blanc d'Henri IV ?",
                 Answer = "blanc"
@@ -154,7 +154,7 @@ namespace ZXTests
             var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	blanc";
 
             //Act
-            new AnkiNoteCsvExporter(fileWriterMock.Object).Export(path, notes);
+            new AnkiNoteCsvExporter(fileWriterMock.Object).Export(path, new List<AnkiNote>() { note });
 
 
             //Assert
@@ -184,10 +184,10 @@ namespace ZXTests
             string text = reader.ReadFileFromPath(squeezeOriginalLLNOutputPath);
             var html = splitter.Split(text)[0];
             var wordItem = wordItemBuilder.Build(html);
-            var ankiNote = ankiNoteBuilder.Builder(wordItem);
+            var note = ankiNoteBuilder.Builder(wordItem);
 
             //export note
-            ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
+            ankiNoteCsvExporter.Export(this.tmpExportFilePath, new List<AnkiNote>() { note });
 
             //Assert
             string expected = reader.ReadFileFromPath(GetPathInData("SingleWord_squeeze_ExpectedNote.txt"));
@@ -202,10 +202,10 @@ namespace ZXTests
             string text = reader.ReadFileFromPath(waggingOriginalLLNOutputPath);
             var html = splitter.Split(text)[0];
             var wordItem = wordItemBuilder.Build(html);
-            var ankiNote = ankiNoteBuilder.Builder(wordItem);
+            var note = ankiNoteBuilder.Builder(wordItem);
 
             //export note
-            ankiNoteCsvExporter.Export(this.tmpExportFilePath, ankiNote);
+            ankiNoteCsvExporter.Export(this.tmpExportFilePath, new List<AnkiNote>() { note });
 
             //Assert
             string expected = reader.ReadFileFromPath(GetPathInData("SingleWord_wagging_ExpectedNote.txt"));

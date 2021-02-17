@@ -34,27 +34,11 @@ namespace LLNToAnki
             Write(path, sb);
         }
 
-        private static void AppendContent(AnkiNote note, StringBuilder sb)
+        private void AppendContent(AnkiNote note, StringBuilder sb)
         {
             sb.Append(note.Question);
-            //sb.Append("	");
-            //sb.Append(note.Before);
             sb.Append("	");
             sb.Append(note.Answer);
-            //sb.Append("	");
-            //sb.Append(note.After);
-            //sb.Append("	");
-            //sb.Append(note.Source);
-            //sb.Append("	");
-            //sb.Append(note.Audio);
-            //sb.Append("	");
-            //sb.Append(note.Mem_Image);
-            //sb.Append("	");
-            //sb.Append(note.Mem_Text);
-            //sb.Append("	");
-            //sb.Append(note.AddReverseQuestion);
-            //sb.Append("	");
-            //sb.Append(note.AddReverseAnswer);
         }
 
         private void Write(string path, StringBuilder sb)
