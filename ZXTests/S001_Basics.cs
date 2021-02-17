@@ -10,11 +10,8 @@ using System.Text;
 
 namespace ZXTests
 {
-    public class Tests : BaseIntegrationTesting
+    public class S001_Basics : BaseIntegrationTesting
     {
-        string squeezeOriginalLLNOutputPath;
-        string twoWordsOriginalLLNOutputPath;
-        string waggingOriginalLLNOutputPath;
         private WordItemBuilder wordItemBuilder;
         private AnkiNoteExporter ankiNoteCsvExporter;
         private AnkiNoteBuilder ankiNoteBuilder;
@@ -27,11 +24,8 @@ namespace ZXTests
             ankiNoteBuilder = new AnkiNoteBuilder();
         }
 
-        public Tests()
+        public S001_Basics()
         {
-            squeezeOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_squeeze.csv";
-            twoWordsOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\TwoWords_backbench_disregard.csv";
-            waggingOriginalLLNOutputPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\SingleWord_wagging.csv";
         }
 
         [Test]
@@ -50,8 +44,10 @@ namespace ZXTests
             //Arrange
             string text = new FileReader().ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
 
+            //Act
             var splittedContent = new TextSplitter().SplitOnTab(text);
 
+            //Assert
             Assert.AreEqual(3, splittedContent.Count);
         }
 
@@ -65,12 +61,12 @@ namespace ZXTests
             //Act
             var r = extractor.GetTitle(html);
 
-
+            //Assert
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", r);
         }
 
         [Test]
-        public void T003b_TheInterperterPermitsToReturnTheWordInsideSpanGap()
+        public void T004_TheInterperterPermitsToReturnTheWordInsideSpanGap()
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
@@ -84,7 +80,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T003c_TheInterpreterReturnsTheTranslation()
+        public void T005_TheInterpreterReturnsTheTranslation()
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
@@ -98,7 +94,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T004_TheTitleIsInsideTitleOfTheWord()
+        public void T006_TheTitleIsInsideTitleOfTheWord()
         {
             //Arrange
             string text = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
@@ -111,7 +107,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T005_TheWordBuilderReturnsTheWord()
+        public void T007_TheWordBuilderReturnsTheWord()
         {
             //Arrange
             string text = new FileReader().ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
@@ -124,7 +120,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T007_ExporterSeparatesWithTab()
+        public void T008_ExporterSeparatesWithTab()
         {
             //Arrange
             var note = new AnkiNote()
@@ -145,9 +141,8 @@ namespace ZXTests
             fileWriterMock.Verify(w => w.Write(path, expectedContent), Times.Once());
         }
 
-
         [Test]
-        public void T008_GetPartToReplace()
+        public void T009_GetPartToReplace()
         {
             //Arrange
             var html = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
@@ -162,7 +157,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T009_SqueezeEndToEnd() //TODO à bouger dans une nouvelle suite de test
+        public void T010_SqueezeEndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //get html
             string text = FileReader.ReadAllText(GetPathInData("SingleWord_squeeze.csv"));
@@ -180,10 +175,10 @@ namespace ZXTests
         }
 
         [Test]
-        public void T010_WaggingEndToEnd() //TODO à bouger dans une nouvelle suite de test
+        public void T011_WaggingEndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //get html
-            string text = FileReader.ReadAllText(waggingOriginalLLNOutputPath);
+            string text = FileReader.ReadAllText(GetPathInData("SingleWord_wagging.csv"));
             var html = Splitter.SplitOnTab(text)[0];
             var wordItem = wordItemBuilder.Build(html);
             var note = ankiNoteBuilder.Builder(wordItem);
@@ -203,7 +198,7 @@ namespace ZXTests
         public void T011_TwoWordsEndToEnd() //TODO à bouger dans une nouvelle suite de test
         {
             //Arrange
-            string text = FileReader.ReadAllText(twoWordsOriginalLLNOutputPath);
+            string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
             var html = Splitter.SplitOnTab(text)[0];
             var wordItem = wordItemBuilder.Build(html);
             var ankiNote = ankiNoteBuilder.Builder(wordItem);
