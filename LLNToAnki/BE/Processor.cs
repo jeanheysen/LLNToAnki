@@ -41,7 +41,7 @@ namespace LLNToAnki.BE
 
             foreach (var item in llnItems)
             {
-                var wordItem = wordItemBuilder.Build(item.HtmlContent);
+                var wordItem = wordItemBuilder.Build(item);
 
                 var ankiNote = ankiNoteBuilder.Builder(wordItem);
 

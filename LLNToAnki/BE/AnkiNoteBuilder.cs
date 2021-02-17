@@ -20,6 +20,8 @@
 
             note.Answer = item.Translation;
 
+            note.Audio = item.Audio;
+
             return note;
         }
     }

@@ -4,7 +4,7 @@ namespace LLNToAnki.BE
 {
     public interface IWordItemBuilder
     {
-        IWordItem Build(string html);
+        IWordItem Build(ILLNItem llnItem);
     }
 
     public class WordItemBuilder : IWordItemBuilder
@@ -20,8 +20,10 @@ namespace LLNToAnki.BE
 
 
         //METHODS
-        public IWordItem Build(string html)
+        public IWordItem Build(ILLNItem llnItem)
         {
+            var html = llnItem.HtmlContent;
+
             return new WordItem()
             {
                 Word = GetWord(html),
@@ -30,7 +32,9 @@ namespace LLNToAnki.BE
 
                 ContextWithWordColored = GetContextWithWordColored(html),
 
-                Translation = GetTranslation(html)
+                Translation = GetTranslation(html),
+
+                Audio = llnItem.Audio
             };
         }
 

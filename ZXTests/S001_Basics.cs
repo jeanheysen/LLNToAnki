@@ -43,7 +43,7 @@ namespace ZXTests
             var html = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
 
             //Act
-            var r = WordItemBuilder.Build(html);
+            var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
 
             //Assert
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", r.EpisodTitle);
@@ -56,7 +56,7 @@ namespace ZXTests
             var html = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
 
             //Act
-            var r = WordItemBuilder.Build(html);
+            var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
 
             //Assert
             Assert.AreEqual("squeeze", r.Word);
@@ -69,7 +69,7 @@ namespace ZXTests
             var html = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
 
             //Act
-            var r = WordItemBuilder.Build(html);
+            var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
 
             //Assert
             Assert.AreEqual("Et appuyez doucement sur la gâchette.", r.Translation);
@@ -83,7 +83,7 @@ namespace ZXTests
             var splittedContent = TextSplitter.SplitOnTab(text);
 
             //Act
-            var item = WordItemBuilder.Build(splittedContent[0]);
+            var item = WordItemBuilder.Build(new LLNItem() { HtmlContent = splittedContent[0] });
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", item.EpisodTitle);
         }
@@ -96,7 +96,7 @@ namespace ZXTests
             var splittedContent = TextSplitter.SplitOnTab(text);
 
             //Act
-            var word = WordItemBuilder.Build(splittedContent[0]);
+            var word = WordItemBuilder.Build(new LLNItem() { HtmlContent = splittedContent[0] });
 
             Assert.AreEqual("squeeze", word.Word);
         }
@@ -105,22 +105,18 @@ namespace ZXTests
         public void T008_ExporterSeparatesWithTab()
         {
             //Arrange
-            var note = new AnkiNote()
-            {
-                Question = "Quelle est la couleur du cheval blanc d'Henri IV ?",
-                Answer = "blanc"
-            };
-
+            var ankiNoteMock = new Mock<IAnkiNote>() { DefaultValue = DefaultValue.Mock };
+            ankiNoteMock.SetupGet(a => a.Question).Returns("q");
+            ankiNoteMock.SetupGet(a => a.Answer).Returns("a");
+            ankiNoteMock.SetupGet(a => a.Audio).Returns("ad");
             var fileWriterMock = new Mock<IDataWriter>() { DefaultValue = DefaultValue.Mock };
-            var path = "whateverPath";
-            var expectedContent = "Quelle est la couleur du cheval blanc d'Henri IV ?	blanc";
 
             //Act
-            new AnkiNoteExporter(fileWriterMock.Object).Export(path, new List<AnkiNote>() { note });
+            new AnkiNoteExporter(fileWriterMock.Object).Export("", new List<IAnkiNote>() { ankiNoteMock.Object });
 
 
             //Assert
-            fileWriterMock.Verify(w => w.Write(path, expectedContent), Times.Once());
+            fileWriterMock.Verify(w => w.Write("", "q	a	ad"), Times.Once());
         }
 
         [Test]
@@ -130,7 +126,7 @@ namespace ZXTests
             var html = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
 
             //Act
-            var r = WordItemBuilder.Build(html);
+            var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
 
             //Assert
             StringAssert.DoesNotContain("{{c1::", r.ContextWithWordColored);

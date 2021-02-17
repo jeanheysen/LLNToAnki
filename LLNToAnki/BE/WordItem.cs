@@ -6,6 +6,7 @@
         string ContextWithWordColored { get; set; }
         string Translation { get; set; }
         string Word { get; set; }
+        string Audio { get; set; }
     }
 
     public class WordItem : IWordItem
@@ -17,5 +18,7 @@
         public string ContextWithWordColored { get; set; }
 
         public string Translation { get; set; }
+
+        public string Audio { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace LLNToAnki.BE
     {
         //FIELDS
         private readonly IDataWriter dataWriter;
+        private const string tab = "	";
 
         //CONSTRUCTOR
         public AnkiNoteExporter(IDataWriter dataWriter)
@@ -38,8 +39,10 @@ namespace LLNToAnki.BE
         private void AppendContent(IAnkiNote note, StringBuilder sb)
         {
             sb.Append(note.Question);
-            sb.Append("	");
+            sb.Append(tab);
             sb.Append(note.Answer);
+            sb.Append(tab);
+            sb.Append(note.Audio);
         }
 
         private void Write(string path, StringBuilder sb)
