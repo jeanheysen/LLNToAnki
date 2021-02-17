@@ -135,7 +135,6 @@ namespace ZXTests
             //Act
             var r = WordItemBuilder.Build(html);
 
-
             //Assert
             StringAssert.DoesNotContain("{{c1::", r.ContextWithWordColored);
             StringAssert.DoesNotContain("}}", r.ContextWithWordColored);
