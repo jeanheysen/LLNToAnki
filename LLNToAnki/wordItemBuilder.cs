@@ -14,20 +14,13 @@ namespace LLNToAnki
 
         public WordItem Build(string html)
         {
-            var word = extractor.GetWord(html);
-
-            var title = extractor.GetTitle(html);
-
-            var question = extractor.GetQuestion(html);
-
-            var context = new WordContext
+            return new WordItem() 
             {
-                EpisodTitle = title,
-                Question = question,
+                Word = extractor.GetWord(html),
+                EpisodTitle = extractor.GetTitle(html),
+                Question = extractor.GetQuestion(html),
                 Translation = extractor.GetTranslation(html)
             };
-
-            return new WordItem() { Word = word, Context = context };
         }
     }
 }

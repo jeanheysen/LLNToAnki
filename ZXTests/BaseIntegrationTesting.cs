@@ -13,11 +13,11 @@ namespace ZXTests
     public class BaseIntegrationTesting
     {
         protected IFileReader FileReader { get; private set; }
-        protected ITextSplitter Splitter { get; private set; }
+        protected ITextSplitter TextSplitter { get; private set; }
         protected IFileWriter FileWriter { get; private set; }
 
-        protected HTMLInterpreter htmlInterpreter;
-        protected WordItemExtractor wordItemExtractor;
+        protected IHTMLInterpreter HtmlInterpreter;
+        protected IWordItemExtractor WordItemExtractor;
         protected WordItemBuilder wordItemBuilder;
         protected AnkiNoteExporter ankiNoteCsvExporter;
         protected AnkiNoteBuilder ankiNoteBuilder;
@@ -28,12 +28,12 @@ namespace ZXTests
         public BaseIntegrationTesting()
         {
             FileReader = new FileReader();
-            Splitter = new TextSplitter();
+            TextSplitter = new TextSplitter();
             FileWriter = new FileWriter();
 
-            htmlInterpreter = new HTMLInterpreter();
-            wordItemExtractor = new WordItemExtractor(htmlInterpreter);
-            wordItemBuilder = new WordItemBuilder(wordItemExtractor);
+            HtmlInterpreter = new HTMLInterpreter();
+            WordItemExtractor = new WordItemExtractor(HtmlInterpreter);
+            wordItemBuilder = new WordItemBuilder(WordItemExtractor);
             ankiNoteCsvExporter = new AnkiNoteExporter(FileWriter);
             ankiNoteBuilder = new AnkiNoteBuilder();
         }
