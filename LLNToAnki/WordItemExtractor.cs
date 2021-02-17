@@ -1,6 +1,14 @@
 ﻿namespace LLNToAnki
 {
-    public class WordItemExtractor
+    public interface IWordItemExtractor
+    {
+        string GetQuestion(string html);
+        string GetTitle(string html);
+        string GetTranslation(string html);
+        string GetWord(string html);
+    }
+
+    public class WordItemExtractor : IWordItemExtractor
     {
         private readonly IHTMLInterpreter interpreter;
 

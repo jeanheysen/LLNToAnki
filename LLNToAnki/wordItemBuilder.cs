@@ -5,17 +5,15 @@ namespace LLNToAnki
 {
     public class WordItemBuilder
     {
-        public WordItemBuilder()
-        {
+        private readonly IWordItemExtractor extractor;
 
+        public WordItemBuilder(IWordItemExtractor wordItemExtractor)
+        {
+            this.extractor = wordItemExtractor;
         }
 
         public WordItem Build(string html)
         {
-            var hTMLInterpreter = new HTMLInterpreter();
-
-            var extractor = new WordItemExtractor(hTMLInterpreter);
-
             var word = extractor.GetWord(html);
 
             var title = extractor.GetTitle(html);

@@ -12,16 +12,12 @@ namespace ZXTests
 {
     public class S001_Basics : BaseIntegrationTesting
     {
-        private WordItemBuilder wordItemBuilder;
-        private AnkiNoteExporter ankiNoteCsvExporter;
-        private AnkiNoteBuilder ankiNoteBuilder;
+        
 
         [SetUp]
         public void Setup()
         {
-            wordItemBuilder = new WordItemBuilder();
-            ankiNoteCsvExporter = new AnkiNoteExporter(FileWriter);
-            ankiNoteBuilder = new AnkiNoteBuilder();
+           
         }
 
         public S001_Basics()
@@ -101,7 +97,7 @@ namespace ZXTests
             var splittedContent = Splitter.SplitOnTab(text);
 
             //Act
-            var item = new WordItemBuilder().Build(splittedContent[0]);
+            var item = wordItemBuilder.Build(splittedContent[0]);
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", item.Context.EpisodTitle);
         }
@@ -114,7 +110,7 @@ namespace ZXTests
             var splittedContent = new TextSplitter().SplitOnTab(text);
 
             //Act
-            var word = new WordItemBuilder().Build(splittedContent[0]);
+            var word = wordItemBuilder.Build(splittedContent[0]);
 
             Assert.AreEqual("squeeze", word.Word);
         }
