@@ -178,7 +178,7 @@ namespace ZXTests
         {
             //Arrange
             string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
-            var llnItems = new LLNItemsBuilder(TextSplitter).Build(text);
+            var llnItems = lLNItemsBuilder.Build(text);
 
             var notes = new List<IAnkiNote>() { };
             foreach (var item in llnItems)
@@ -204,7 +204,7 @@ namespace ZXTests
             string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
 
             //Act
-            var llnItems = new LLNItemsBuilder(TextSplitter).Build(text);
+            var llnItems = lLNItemsBuilder.Build(text);
 
             //Assert
             Assert.AreEqual(2, llnItems.Count);
@@ -217,7 +217,7 @@ namespace ZXTests
             string text = FileReader.ReadAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
 
             //Act
-            var llnItems = new LLNItemsBuilder(TextSplitter).Build(text);
+            var llnItems = lLNItemsBuilder.Build(text);
 
             //Assert
             Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[0].HtmlContent.Substring(0, 51));

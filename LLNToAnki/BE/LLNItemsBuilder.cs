@@ -4,22 +4,24 @@ using System.Linq;
 
 namespace LLNToAnki.BE
 {
-    public class LLNItemsBuilder
+    public interface ILLNItemsBuilder
     {
-        private readonly ITextSplitter textSplitter;
+        IReadOnlyList<ILLNItem> Build(string rawLlnOutput);
+    }
 
-        public LLNItemsBuilder(ITextSplitter textSplitter)
+    public class LLNItemsBuilder : ILLNItemsBuilder
+    {
+        public LLNItemsBuilder()
         {
-            this.textSplitter = textSplitter;
         }
 
-        public IReadOnlyList<LLNItem> Build(string rawLlnOutput)
+        public IReadOnlyList<ILLNItem> Build(string rawLlnOutput)
         {
             var separator = "\"<style>";
 
             var all = rawLlnOutput.Split(separator).ToList();
 
-            var r = new List<LLNItem>();
+            var r = new List<ILLNItem>();
             int counter = 0;
 
             foreach (var item in all)
@@ -27,7 +29,7 @@ namespace LLNToAnki.BE
                 if (counter++ == 0) continue;
 
                 var content = string.Concat(separator, item);
-                
+
                 r.Add(CreateItemForRawCut(content));
             }
 
@@ -37,7 +39,7 @@ namespace LLNToAnki.BE
         private LLNItem CreateItemForRawCut(string content)
         {
             var subitems = content.Split("\t");
-            return new LLNItem() 
+            return new LLNItem()
             {
                 HtmlContent = subitems[0],
                 Audio = subitems[1],
