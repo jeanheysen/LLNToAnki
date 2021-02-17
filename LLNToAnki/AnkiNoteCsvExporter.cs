@@ -15,12 +15,12 @@ namespace LLNToAnki
         public void Export(string path, List<AnkiNote> notes)
         {
             var sb = new StringBuilder();
-
-            AppendContent(notes[0], sb);
-
-            sb.AppendLine();
-            
-            AppendContent(notes[1], sb);
+            int i = 0;
+            foreach (var note in notes)
+            {
+                if(i++!=0) sb.AppendLine();
+                AppendContent(note, sb);
+            }
 
             Write(path, sb);
         }
