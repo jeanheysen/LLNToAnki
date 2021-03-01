@@ -12,5 +12,11 @@
 &lt;/SessionState&gt;</s:String>
 	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dfb71bb0_002Ddcf8_002D405b_002D917a_002D6b4eb3c780e0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from S001_Basics.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;ProjectFile&gt;084A000A-F469-4843-8A2C-52EA42CC6F74/f:S001_Basics.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;ProjectFile&gt;084A000A-F469-4843-8A2C-52EA42CC6F74/f:S001_Basics.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::084A000A-F469-4843-8A2C-52EA42CC6F74::.NETCoreApp,Version=v3.1::ZXTests.S002_ScrapWordReference.T001_ExtractWordReferenceTranslation&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::084A000A-F469-4843-8A2C-52EA42CC6F74::.NETCoreApp,Version=v3.1::ZXTests.S002_ScrapWordReference.T002_SaveHtmLocally&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

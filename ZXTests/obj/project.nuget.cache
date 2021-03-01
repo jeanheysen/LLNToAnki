@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "fvGTnOoA00QIxR/xHIwHKGd4yq8Dadvd5OxtMmLIIuVIYC2BfPKw5BqHegsHEcRM0Dl/PsNfphZLFAU/oNpgwg==",
+  "dgSpecHash": "o12Zrr3boKKGPgoxEG7YDy5iSJlE6TlwQiet1Nhf2G8BO9ocU6Uj1D0y/cGtMaWtj7cDsj9BxUdGOwxd78R20g==",
   "success": true,
   "projectFilePath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\ZXTests\\ZXTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\felix\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\htmlagilitypack.netcore\\1.5.0.1\\htmlagilitypack.netcore.1.5.0.1.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\htmlagilitypack\\1.11.30\\htmlagilitypack.1.11.30.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.codecoverage\\16.4.0\\microsoft.codecoverage.16.4.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.csharp\\4.0.1\\microsoft.csharp.4.0.1.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\microsoft.dotnet.internalabstractions\\1.0.0\\microsoft.dotnet.internalabstractions.1.0.0.nupkg.sha512",

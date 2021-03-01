@@ -11,13 +11,9 @@ namespace LLNToAnki.Infrastructure
         {
         }
 
-
-        public HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute)
+        public HtmlNode GetNodeByNameAndAttribute(HtmlNode htmlNode, string name, string attribute)
         {
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(html);
-
-            var divs = htmlDoc.DocumentNode.Descendants().Where(n => n.Name == name).ToList();
+            var divs = htmlNode.Descendants().Where(n => n.Name == name).ToList();
 
             foreach (var div in divs)
             {
@@ -30,6 +26,15 @@ namespace LLNToAnki.Infrastructure
                 }
             }
             return null;
+        }
+
+        public HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute)
+        {
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(html);
+            var htmlNode = htmlDoc.DocumentNode;
+
+            return GetNodeByNameAndAttribute(htmlNode, name, attribute);
         }
     }
 }
