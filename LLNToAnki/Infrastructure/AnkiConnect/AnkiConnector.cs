@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LLNToAnki.Infrastructure.AnkiConnect
 {
-    public class Process
+    public class AnkiConnector
     {
         public string GetJsonContent()
         {

@@ -12,11 +12,11 @@ namespace ZXTests
 {
     class S003_AnkiConnectTests
     {
-        private Process process;
+        private AnkiConnector process;
 
         public S003_AnkiConnectTests()
         {
-            process = new Process();
+            process = new AnkiConnector();
         }
 
         [Test]
@@ -48,6 +48,22 @@ namespace ZXTests
 
         [Test]
         public async Task T003_WorksWithBuildNoteConnectObject()
+        {
+            //Arrange
+            var note = process.GetNote("front content", "back content", "blabla");
+            var json = JsonConvert.SerializeObject(note);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8765/");
+
+            //Act
+            HttpResponseMessage response = await client.PostAsync("", data);
+
+            //Assert - faire un get
+        }
+
+        [Test]
+        public async Task T004_AddNoteWithHTML()
         {
             //Arrange
             var note = process.GetNote("front content", "back content", "blabla");
