@@ -1,4 +1,5 @@
-﻿using LLNToAnki.Infrastructure.AnkiConnect;
+﻿using LLNToAnki.BE;
+using LLNToAnki.Infrastructure.AnkiConnect;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ZXTests
 {
-    class S003_AnkiConnectTests
+    class S003_AnkiConnectTests : BaseIntegrationTesting
     {
         private AnkiConnector process;
 
@@ -66,7 +67,10 @@ namespace ZXTests
         public async Task T004_AddNoteWithHTML()
         {
             //Arrange
-            var note = process.GetNote("front content", "back content", "blabla");
+            string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze.csv"));
+            var splittedContent = TextSplitter.SplitOnTab(text);
+            var item = WordItemBuilder.Build(new LLNItem() { HtmlContent = splittedContent[0] });
+            var note = process.GetNote(item.ContextWithWordColored, item.Translation, item.EpisodTitle);
             var json = JsonConvert.SerializeObject(note);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var client = new HttpClient();
