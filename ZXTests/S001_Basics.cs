@@ -119,7 +119,7 @@ namespace ZXTests
 
 
             //Assert
-            fileWriterMock.Verify(w => w.Write("", "q	a		ad"), Times.Once());
+            fileWriterMock.Verify(w => w.Write("", "q	a			ad"), Times.Once());
         }
 
         [Test]
@@ -235,6 +235,20 @@ namespace ZXTests
 
             //Assert
             dataWriterMock.Verify(dw => dw.Write(It.IsAny<string>(), It.Is<string>(c => c.Contains("https://www.wordreference.com/enfr/pig"))));
+        }
+
+        [Test]
+        public void T017_NoteBuildsAfterWithTranslation()
+        {
+            //Arrange
+            var item = new Mock<IWordItem>() { DefaultValue = DefaultValue.Mock };
+            item.SetupGet(n => n.Translation).Returns("c'est la traduction");
+
+            //Act
+            var note = new AnkiNoteBuilder().Build(item.Object);
+
+            //Assert
+            Assert.AreEqual("Traduction Netflix : \"c'est la traduction\".", note.After);
         }
     }
 }

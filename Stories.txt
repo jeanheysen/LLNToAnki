@@ -2,8 +2,6 @@ zip -> unzip, copy file to media, import, move csv to archive
 
 changer la couleur mettre le même rouge
 
-mettre la source égale à l'url de la page wordreference
-
 pomper wordreference et mettre dans after
 
 mettre le fond en transparent car sinon il fait un gros carré blanc sur téléphone

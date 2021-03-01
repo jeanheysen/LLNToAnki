@@ -42,6 +42,8 @@ namespace LLNToAnki.BE
             sb.Append(tab);
             sb.Append(note.Answer);
             sb.Append(tab);
+            sb.Append(note.After);
+            sb.Append(tab);
             sb.Append(note.Source);
             sb.Append(tab);
             sb.Append(note.Audio);
