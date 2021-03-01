@@ -1,3 +1,13 @@
 zip -> unzip, copy file to media, import, move csv to archive
+
 changer la couleur mettre le même rouge
-mettre la source égale au titre de l'épisode ?
+
+mettre la source égale à l'url de la page wordreference
+
+pomper wordreference et mettre dans after
+
+mettre le fond en transparent car sinon il fait un gros carré blanc sur téléphone
+
+Distinguer la langue pour aller pomper WR ou MWB
+
+Mettre la traduction dans After avec une mention genre Contexte original : "blabla"

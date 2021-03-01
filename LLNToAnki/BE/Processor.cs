@@ -43,7 +43,7 @@ namespace LLNToAnki.BE
             {
                 var wordItem = wordItemBuilder.Build(item);
 
-                var ankiNote = ankiNoteBuilder.Builder(wordItem);
+                var ankiNote = ankiNoteBuilder.Build(wordItem);
 
                 notes.Add(ankiNote);
             }
