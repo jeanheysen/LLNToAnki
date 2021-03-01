@@ -57,12 +57,16 @@ namespace ZXTests
         public List<string> fields { get; set; }
     }
 
-    class S003_AnkiConnectTests
+    public class Process
     {
-        [Test]
-        public async Task T001()
+        public string GetJsonContent()
         {
-            //create object following the structure of the body
+            string content = "{\"action\": \"addNote\",\"version\": 6,\"params\": {\"note\": {\"deckName\": \"All\",\"modelName\": \"Full_Recto_verso_before_after_Audio\",\"fields\": {\"Question\": \"front content\",\"Answer\": \"back content\",\"After\" :\"blabla\"},\"options\": {\"allowDuplicate\": false,\"duplicateScope\": \"deck\",\"duplicateScopeOptions\": {\"deckName\": \"All\",\"checkChildren\": false}},\"picture\": [{\"url\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/A_black_cat_named_Tilly.jpg/220px-A_black_cat_named_Tilly.jpg\",\"filename\": \"black_cat.jpg\",\"skipHash\": \"8d6e4646dfae812bf39651b59d7429ce\",\"fields\": [\"Back\"]}]}}}";
+            return content;
+        }
+
+        public connectNote GetNote()
+        {
             var o = new connectNote();
             o.Action = "addNote";
             o.Version = 6;
@@ -87,24 +91,49 @@ namespace ZXTests
             picture.skipHash = "8d6e4646dfae812bf39651b59d7429ce";
             picture.fields = new List<string>() { "Back" };
             o.Params.note.picture.Add(picture);
+            return o;
+        }
+    }
 
-            //serialize in json
-            var json = JsonConvert.SerializeObject(o).ToLower();
+    class S003_AnkiConnectTests
+    {
+        private Process process;
 
-            var data = new StringContent(GetJsonContent(), Encoding.UTF8, "application/json");
+        public S003_AnkiConnectTests()
+        {
+            process = new Process();
+        }
 
-            //post it
+        [Test]
+        public async Task T001_AddNotetoAnkiAndRetrieveIt()
+        {
+            //var note = GetNote();
+            //var json = JsonConvert.SerializeObject(note).ToLower();
+
+            //Arrange
+            var data = new StringContent(process.GetJsonContent(), Encoding.UTF8, "application/json");
             var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8765/");
 
+            //Act
+            client.BaseAddress = new Uri("http://localhost:8765/");
             HttpResponseMessage response = await client.PostAsync("", data);
 
+            //Assert - faire un get
         }
 
-        private string GetJsonContent()
+        [Test]
+        public void T002_BuildContentWithJsonConverterReturnsSameResult()
         {
-            string content = "{\"action\": \"addNote\",\"version\": 6,\"params\": {\"note\": {\"deckName\": \"All\",\"modelName\": \"Full_Recto_verso_before_after_Audio\",\"fields\": {\"Question\": \"front content\",\"Answer\": \"back content\",\"After\" :\"blabla\"},\"options\": {\"allowDuplicate\": false,\"duplicateScope\": \"deck\",\"duplicateScopeOptions\": {\"deckName\": \"All\",\"checkChildren\": false}},\"picture\": [{\"url\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/A_black_cat_named_Tilly.jpg/220px-A_black_cat_named_Tilly.jpg\",\"filename\": \"black_cat.jpg\",\"skipHash\": \"8d6e4646dfae812bf39651b59d7429ce\",\"fields\": [\"Back\"]}]}}}";
-            return content;
+            //Arrange
+            var note = process.GetNote();
+
+            //Act
+            var json = JsonConvert.SerializeObject(note).ToLower();
+
+            //Assert
+            StringAssert.AreEqualIgnoringCase(process.GetJsonContent(), json);
         }
+
+
     }
 }
