@@ -1,4 +1,7 @@
-﻿namespace LLNToAnki.BE
+﻿using LLNToAnki.Infrastructure;
+using System.Text;
+
+namespace LLNToAnki.BE
 {
     public interface IAnkiNoteBuilder
     {
@@ -36,7 +39,21 @@
 
         private string BuildAfter(string sentence)
         {
-            return $"Traduction Netflix : \"{sentence}\".";
+            var sb = new StringBuilder();
+
+            sb.Append($"Traduction Netflix : \"{sentence}\".");
+
+            var htmlreader = new HTMLWebsiteReader();
+            string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
+            var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
+            var scraper = new HTMLScraper();
+            var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");
+
+            var innertext = node.InnerHtml;
+            var translation = innertext.Replace("\r\n", "\n");
+            //sb.Append(translation);
+
+            return sb.ToString();
         }
     }
 }
