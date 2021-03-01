@@ -9,8 +9,11 @@ namespace ZXTests
 {
     public class S001_Basics : BaseIntegrationTesting
     {
+        private Mock<IDataWriter> dataWriterMock;
+        
         public S001_Basics()
         {
+            dataWriterMock = new Mock<IDataWriter>() { DefaultValue = DefaultValue.Mock };
         }
 
         [Test]
@@ -116,7 +119,7 @@ namespace ZXTests
 
 
             //Assert
-            fileWriterMock.Verify(w => w.Write("", "q	a	ad"), Times.Once());
+            fileWriterMock.Verify(w => w.Write("", "q	a		ad"), Times.Once());
         }
 
         [Test]
@@ -218,6 +221,21 @@ namespace ZXTests
 
             //Assert
             Assert.AreEqual($"https://www.wordreference.com/enfr/{word}", note.Source);
+        }
+
+        [Test]
+        public void T016_ExportedNoteContainsTheSource()
+        {
+            //Arrange
+            var note = new Mock<IAnkiNote>() { DefaultValue = DefaultValue.Mock };
+            note.SetupGet(n => n.Source).Returns("https://www.wordreference.com/enfr/pig");
+            var exporter = new AnkiNoteExporter(dataWriterMock.Object);
+
+            //Act
+            exporter.Export("",new List<IAnkiNote>() { note.Object });
+
+            //Assert
+            dataWriterMock.Verify(dw => dw.Write(It.IsAny<string>(), It.Is<string>(c => c.Contains("https://www.wordreference.com/enfr/pig"))));
         }
     }
 }
