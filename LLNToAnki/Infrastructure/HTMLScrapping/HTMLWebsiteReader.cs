@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,9 +12,11 @@ namespace LLNToAnki.Infrastructure
 
         }
 
-        public string GetHTMLFromWebsite(string path)
+        public HtmlNode GetHTMLFromLocalPage(string path)
         {
-            return "";
+            var web = new HtmlWeb();
+
+            return web.Load(path).DocumentNode;
         }
     }
 }

@@ -11,35 +11,32 @@ namespace ZXTests
     {
         string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
 
-        public HtmlDocument CreateHtmlDocument(string url)
-        {
-            var web = new HtmlWeb();
-
-            return web.Load(url);
-        }
-
         [Test]
         public void T001_LoadEyeBallWordReferenceFully()
         {
+            //Arrange
+            var htmlreader = new HTMLWebsiteReader();
+
             //Act
-            var document = CreateHtmlDocument(localWordReferenceEyball);
+            var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
 
             //Assert
-            Assert.Greater(document.DocumentNode.InnerLength, 120000);
+            Assert.Greater(mainNode.InnerLength, 120000);
         }
 
         [Test]
         public void T002_ExtractPrincipalTranslationFromPage()
         {
             //Arrange
-            var document = CreateHtmlDocument(localWordReferenceEyball);
+            var htmlreader = new HTMLWebsiteReader();
+            var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
             var scraper = new HTMLScraper();
 
             //act
-            var node = scraper.GetNodeByNameAndAttribute(document.DocumentNode, "table", "class");
+            var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");
 
             //Assert
-            StringAssert.Contains("The human eyeball is not perfectly spherical.", node.InnerText);
+            StringAssert.Contains("The human eyeball is not perfectly spherical.", mainNode.InnerText);
             StringAssert.Contains("globe oculaire", node.InnerText);
         }
     }
