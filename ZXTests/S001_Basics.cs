@@ -208,19 +208,18 @@ namespace ZXTests
             Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[1].HtmlContent.Substring(0, 51));
         }
 
-        [TestCase("bread")]
-        [TestCase("pig")]
-        public void T015_NoteBuildsSourceWithWordReference(string word)
+        [Test]
+        public void T015_NoteBuildsSourceWithWordReference()
         {
             //Arrange
             var item = new Mock<IWordItem>() { DefaultValue = DefaultValue.Mock };
-            item.SetupGet(n => n.Word).Returns(word);
+            item.SetupGet(n => n.Word).Returns("bread");
 
             //Act
             var note = new AnkiNoteBuilder().Build(item.Object);
 
             //Assert
-            Assert.AreEqual($"https://www.wordreference.com/enfr/{word}", note.Source);
+            Assert.AreEqual($"<a href=\"https://www.wordreference.com/enfr/bread\">https://www.wordreference.com/enfr/bread</a>", note.Source);
         }
 
         [Test]

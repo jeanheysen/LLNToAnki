@@ -29,7 +29,7 @@
 
         private string BuildSource(string word)
         {
-            return $"https://www.wordreference.com/enfr/{word}";
+            return $"<a href=\"https://www.wordreference.com/enfr/{word}\">https://www.wordreference.com/enfr/{word}</a>";
         }
     }
 }
