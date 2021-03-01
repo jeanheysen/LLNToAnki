@@ -11,9 +11,9 @@ namespace ZXTests
 {
     public class connectNote
     {
-        public string Action { get; set; }
-        public int Version { get; set; }
-        public Params Params { get; set; }
+        public string action { get; set; }
+        public int version { get; set; }
+        public Params @params { get; set; }
     }
 
     public class Params
@@ -52,7 +52,7 @@ namespace ZXTests
     public class picture
     {
         public string url { get; set; }
-        public string fileName { get; set; }
+        public string filename { get; set; }
         public string skipHash { get; set; }
         public List<string> fields { get; set; }
     }
@@ -61,36 +61,36 @@ namespace ZXTests
     {
         public string GetJsonContent()
         {
-            string content = "{\"action\": \"addNote\",\"version\": 6,\"params\": {\"note\": {\"deckName\": \"All\",\"modelName\": \"Full_Recto_verso_before_after_Audio\",\"fields\": {\"Question\": \"front content\",\"Answer\": \"back content\",\"After\" :\"blabla\"},\"options\": {\"allowDuplicate\": false,\"duplicateScope\": \"deck\",\"duplicateScopeOptions\": {\"deckName\": \"All\",\"checkChildren\": false}},\"picture\": [{\"url\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/A_black_cat_named_Tilly.jpg/220px-A_black_cat_named_Tilly.jpg\",\"filename\": \"black_cat.jpg\",\"skipHash\": \"8d6e4646dfae812bf39651b59d7429ce\",\"fields\": [\"Back\"]}]}}}";
+            string content = "{\"action\":\"addNote\",\"version\":6,\"params\":{\"note\":{\"deckName\":\"All\",\"modelName\":\"Full_Recto_verso_before_after_Audio\",\"fields\":{\"Question\":\"front content\",\"Answer\":\"back content\",\"After\":\"blabla\"},\"options\":{\"allowDuplicate\":false,\"duplicateScope\":\"deck\",\"duplicateScopeOptions\":{\"deckName\":\"All\",\"checkChildren\":false}},\"picture\":[{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/A_black_cat_named_Tilly.jpg/220px-A_black_cat_named_Tilly.jpg\",\"filename\":\"black_cat.jpg\",\"skipHash\":\"8d6e4646dfae812bf39651b59d7429ce\",\"fields\":[\"Back\"]}]}}}";
             return content;
         }
 
         public connectNote GetNote()
         {
             var o = new connectNote();
-            o.Action = "addNote";
-            o.Version = 6;
-            o.Params = new Params();
-            o.Params.note = new note();
-            o.Params.note.deckName = "All";
-            o.Params.note.modelName = "Full_Recto_verso_before_after_Audio";
-            o.Params.note.fields = new fields();
-            o.Params.note.fields.Question = "front content";
-            o.Params.note.fields.Answer = "back content";
-            o.Params.note.fields.After = "blabla";
-            o.Params.note.options = new options();
-            o.Params.note.options.allowDuplicate = false;
-            o.Params.note.options.duplicateScope = "deck";
-            o.Params.note.options.duplicateScopeOptions = new duplicateScopeOptions();
-            o.Params.note.options.duplicateScopeOptions.deckName = "All";
-            o.Params.note.options.duplicateScopeOptions.checkChildren = false;
-            o.Params.note.picture = new List<picture>();
+            o.action = "addNote";
+            o.version = 6;
+            o.@params = new Params();
+            o.@params.note = new note();
+            o.@params.note.deckName = "All";
+            o.@params.note.modelName = "Full_Recto_verso_before_after_Audio";
+            o.@params.note.fields = new fields();
+            o.@params.note.fields.Question = "front content";
+            o.@params.note.fields.Answer = "back content";
+            o.@params.note.fields.After = "blabla";
+            o.@params.note.options = new options();
+            o.@params.note.options.allowDuplicate = false;
+            o.@params.note.options.duplicateScope = "deck";
+            o.@params.note.options.duplicateScopeOptions = new duplicateScopeOptions();
+            o.@params.note.options.duplicateScopeOptions.deckName = "All";
+            o.@params.note.options.duplicateScopeOptions.checkChildren = false;
+            o.@params.note.picture = new List<picture>();
             var picture = new picture();
             picture.url = @"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/A_black_cat_named_Tilly.jpg/220px-A_black_cat_named_Tilly.jpg";
-            picture.fileName = "black_cat.jpg";
+            picture.filename = "black_cat.jpg";
             picture.skipHash = "8d6e4646dfae812bf39651b59d7429ce";
             picture.fields = new List<string>() { "Back" };
-            o.Params.note.picture.Add(picture);
+            o.@params.note.picture.Add(picture);
             return o;
         }
     }
@@ -122,7 +122,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T002_BuildContentWithJsonConverterReturnsSameResult()
+        public void T002_BuildContentWithJsonConverterReturnsSameResultIgnoringCase()
         {
             //Arrange
             var note = process.GetNote();
@@ -134,6 +134,33 @@ namespace ZXTests
             StringAssert.AreEqualIgnoringCase(process.GetJsonContent(), json);
         }
 
+        [Test]
+        public void T003_BuildContentWithJsonConverterReturnsSameResultWithCase()
+        {
+            //Arrange
+            var note = process.GetNote();
 
+            //Act
+            var json = JsonConvert.SerializeObject(note);
+
+            //Assert
+            Assert.AreEqual(process.GetJsonContent(), json);
+        }
+
+        [Test]
+        public async Task T004_WorksWithBuildNoteConnectObject()
+        {
+            //Arrange
+            var note = process.GetNote();
+            var json = JsonConvert.SerializeObject(note);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:8765/");
+
+            //Act
+            HttpResponseMessage response = await client.PostAsync("", data);
+
+            //Assert - faire un get
+        }
     }
 }
