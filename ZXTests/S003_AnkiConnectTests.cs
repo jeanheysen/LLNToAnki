@@ -20,7 +20,20 @@ namespace ZXTests
         }
 
         [Test]
-        public async Task T001_AddNotetoAnkiAndRetrieveIt()
+        public void T001_BuildContentWithJsonConverterReturnsSameResultWithCase()
+        {
+            //Arrange
+            var note = process.GetNote("front content", "back content", "blabla");
+
+            //Act
+            var json = JsonConvert.SerializeObject(note);
+
+            //Assert
+            Assert.AreEqual(process.GetJsonContent(), json);
+        }
+
+        [Test]
+        public async Task T002_AddNotetoAnkiAndRetrieveIt()
         {
             //Arrange
             var data = new StringContent(process.GetJsonContent(), Encoding.UTF8, "application/json");
@@ -34,36 +47,10 @@ namespace ZXTests
         }
 
         [Test]
-        public void T002_BuildContentWithJsonConverterReturnsSameResultIgnoringCase()
+        public async Task T003_WorksWithBuildNoteConnectObject()
         {
             //Arrange
-            var note = process.GetNote();
-
-            //Act
-            var json = JsonConvert.SerializeObject(note).ToLower();
-
-            //Assert
-            StringAssert.AreEqualIgnoringCase(process.GetJsonContent(), json);
-        }
-
-        [Test]
-        public void T003_BuildContentWithJsonConverterReturnsSameResultWithCase()
-        {
-            //Arrange
-            var note = process.GetNote();
-
-            //Act
-            var json = JsonConvert.SerializeObject(note);
-
-            //Assert
-            Assert.AreEqual(process.GetJsonContent(), json);
-        }
-
-        [Test]
-        public async Task T004_WorksWithBuildNoteConnectObject()
-        {
-            //Arrange
-            var note = process.GetNote();
+            var note = process.GetNote("front content", "back content", "blabla");
             var json = JsonConvert.SerializeObject(note);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var client = new HttpClient();

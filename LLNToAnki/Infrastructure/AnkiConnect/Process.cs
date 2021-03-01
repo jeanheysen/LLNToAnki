@@ -12,7 +12,7 @@ namespace LLNToAnki.Infrastructure.AnkiConnect
             return content;
         }
 
-        public connectNote GetNote()
+        public connectNote GetNote(string question, string answer, string after)
         {
             var o = new connectNote();
             o.action = "addNote";
@@ -22,9 +22,9 @@ namespace LLNToAnki.Infrastructure.AnkiConnect
             o.@params.note.deckName = "All";
             o.@params.note.modelName = "Full_Recto_verso_before_after_Audio";
             o.@params.note.fields = new fields();
-            o.@params.note.fields.Question = "front content";
-            o.@params.note.fields.Answer = "back content";
-            o.@params.note.fields.After = "blabla";
+            o.@params.note.fields.Question = question;
+            o.@params.note.fields.Answer = answer;
+            o.@params.note.fields.After = after;
             o.@params.note.options = new options();
             o.@params.note.options.allowDuplicate = false;
             o.@params.note.options.duplicateScope = "deck";
