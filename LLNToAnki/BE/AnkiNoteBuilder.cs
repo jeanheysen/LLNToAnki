@@ -51,7 +51,7 @@ namespace LLNToAnki.BE
 
             var innertext = node.InnerHtml;
             var translation = innertext.Replace("\r\n", "\n");
-            //sb.Append(translation);
+            sb.Append(translation);
 
             return sb.ToString();
         }
