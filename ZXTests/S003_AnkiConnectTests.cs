@@ -66,7 +66,7 @@ namespace ZXTests
 
 
         [Test]
-        public async Task T004_AddNoteWithQuestionCoucouInHTML()
+        public async Task T004_AddNoteWithQuestionCoucouInHTML_WorksFine()
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("coucouHTML.txt"));
@@ -82,7 +82,7 @@ namespace ZXTests
 
 
         [Test]
-        public async Task T005_AddNoteWithQuestionWithSimpleHtmlInJsonWorksFine()
+        public async Task T005_AddNoteWithQuestionWithSimpleHtmlInJson_WorksFine()
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("simpleHtmlForJson.txt"));
