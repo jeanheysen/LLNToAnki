@@ -23,6 +23,13 @@ namespace ZXTests
             client.BaseAddress = new Uri("http://localhost:8765/");
         }
 
+        public string GetJsonContent()
+        {
+            string content = "{\"action\":\"addNote\",\"version\":6,\"params\":{\"note\":{\"deckName\":\"All\",\"modelName\":\"Full_Recto_verso_before_after_Audio\",\"fields\":{\"Question\":\"front content\",\"Answer\":\"back content\",\"After\":\"blabla\"},\"options\":{\"allowDuplicate\":false,\"duplicateScope\":\"deck\",\"duplicateScopeOptions\":{\"deckName\":\"All\",\"checkChildren\":false}},\"picture\":[{\"url\":\"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/A_black_cat_named_Tilly.jpg/220px-A_black_cat_named_Tilly.jpg\",\"filename\":\"black_cat.jpg\",\"skipHash\":\"8d6e4646dfae812bf39651b59d7429ce\",\"fields\":[\"Back\"]}]}}}";
+            return content;
+        }
+
+
         [Test]
         public void T001_BuildContentWithJsonConverterReturnsSameResultWithCase()
         {
@@ -33,14 +40,14 @@ namespace ZXTests
             var json = JsonConvert.SerializeObject(note);
 
             //Assert
-            Assert.AreEqual(process.GetJsonContent(), json);
+            Assert.AreEqual(GetJsonContent(), json);
         }
 
         [Test]
         public async Task T002_AddNoteFromJsonInTextWorksFine()
         {
             //Arrange
-            var data = new StringContent(process.GetJsonContent(), Encoding.UTF8, "application/json");
+            var data = new StringContent(GetJsonContent(), Encoding.UTF8, "application/json");
 
             //Act
             client.BaseAddress = new Uri("http://localhost:8765/");
@@ -64,7 +71,6 @@ namespace ZXTests
             //Assert - faire un get
         }
 
-
         [Test]
         public async Task T004_AddNoteWithQuestionCoucouInHTML_WorksFine()
         {
@@ -77,9 +83,6 @@ namespace ZXTests
             //Act
             HttpResponseMessage response = await client.PostAsync("", data);
         }
-
-
-
 
         [Test]
         public async Task T005_AddNoteWithQuestionWithSimpleHtmlInJson_WorksFine()
@@ -102,7 +105,7 @@ namespace ZXTests
             var note = process.GetNote(text, "this is the translation", "this is the episod title");
             var json = JsonConvert.SerializeObject(note);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            
+
             //Act
             HttpResponseMessage response = await client.PostAsync("", data);
         }
@@ -118,6 +121,12 @@ namespace ZXTests
 
             //Act
             HttpResponseMessage response = await client.PostAsync("", data);
+        }
+
+        [Test]
+        public async Task T008_EndToEndWithEyeBall()
+        {
+
         }
     }
 }
