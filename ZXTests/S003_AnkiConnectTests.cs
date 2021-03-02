@@ -14,10 +14,13 @@ namespace ZXTests
     class S003_AnkiConnectTests : BaseIntegrationTesting
     {
         private AnkiConnector process;
+        private HttpClient client;
 
         public S003_AnkiConnectTests()
         {
             process = new AnkiConnector();
+            client = new HttpClient();
+
         }
 
         [Test]
@@ -38,7 +41,6 @@ namespace ZXTests
         {
             //Arrange
             var data = new StringContent(process.GetJsonContent(), Encoding.UTF8, "application/json");
-            var client = new HttpClient();
 
             //Act
             client.BaseAddress = new Uri("http://localhost:8765/");
@@ -51,10 +53,9 @@ namespace ZXTests
         public async Task T003_WorksWithBuildNoteConnectObject()
         {
             //Arrange
-            var note = process.GetNote("front content", "back content", "blabla");
+            var note = process.GetNote("<img src=\"black_cat.jpg\">", "back content", "blabla");
             var json = JsonConvert.SerializeObject(note);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8765/");
 
             //Act
@@ -73,13 +74,28 @@ namespace ZXTests
             var note = process.GetNote(item.ContextWithWordColored, item.Translation, item.EpisodTitle);
             var json = JsonConvert.SerializeObject(note);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8765/");
 
             //Act
             HttpResponseMessage response = await client.PostAsync("", data);
 
             //Assert - faire un get
+        }
+
+        [Test]
+        public async Task T005_AddNoteWithQuestionFromCleanedHtmlForJson()
+        {
+            //Arrange
+            string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_CleanedHtmlForJson.txt"));
+            var note = process.GetNote(text, "this is the translation", "this is the episod title");
+            var json = JsonConvert.SerializeObject(note);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            
+            
+            client.BaseAddress = new Uri("http://localhost:8765/");
+
+            //Act
+            HttpResponseMessage response = await client.PostAsync("", data);
         }
     }
 }
