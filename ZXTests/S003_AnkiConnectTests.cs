@@ -106,5 +106,18 @@ namespace ZXTests
             //Act
             HttpResponseMessage response = await client.PostAsync("", data);
         }
+
+        [Test]
+        public async Task T007_AddNote_CleanedWordReferenceTable()
+        {
+            //Arrange
+            string text = DataProvider.GetAllText(GetPathInData("WordReference_eyeBall_InnerHTML.txt"));
+            var note = process.GetNote(text, "this is the translation", "this is the episod title");
+            var json = JsonConvert.SerializeObject(note);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            //Act
+            HttpResponseMessage response = await client.PostAsync("", data);
+        }
     }
 }
