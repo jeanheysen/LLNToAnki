@@ -41,17 +41,19 @@ namespace LLNToAnki.BE
         {
             var sb = new StringBuilder();
 
-            sb.Append($"Traduction Netflix : \"{sentence}\".");
+            //sb.Append($"Traduction Netflix : \"{sentence}\".");
 
             var htmlreader = new HTMLWebsiteReader();
+            
             string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
+            
             var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
+            
             var scraper = new HTMLScraper();
+            
             var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");
 
-            var innertext = node.InnerHtml;
-            var translation = innertext.Replace("\r\n", "\n");
-            //sb.Append(translation); //TODO clean
+            sb.Append(node.ParentNode.InnerHtml); 
 
             return sb.ToString();
         }

@@ -116,11 +116,5 @@ namespace ZXTests
             //Act
             await connectNotePoster.Post(note);
         }
-
-        [Test]
-        public async Task T008_EndToEndWithEyeBall()
-        {
-
-        }
     }
 }
