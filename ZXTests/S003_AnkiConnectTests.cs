@@ -95,7 +95,7 @@ namespace ZXTests
         }
 
         [Test]
-        public async Task T006_AddNoteWithQuestionFromCleanedHtmlForJson()
+        public async Task T006_AddNoteSqueezeTriggerFromCleanedHtml_WorksFine()
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_CleanedHtmlForJson.txt"));
