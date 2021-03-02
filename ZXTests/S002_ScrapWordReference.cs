@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using LLNToAnki.Infrastructure;
+using LLNToAnki.Infrastructure.HTMLScrapping;
 using NUnit.Framework;
 using System;
 using System.IO;
@@ -13,11 +14,14 @@ namespace ZXTests
     {
         string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
         private HTMLWebsiteReader htmlreader;
+        private WordReferenceTranslationsProvider wordReferenceTranslationProvider;
 
         public S002_ScrapWordReference()
         {
             htmlreader = new HTMLWebsiteReader();
+            wordReferenceTranslationProvider = new WordReferenceTranslationsProvider();
         }
+        
         [Test]
         public void T001_LoadEyeBallWordReferenceFully()
         {
@@ -81,6 +85,16 @@ namespace ZXTests
 
             //Assert
             Assert.Greater(r.InnerLength, 174000);
+        }
+
+        [Test]
+        public void T006_LoadEyeBallWordReferenceFully()
+        {
+            //Act
+            var r = wordReferenceTranslationProvider.GetTranslations("eyeball");
+
+            //Assert
+            StringAssert.DoesNotContain(": Refers to person, place, thing, quality, etc.", r);
         }
     }
 }
