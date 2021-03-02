@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace LLNToAnki.Infrastructure.AnkiConnect
 {
-    public class AnkiConnector
+    public class ConnectNoteBuilder
     {
-        public connectNote GetNote(string question, string answer, string after)
+        public connectNote Build(string question, string answer, string after)
         {
             var o = new connectNote();
             o.action = "addNote";

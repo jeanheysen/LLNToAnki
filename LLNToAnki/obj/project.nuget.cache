@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "C2YspT8u0mGvWlCkW+ylBfWWHCknA9MHXHez3YtzEgw568n7xcIfpbaDaLHIeJrp3BmkPv8N18mOOTvgaSnntg==",
+  "dgSpecHash": "LbI6Cb7vLD/ueV5iJklbVDyVhyugy2tWWIKYRrhKITKQ0SBIBMBZtGAVn+2rT9IP57W4+Oo1kpmbOFsR1Rinww==",
   "success": true,
   "projectFilePath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\felix\\.nuget\\packages\\htmlagilitypack\\1.11.30\\htmlagilitypack.1.11.30.nupkg.sha512"
+    "C:\\Users\\felix\\.nuget\\packages\\htmlagilitypack\\1.11.30\\htmlagilitypack.1.11.30.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }

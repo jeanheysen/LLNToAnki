@@ -13,12 +13,14 @@ namespace ZXTests
 {
     class S003_AnkiConnectTests : BaseIntegrationTesting
     {
-        private AnkiConnector process;
+        private ConnectNoteBuilder connectNoteBuilder;
+        private ConnectNotePoster connectNotePoster;
         private HttpClient client;
 
         public S003_AnkiConnectTests()
         {
-            process = new AnkiConnector();
+            connectNoteBuilder = new ConnectNoteBuilder();
+            connectNotePoster = new ConnectNotePoster();
             client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8765/");
         }
@@ -34,7 +36,7 @@ namespace ZXTests
         public void T001_BuildContentWithJsonConverterReturnsSameResultWithCase()
         {
             //Arrange
-            var note = process.GetNote("front content", "back content", "blabla");
+            var note = connectNoteBuilder.Build("front content", "back content", "blabla");
 
             //Act
             var json = JsonConvert.SerializeObject(note);
@@ -60,15 +62,12 @@ namespace ZXTests
         public async Task T003_AddNoteWithACatInTheQuestionWorksFine()
         {
             //Arrange
-            var note = process.GetNote("<img src=\"black_cat.jpg\">", "back content", "blabla");
-            var json = JsonConvert.SerializeObject(note);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            client.BaseAddress = new Uri("http://localhost:8765/");
+            var note = connectNoteBuilder.Build("<img src=\"black_cat.jpg\">", "back content", "blabla");
 
             //Act
-            HttpResponseMessage response = await client.PostAsync("", data);
+            await connectNotePoster.Post(note);
 
-            //Assert - faire un get
+            //Assert
         }
 
         [Test]
@@ -76,12 +75,11 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("coucouHTML.txt"));
-            var note = process.GetNote(text, "this is the translation", "this is the episod title");
-            var json = JsonConvert.SerializeObject(note);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var note = connectNoteBuilder.Build(text, "this is the translation", "this is the episod title");
 
             //Act
-            HttpResponseMessage response = await client.PostAsync("", data);
+            await connectNotePoster.Post(note);
+
         }
 
         [Test]
@@ -89,12 +87,11 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("simpleHtmlForJson.txt"));
-            var note = process.GetNote(text, "this is the translation", "this is the episod title");
-            var json = JsonConvert.SerializeObject(note);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var note = connectNoteBuilder.Build(text, "this is the translation", "this is the episod title");
 
             //Act
-            HttpResponseMessage response = await client.PostAsync("", data);
+            await connectNotePoster.Post(note);
+
         }
 
         [Test]
@@ -102,12 +99,11 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_CleanedHtmlForJson.txt"));
-            var note = process.GetNote(text, "this is the translation", "this is the episod title");
-            var json = JsonConvert.SerializeObject(note);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var note = connectNoteBuilder.Build(text, "this is the translation", "this is the episod title");
 
             //Act
-            HttpResponseMessage response = await client.PostAsync("", data);
+            await connectNotePoster.Post(note);
+
         }
 
         [Test]
@@ -115,12 +111,10 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("WordReference_eyeBall_TableHTML.txt"));
-            var note = process.GetNote(text, "this is the translation", "this is the episod title");
-            var json = JsonConvert.SerializeObject(note);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var note = connectNoteBuilder.Build(text, "this is the translation", "this is the episod title");
 
             //Act
-            HttpResponseMessage response = await client.PostAsync("", data);
+            await connectNotePoster.Post(note);
         }
 
         [Test]
