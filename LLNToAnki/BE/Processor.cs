@@ -71,9 +71,19 @@ namespace LLNToAnki.BE
         {
             List<IAnkiNote> notes = CreateAnkiNotes(filePath);
 
-            var connectNote = connectNoteBuilder.Build(notes.First());
-            
-            connectNotePoster.Post(connectNote).Wait();
+            var totalCount = notes.Count;
+
+            var connectNotes = new List<IConnectNote>();
+            var i = 0;
+
+            foreach (var ankiNote in notes)
+            {
+                var connectNote = connectNoteBuilder.Build(notes.First());
+
+                connectNotePoster.Post(connectNote).Wait();
+
+                System.Console.WriteLine($"{++i} added out of {totalCount}.");
+            }
 
             return notes.Count;
         }
