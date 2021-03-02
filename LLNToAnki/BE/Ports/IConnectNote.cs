@@ -8,7 +8,6 @@ namespace LLNToAnki.BE.Ports
     public interface IConnectNoteBuilder
     {
         IConnectNote Build(IAnkiNote ankiNote);
-        IConnectNote Build(string question, string answer, string after);
     }
 
     public interface IConnectNotePoster
@@ -36,5 +35,7 @@ namespace LLNToAnki.BE.Ports
         string After { get; set; }
         string Answer { get; set; }
         string Question { get; set; }
+        string Source { get; set; }
+        string Audio { get; set; }
     }
 }

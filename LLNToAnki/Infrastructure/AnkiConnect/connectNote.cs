@@ -64,6 +64,8 @@ namespace LLNToAnki.Infrastructure.AnkiConnect
         public string Question { get; set; }
         public string Answer { get; set; }
         public string After { get; set; }
+        public string Source { get; set; }
+        public string Audio { get; set; }
     }
     
     public class options

@@ -1,5 +1,6 @@
 ﻿using LLNToAnki.BE;
 using LLNToAnki.Infrastructure.AnkiConnect;
+using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
@@ -16,6 +17,7 @@ namespace ZXTests
         private ConnectNoteBuilder connectNoteBuilder;
         private ConnectNotePoster connectNotePoster;
         private HttpClient client;
+        private Mock<AnkiNote> ankiNoteMock;
 
         public S004_DoNotRun_AddToAnki()
         {
@@ -23,6 +25,12 @@ namespace ZXTests
             connectNotePoster = new ConnectNotePoster();
             client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8765/");
+
+            ankiNoteMock = new Mock<AnkiNote>() { DefaultValue = DefaultValue.Mock };
+            ankiNoteMock.SetupGet(a => a.Question).Returns("front content");
+            ankiNoteMock.SetupGet(a => a.Answer).Returns("back content");
+            ankiNoteMock.SetupGet(a => a.After).Returns("blabla");
+            var note = connectNoteBuilder.Build(ankiNoteMock.Object);
         }
 
         public string GetJsonContent()
@@ -49,7 +57,8 @@ namespace ZXTests
         public async Task T002_AddNoteWithACatInTheQuestionWorksFine()
         {
             //Arrange
-            var note = connectNoteBuilder.Build("<img src=\"black_cat.jpg\">", "back content", "blabla");
+            ankiNoteMock.SetupGet(a => a.Question).Returns("<img src=\"black_cat.jpg\">");
+            var note = connectNoteBuilder.Build(ankiNoteMock.Object);
 
             //Act
             await connectNotePoster.Post(note);
@@ -62,10 +71,11 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("coucouHTML.txt"));
-            var note = connectNoteBuilder.Build(text, "this is the translation", "this is the episod title");
+            ankiNoteMock.SetupGet(a => a.Question).Returns(text);
+            var ankiNote = connectNoteBuilder.Build(ankiNoteMock.Object);
 
             //Act
-            await connectNotePoster.Post(note);
+            await connectNotePoster.Post(ankiNote);
 
         }
 
@@ -74,10 +84,11 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("simpleHtmlForJson.txt"));
-            var note = connectNoteBuilder.Build(text, "this is the translation", "this is the episod title");
+            ankiNoteMock.SetupGet(a => a.Question).Returns(text);
+            var ankiNote = connectNoteBuilder.Build(ankiNoteMock.Object);
 
             //Act
-            await connectNotePoster.Post(note);
+            await connectNotePoster.Post(ankiNote);
 
         }
 
@@ -86,10 +97,11 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_CleanedHtmlForJson.txt"));
-            var note = connectNoteBuilder.Build(text, "this is the translation", "this is the episod title");
+            ankiNoteMock.SetupGet(a => a.Question).Returns(text);
+            var ankiNote = connectNoteBuilder.Build(ankiNoteMock.Object);
 
             //Act
-            await connectNotePoster.Post(note);
+            await connectNotePoster.Post(ankiNote);
 
         }
 
@@ -98,10 +110,11 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("WordReference_eyeBall_TableHTML.txt"));
-            var note = connectNoteBuilder.Build(text, "this is the translation", "this is the episod title");
+            ankiNoteMock.SetupGet(a => a.Question).Returns(text);
+            var ankiNote = connectNoteBuilder.Build(ankiNoteMock.Object);
 
             //Act
-            await connectNotePoster.Post(note);
+            await connectNotePoster.Post(ankiNote);
         }
     }
 

@@ -1,5 +1,6 @@
 ﻿using LLNToAnki.BE;
 using LLNToAnki.Infrastructure.AnkiConnect;
+using Moq;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
@@ -36,7 +37,11 @@ namespace ZXTests
         public void T001_BuildContentWithJsonConverterReturnsSameResultWithCase()
         {
             //Arrange
-            var note = connectNoteBuilder.Build("front content", "back content", "blabla");
+            var ankiNoteMock = new Mock<AnkiNote>() { DefaultValue = DefaultValue.Mock };
+            ankiNoteMock.SetupGet(a => a.Question).Returns("front content");
+            ankiNoteMock.SetupGet(a => a.Answer).Returns("back content");
+            ankiNoteMock.SetupGet(a => a.After).Returns("blabla");
+            var note = connectNoteBuilder.Build(ankiNoteMock.Object);
 
             //Act
             var json = JsonConvert.SerializeObject(note);

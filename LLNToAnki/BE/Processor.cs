@@ -78,7 +78,7 @@ namespace LLNToAnki.BE
 
             foreach (var ankiNote in notes)
             {
-                var connectNote = connectNoteBuilder.Build(notes.First());
+                var connectNote = connectNoteBuilder.Build(ankiNote);
 
                 connectNotePoster.Post(connectNote).Wait();
 

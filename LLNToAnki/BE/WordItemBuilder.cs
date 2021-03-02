@@ -63,6 +63,7 @@ namespace LLNToAnki.BE
             var by = "<span class=\"\"dc-gap\"\" style=\"\"background-color: brown;\"\">";
             var a5 = a4.Replace(toreplace, by);
 
+            //TODO ce mic mac est à bouger dans le ConnectNoteBuilder
             var a6 = a5.Replace("\"\"", "\"");
             var a7 = a6.Substring(1, a6.Length - 2);//remove the first " and the last "
 
