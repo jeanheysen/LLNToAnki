@@ -24,7 +24,14 @@ namespace LLNToAnki.Infrastructure
         {
             WebClient client = new WebClient();
 
-            client.DownloadFile(url, localPath);
+            try
+            {
+                client.DownloadFile(url, localPath);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

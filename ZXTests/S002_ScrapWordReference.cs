@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using LLNToAnki.Infrastructure;
 using NUnit.Framework;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -20,9 +21,6 @@ namespace ZXTests
         [Test]
         public void T001_LoadEyeBallWordReferenceFully()
         {
-            //Arrange
-            var htmlreader = new HTMLWebsiteReader();
-
             //Act
             var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
 
@@ -50,7 +48,7 @@ namespace ZXTests
         {
             //Arrange
             var remoteFilename = @"https://www.mijnwoordenboek.nl/vertaal/NL/FR/brood";
-            var localFilename = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\bread.htm";
+            var localFilename = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\MWBbrood.htm";
             if (File.Exists(localFilename)) File.Delete(localFilename);
 
             //Act
@@ -58,6 +56,31 @@ namespace ZXTests
 
             //Assert
             Assert.Greater(File.ReadAllText(localFilename).Length, 26000);
+        }
+
+        [Test]
+        public void T004_DirectDownloadWordReferenceThrowsException()
+        {
+            //Arrange
+            var remoteFilename = @"https://www.wordreference.com/enfr/bread";
+            var localFilename = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\WRbread.htm";
+            if (File.Exists(localFilename)) File.Delete(localFilename);
+
+            //Assert
+            Assert.Throws<System.Net.WebException>(()=> htmlreader.DirectDownload(remoteFilename, localFilename));
+        }
+
+        [Test]
+        public void T005_ExtractHTMLWithAgilityPackWordReferenceBreadReturns174koFile()
+        {
+            //Arrange
+            var remoteFilename = @"https://www.wordreference.com/enfr/bread";
+
+            //Act
+            var r = htmlreader.GetHTMLFromLocalPage(remoteFilename);
+
+            //Assert
+            Assert.Greater(r.InnerLength, 174000);
         }
     }
 }
