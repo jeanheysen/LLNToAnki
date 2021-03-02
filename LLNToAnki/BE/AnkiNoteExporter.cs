@@ -38,7 +38,9 @@ namespace LLNToAnki.BE
 
         private void AppendContent(IAnkiNote note, StringBuilder sb)
         {
-            sb.Append(note.Question);
+            sb.Append("\"");
+            sb.Append(note.Question.Replace("\"", "\"\""));
+            sb.Append("\"");
             sb.Append(tab);
             sb.Append(note.Answer);
             sb.Append(tab);

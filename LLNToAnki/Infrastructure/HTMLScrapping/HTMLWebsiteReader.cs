@@ -13,7 +13,7 @@ namespace LLNToAnki.Infrastructure
 
         }
 
-        public HtmlNode GetHTMLFromLocalPage(string path)
+        public HtmlNode GetHTML(string path)
         {
             var web = new HtmlWeb();
 

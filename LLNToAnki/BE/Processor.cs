@@ -40,33 +40,20 @@ namespace LLNToAnki.BE
 
         public int WriteInTextFile(string filePath, string targetPath)
         {
-            var data = dataProvider.GetAllText(filePath);
-
-            var llnItems = lLNItemsBuilder.Build(data);
-
-            var notes = new List<IAnkiNote>();
-
-            foreach (var item in llnItems)
-            {
-                var wordItem = wordItemBuilder.Build(item);
-
-                var ankiNote = ankiNoteBuilder.Build(wordItem);
-
-                notes.Add(ankiNote);
-            }
+            List<IAnkiNote> notes = CreateAnkiNotes(filePath);
 
             ankiNoteExporter.Export(targetPath, notes);
 
             return notes.Count;
         }
 
-        public int PushToAnkiThroughAPI(string filePath)
+        private List<IAnkiNote> CreateAnkiNotes(string filePath)
         {
+            var notes = new List<IAnkiNote>();
+
             var data = dataProvider.GetAllText(filePath);
 
             var llnItems = lLNItemsBuilder.Build(data);
-
-            var notes = new List<IAnkiNote>();
 
             foreach (var item in llnItems)
             {
@@ -76,6 +63,13 @@ namespace LLNToAnki.BE
 
                 notes.Add(ankiNote);
             }
+
+            return notes;
+        }
+
+        public int PushToAnkiThroughAPI(string filePath)
+        {
+            List<IAnkiNote> notes = CreateAnkiNotes(filePath);
 
             var connectNote = connectNoteBuilder.Build(notes.First());
             

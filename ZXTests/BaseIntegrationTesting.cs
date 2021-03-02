@@ -2,6 +2,7 @@
 using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.AnkiConnect;
+using Moq;
 
 namespace ZXTests
 {
@@ -17,6 +18,7 @@ namespace ZXTests
         protected IAnkiNoteBuilder AnkiNoteBuilder { get; }
         protected ILLNItemsBuilder LLNItemsBuilder { get; }
         protected IProcessor Processor { get; }
+        protected Mock<ITranslationsProvider> TranslationsProvider { get; set; }
 
         protected string TmpExportFilePath => GetPathInData("tmp_export.txt");
 
@@ -35,7 +37,9 @@ namespace ZXTests
 
             AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
 
-            AnkiNoteBuilder = new AnkiNoteBuilder();
+            TranslationsProvider = new Mock<ITranslationsProvider>() { DefaultValue = DefaultValue.Mock };
+
+            AnkiNoteBuilder = new AnkiNoteBuilder(TranslationsProvider.Object);
 
             LLNItemsBuilder = new LLNItemsBuilder();
 

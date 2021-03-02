@@ -2,6 +2,7 @@
 using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.AnkiConnect;
+using LLNToAnki.Infrastructure.HTMLScrapping;
 using System.IO;
 
 namespace LLNToAnki.FE
@@ -19,7 +20,7 @@ namespace LLNToAnki.FE
             var HtmlScraper = new HTMLScraper();
             var WordItemBuilder = new WordItemBuilder(HtmlScraper);
             var AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
-            var AnkiNoteBuilder = new AnkiNoteBuilder();
+            var AnkiNoteBuilder = new AnkiNoteBuilder(new WordReferenceTranslationsProvider());
             var LLNItemsBuilder = new LLNItemsBuilder();
 
             var dataPath = Path.Combine(dataFolder, dataFileName);

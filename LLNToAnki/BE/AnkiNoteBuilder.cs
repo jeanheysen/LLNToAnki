@@ -1,4 +1,5 @@
-﻿using LLNToAnki.Infrastructure;
+﻿using LLNToAnki.BE.Ports;
+using LLNToAnki.Infrastructure;
 using System.Text;
 
 namespace LLNToAnki.BE
@@ -10,9 +11,11 @@ namespace LLNToAnki.BE
 
     public class AnkiNoteBuilder : IAnkiNoteBuilder
     {
-        public AnkiNoteBuilder()
-        {
+        private readonly ITranslationsProvider translationsProvider;
 
+        public AnkiNoteBuilder(ITranslationsProvider translationsProvider)
+        {
+            this.translationsProvider = translationsProvider;
         }
 
         public IAnkiNote Build(IWordItem item)
@@ -27,7 +30,7 @@ namespace LLNToAnki.BE
 
             note.Source = BuildSource(item.Word);
 
-            note.After = BuildAfter(item.Translation);
+            note.After = BuildAfter(item.Translation, item.Word) ;
 
             return note;
         }
@@ -37,23 +40,15 @@ namespace LLNToAnki.BE
             return $"<a href=\"https://www.wordreference.com/enfr/{word}\">https://www.wordreference.com/enfr/{word}</a>";
         }
 
-        private string BuildAfter(string sentence)
+        private string BuildAfter(string sentence,string word)
         {
             var sb = new StringBuilder();
 
             sb.Append($"Traduction Netflix : \"{sentence}\".");
 
-            var htmlreader = new HTMLWebsiteReader();
-            
-            string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
-            
-            var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
-            
-            var scraper = new HTMLScraper();
-            
-            var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");
+            var translations = translationsProvider.GetTranslations(word);
 
-            sb.Append(node.ParentNode.InnerHtml); 
+            sb.Append(translations); 
 
             return sb.ToString();
         }

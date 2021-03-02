@@ -22,7 +22,7 @@ namespace ZXTests
         public void T001_LoadEyeBallWordReferenceFully()
         {
             //Act
-            var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
+            var mainNode = htmlreader.GetHTML(localWordReferenceEyball);
 
             //Assert
             Assert.Greater(mainNode.InnerLength, 120000);
@@ -32,7 +32,7 @@ namespace ZXTests
         public void T002_ExtractPrincipalTranslationFromPage()
         {
             //Arrange
-            var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
+            var mainNode = htmlreader.GetHTML(localWordReferenceEyball);
             var scraper = new HTMLScraper();
 
             //act
@@ -77,7 +77,7 @@ namespace ZXTests
             var remoteFilename = @"https://www.wordreference.com/enfr/bread";
 
             //Act
-            var r = htmlreader.GetHTMLFromLocalPage(remoteFilename);
+            var r = htmlreader.GetHTML(remoteFilename);
 
             //Assert
             Assert.Greater(r.InnerLength, 174000);

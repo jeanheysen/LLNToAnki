@@ -119,7 +119,7 @@ namespace ZXTests
 
 
             //Assert
-            fileWriterMock.Verify(w => w.Write("", "q	a			ad"), Times.Once());
+            fileWriterMock.Verify(w => w.Write("", "\"q\"	a			ad"), Times.Once());
         }
 
         [Test]
@@ -216,7 +216,7 @@ namespace ZXTests
             item.SetupGet(n => n.Word).Returns("bread");
 
             //Act
-            var note = new AnkiNoteBuilder().Build(item.Object);
+            var note = AnkiNoteBuilder.Build(item.Object);
 
             //Assert
             Assert.AreEqual($"<a href=\"https://www.wordreference.com/enfr/bread\">https://www.wordreference.com/enfr/bread</a>", note.Source);
@@ -227,6 +227,7 @@ namespace ZXTests
         {
             //Arrange
             var note = new Mock<IAnkiNote>() { DefaultValue = DefaultValue.Mock };
+            note.SetupGet(n => n.Question).Returns("");
             note.SetupGet(n => n.Source).Returns("https://www.wordreference.com/enfr/pig");
             var exporter = new AnkiNoteExporter(dataWriterMock.Object);
 
@@ -245,7 +246,7 @@ namespace ZXTests
             item.SetupGet(n => n.Translation).Returns("c'est la traduction");
 
             //Act
-            var note = new AnkiNoteBuilder().Build(item.Object);
+            var note = AnkiNoteBuilder.Build(item.Object);
 
             //Assert
             Assert.AreEqual("Traduction Netflix : \"c'est la traduction\".", note.After);
