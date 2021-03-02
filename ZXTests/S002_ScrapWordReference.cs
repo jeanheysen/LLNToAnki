@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using LLNToAnki.Infrastructure;
 using NUnit.Framework;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,7 +11,12 @@ namespace ZXTests
     public class S002_ScrapWordReference
     {
         string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
+        private HTMLWebsiteReader htmlreader;
 
+        public S002_ScrapWordReference()
+        {
+            htmlreader = new HTMLWebsiteReader();
+        }
         [Test]
         public void T001_LoadEyeBallWordReferenceFully()
         {
@@ -28,7 +34,6 @@ namespace ZXTests
         public void T002_ExtractPrincipalTranslationFromPage()
         {
             //Arrange
-            var htmlreader = new HTMLWebsiteReader();
             var mainNode = htmlreader.GetHTMLFromLocalPage(localWordReferenceEyball);
             var scraper = new HTMLScraper();
 
@@ -38,6 +43,21 @@ namespace ZXTests
             //Assert
             StringAssert.Contains("The human eyeball is not perfectly spherical.", mainNode.InnerText);
             StringAssert.Contains("globe oculaire", node.InnerText);
+        }
+
+        [Test]
+        public void T003_DownloadPageMinjWoordenBoekForBreadReturnsA26koFile()
+        {
+            //Arrange
+            var remoteFilename = @"https://www.mijnwoordenboek.nl/vertaal/NL/FR/brood";
+            var localFilename = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\bread.htm";
+            if (File.Exists(localFilename)) File.Delete(localFilename);
+
+            //Act
+            htmlreader.DirectDownload(remoteFilename, localFilename);
+
+            //Assert
+            Assert.Greater(File.ReadAllText(localFilename).Length, 26000);
         }
     }
 }

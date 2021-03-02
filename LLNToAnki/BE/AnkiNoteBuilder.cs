@@ -41,7 +41,7 @@ namespace LLNToAnki.BE
         {
             var sb = new StringBuilder();
 
-            //sb.Append($"Traduction Netflix : \"{sentence}\".");
+            sb.Append($"Traduction Netflix : \"{sentence}\".");
 
             var htmlreader = new HTMLWebsiteReader();
             

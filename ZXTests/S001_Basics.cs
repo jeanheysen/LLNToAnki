@@ -10,7 +10,7 @@ namespace ZXTests
     public class S001_Basics : BaseIntegrationTesting
     {
         private Mock<IDataWriter> dataWriterMock;
-        
+
         public S001_Basics()
         {
             dataWriterMock = new Mock<IDataWriter>() { DefaultValue = DefaultValue.Mock };
@@ -231,7 +231,7 @@ namespace ZXTests
             var exporter = new AnkiNoteExporter(dataWriterMock.Object);
 
             //Act
-            exporter.Export("",new List<IAnkiNote>() { note.Object });
+            exporter.Export("", new List<IAnkiNote>() { note.Object });
 
             //Assert
             dataWriterMock.Verify(dw => dw.Write(It.IsAny<string>(), It.Is<string>(c => c.Contains("https://www.wordreference.com/enfr/pig"))));

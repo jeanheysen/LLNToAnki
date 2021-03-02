@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace LLNToAnki.Infrastructure
@@ -17,6 +18,13 @@ namespace LLNToAnki.Infrastructure
             var web = new HtmlWeb();
 
             return web.Load(path).DocumentNode;
+        }
+
+        public void DirectDownload(string url, string localPath)
+        {
+            WebClient client = new WebClient();
+
+            client.DownloadFile(url, localPath);
         }
     }
 }

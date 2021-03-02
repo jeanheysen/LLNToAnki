@@ -1,4 +1,4 @@
-"<style>
+<style>
 
     html,
     body {
@@ -95,102 +95,53 @@
     .dc-lang-ur.dc-orig {
         font-size: 1.2rem;
     }
-</style><div class=""dc-bg""><div class=""dc-card dc-lang-en dc-word-naked""><div class=""dc-title"">The Crown S4:E10 Guerre</div><div class=""dc-images""><div class=""dc-image dc-image-prev"" style=""background-image: url(1613551620685_prev.jpg)""></div><div class=""dc-image dc-image-next"" style=""background-image: url(1613551620685_next.jpg)""></div></div><div class=""dc-line""><span class=""dc-down dc-lang-en dc-orig"">with</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">flagrant</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-gap"" style=""background-color: brown;""><span class=""dc-down dc-lang-en dc-orig"">disregard</span></span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">for</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">the</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">agreement</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">we</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">made</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">in</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">our</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">meeting</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">with</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">you</span><span class=""dc-down dc-lang-en dc-orig"">.</span></div><div class=""dc-line dc-translation dc-lang-fr""></div></div></div>"	Elle ignore sciemment ce à quoi elle s'est engagée lors de notre réunion.	Traduction Netflix : "Elle ignore sciemment ce à quoi elle s'est engagée lors de notre réunion.".	<a href="https://www.wordreference.com/enfr/disregard">https://www.wordreference.com/enfr/disregard</a>	[sound:1613551620685.mp3]
-"<style>
 
-    html,
-    body {
-        padding: 0;
-        margin: 0;
-    }
-
-    .card {
-        background: rgb(255,243,248);
-        background: linear-gradient(76deg, rgba(255,243,248,1) 0%, rgba(238,246,255,1) 100%);
-    }
-
-    .nightMode.card {
-        background: black;
-    }
-    
-    .dc-card {
-        background-color: white;
-        padding-bottom: 1rem;
-        border-bottom: 0.5px solid grey;
-    }
-
-    .nightMode .dc-card {
-        background: #333;
-        border-bottom: none;
-    }
-
-    .nightMode .cloze {
-        color: #1569C7;
-    }
-
-    .dc-title {
-        color: rgb(127, 127, 127);
-        font-size: 0.8rem;
-        text-align: center;
-        padding-top: 0.65rem;
-        margin-bottom: 0.65rem;
-    }
-
-    .dc-images {
-        text-align: center;
-        max-width: 450px;
-        margin: 0 auto 0.5rem;
-    }
-
-    .dc-image {
-       margin-left: 2px;
-       margin-right: 2px;
-        display: inline-block;
-        width: calc(50% - 10px);
-        padding-bottom: 29%;
-        background-position: center;
+    .dc-play {
+        margin: 0.5rem 1rem 0 auto;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.4rem;
+        height: 1.4rem;
+        border-radius: 1rem;
         background-repeat: no-repeat;
-        background-size: cover;
+        background-color: blue;
+        background-position: center;
     }
 
-    .dc-line {
-        padding: 0.4rem;
+    .nightMode .dc-play {
+        background-color: #1569C7;
     }
 
-    .dc-up {
-        display: block;
-        font-size: 0.75rem;
+    .dc-play-svg {
+        pointer-events: none; 
+        transform: translateX(6%);
+        width: 1rem;
+        height: 1rem;
     }
+</style><div class="dc-bg" onclick="var dc_audio = document.getElementById('dc-audio'); if(dc_audio){ dc_audio.pause(); dc_audio.currentTime = 0; dc_audio.play(); }"><div class="dc-card dc-lang-en dc-word-naked"><div class="dc-title">The Crown S4:E2 L'épreuve de Balmoral</div><div class="dc-images"><div class="dc-image dc-image-prev" style="background-image: url(1610544850824_prev.jpg)"></div><div class="dc-image dc-image-next" style="background-image: url(1610544850824_next.jpg)"></div></div><div class="dc-line"><span class="dc-down dc-lang-en dc-orig">And</span><span class="dc-down dc-lang-en dc-orig"> </span><span class="dc-down dc-lang-en dc-orig">gently</span><span class="dc-down dc-lang-en dc-orig"> </span><span class="dc-gap" style="background-color: brown;"><span class="dc-down dc-lang-en dc-orig">squeeze</span></span><span class="dc-down dc-lang-en dc-orig"> </span><span class="dc-down dc-lang-en dc-orig">the</span><span class="dc-down dc-lang-en dc-orig"> </span><span class="dc-down dc-lang-en dc-orig">trigger</span><span class="dc-down dc-lang-en dc-orig">.</span></div><div class="dc-line dc-translation dc-lang-fr"></div><audio style="display: none;" id="dc-audio"><source src="1610544850824.mp3" type="audio/mpeg"></audio><div class="dc-play" preload="auto"><svg class="dc-play-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#fff" d="M96 64l320 192-320 192z"></path></svg></div></div></div>	Et appuyez doucement sur la gâchette.	
+        <!-- copyright 2 --><div><p class="wrcopyright"><a name="eyeball101"></a><span dir="auto">WordReference English-<span class="ph" data-ph="sLanguage">French</span> Dictionary © 2021:</span></p></div><table class="WRD" onclick='redirectWR(event,"WRenfr")'><tbody><tr class="wrtopsection"><td colspan="3" title="Principal Translations"><strong><span class="ph" data-ph="sMainMeanings">Principales traductions</span></strong></td></tr><tr class="langHeader" style="font-size: 13px;text-decoration: underline;font-weight:bold;"><td class="FrWrd">Anglais</td><td></td><td class="ToWrd">Français</td></tr>
+<tr class="even" id="enfr:60281"><td class="FrWrd"><strong>eyeball</strong> <em class="tooltip POS2">n<span><i>noun</i>: Refers to person, place, thing, quality, etc.</span></em></td><td> <i class="Fr2">often plural</i> (ball of the eye)</td><td class="ToWrd">globe oculaire <em class="tooltip POS2">nm<span><i>nom masculin</i>: s'utilise avec les articles <b>"le", "l'" </b>(devant une voyelle ou un h muet), <b>"un"</b>. <i>Ex : garçon - nm &gt; On dira "<b>le</b> garçon" ou "<b>un</b> garçon". </i></span></em></td></tr>
+<tr class="even"><td>&nbsp;</td><td colspan="2" class="FrEx"><span dir="ltr">The human eyeball is not perfectly spherical.</span></td></tr>
+<tr class="even"><td>&nbsp;</td><td colspan="2" class="ToEx"><span dir="ltr">Le globe oculaire humain n'est pas parfaitement sphérique.</span></td></tr>
+<tr class="odd" id="enfr:60282"><td class="FrWrd"><strong>eyeball <span title="something">[sth]</span><a title="conjugate eyeball" class="conjugate" href="https://www.wordreference.com/conj/EnVerbs.aspx?v=eyeball">⇒</a></strong> <em class="tooltip POS2">vtr<span><i>transitive verb</i>: Verb taking a direct object--for example, "<b>Say</b> something." "She <b>found</b> the cat."</span></em></td><td> <i class="Fr2">informal</i> (measure, gauge by sight)</td><td class="ToWrd">évaluer à vue de nez, estimer à vue de nez <em class="tooltip POS2">vtr<span><i>verbe transitif</i>: verbe qui s'utilise avec un complément d'objet direct (COD). <i>Ex : "J'<b>écris</b> une lettre". "Elle <b>a retrouvé</b> son chat".</i></span></em></td></tr>
+<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td><td class="ToWrd">estimer au coup d'œil <em class="tooltip POS2">vtr<span><i>verbe transitif</i>: verbe qui s'utilise avec un complément d'objet direct (COD). <i>Ex : "J'<b>écris</b> une lettre". "Elle <b>a retrouvé</b> son chat".</i></span></em></td></tr>
+<tr class="odd"><td>&nbsp;</td><td>&nbsp;</td><td class="ToWrd">estimer au juger<a title="conjugate estimer au juger" class="conjugate" href="https://www.wordreference.com/conj/FrVerbs.aspx?v=estimer+au+juger">⇒</a>, évaluer au juger<a title="conjugate évaluer au juger" class="conjugate" href="https://www.wordreference.com/conj/FrVerbs.aspx?v=%c3%a9valuer+au+juger">⇒</a> <em class="tooltip POS2">vtr<span><i>verbe transitif</i>: verbe qui s'utilise avec un complément d'objet direct (COD). <i>Ex : "J'<b>écris</b> une lettre". "Elle <b>a retrouvé</b> son chat".</i></span></em></td></tr>
+<tr class="odd"><td>&nbsp;</td><td colspan="2" class="FrEx"><span dir="ltr">The inspector eyeballed the room and guessed it to be twenty feet in length.</span></td></tr>
+<tr class="odd"><td>&nbsp;</td><td colspan="2" class="ToEx"><span dir="ltr">L'inspecteur a estimé au coup d'œil que la pièce faisait six mètres de long.</span></td></tr>
+<tr class="even" id="enfr:60283"><td class="FrWrd"><strong>eyeball <span title="something or somebody">[sth/sb]</span><a title="conjugate eyeball" class="conjugate" href="https://www.wordreference.com/conj/EnVerbs.aspx?v=eyeball">⇒</a></strong> <em class="tooltip POS2">vtr<span><i>transitive verb</i>: Verb taking a direct object--for example, "<b>Say</b> something." "She <b>found</b> the cat."</span></em></td><td> <i class="Fr2">informal</i> (look at)&nbsp;<span class="dsense">(<i>familier</i>)</span></td><td class="ToWrd">reluquer<a title="conjugate reluquer" class="conjugate" href="https://www.wordreference.com/conj/FrVerbs.aspx?v=reluquer">⇒</a>, mater<a title="conjugate mater" class="conjugate" href="https://www.wordreference.com/conj/FrVerbs.aspx?v=mater">⇒</a> <em class="tooltip POS2">vtr<span><i>verbe transitif</i>: verbe qui s'utilise avec un complément d'objet direct (COD). <i>Ex : "J'<b>écris</b> une lettre". "Elle <b>a retrouvé</b> son chat".</i></span></em></td></tr>
+<tr class="even"><td>&nbsp;</td><td class="To2">&nbsp;<span class="dsense">(<i>familier</i>)</span></td><td class="ToWrd">zieuter<a title="conjugate zieuter" class="conjugate" href="https://www.wordreference.com/conj/FrVerbs.aspx?v=zieuter">⇒</a>, zyeuter<a title="conjugate zyeuter" class="conjugate" href="https://www.wordreference.com/conj/FrVerbs.aspx?v=zyeuter">⇒</a> <em class="tooltip POS2">vtr<span><i>verbe transitif</i>: verbe qui s'utilise avec un complément d'objet direct (COD). <i>Ex : "J'<b>écris</b> une lettre". "Elle <b>a retrouvé</b> son chat".</i></span></em></td></tr>
+<tr class="even"><td>&nbsp;</td><td>&nbsp;</td><td class="ToWrd">fixer du regard <em class="tooltip POS2">vtr<span><i>verbe transitif</i>: verbe qui s'utilise avec un complément d'objet direct (COD). <i>Ex : "J'<b>écris</b> une lettre". "Elle <b>a retrouvé</b> son chat".</i></span></em></td></tr>
+<tr class="even"><td>&nbsp;</td><td colspan="2" class="ToEx"><span dir="ltr">Je ne sais pas pourquoi il me fixe du regard comme ça.</span></td></tr>
+</tbody></table>
+<table class="WRreporterror">
+<tbody><tr class="odd more"><td>&nbsp;</td>
+<td style="text-align:right;"><a target="WRsug" title="Is something important missing? Report an error or suggest an improvement." href="https://forum.wordreference.com/forums/dictionary-error-reports-and-suggestions.30/post-thread?prefix_id=25&amp;title=eyeball"><span class="ph" data-ph="sReportError">Un oubli important ? Signalez une erreur ou suggérez une amélioration.</span></a></td></tr></tbody></table>
 
-    .dc-translation {
-        color: fuchsia;
-    }
 
-    .dc-layer {
-        display: inline-block;
-        text-align: center;
-        line-height: 1.3rem;
-    }
+                  <!-- This mobileAd_holder is from buildWRD5.aspx -->
+                  <div id="mobileAd_holder" style="display:none;">
+                  </div>
 
-    .dc-lang-zh-CN.dc-orig {
-        font-size: 1.2rem;
-    }
-    .dc-lang-zh-TW.dc-orig {
-        font-size: 1.2rem;
-    }
-    .dc-lang-ja.dc-orig {
-        font-size: 1.2rem;
-    }
-    .dc-lang-th.dc-orig {
-        font-size: 1.2rem;
-    }
-    .dc-lang-ar.dc-orig {
-        font-size: 1.2rem;
-    }
-    .dc-lang-fa.dc-orig {
-        font-size: 1.2rem;
-    }
-    .dc-lang-ur.dc-orig {
-        font-size: 1.2rem;
-    }
-</style><div class=""dc-bg""><div class=""dc-card dc-lang-en dc-word-naked""><div class=""dc-title"">The Crown S4:E10 Guerre</div><div class=""dc-images""><div class=""dc-image dc-image-prev"" style=""background-image: url(1613551575308_prev.jpg)""></div><div class=""dc-image dc-image-next"" style=""background-image: url(1613551575308_next.jpg)""></div></div><div class=""dc-line""><span class=""dc-down dc-lang-en dc-orig"">since</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">I</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">last</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">spoke</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">from</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">one</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">of</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-down dc-lang-en dc-orig"">these</span><span class=""dc-down dc-lang-en dc-orig""> </span><span class=""dc-gap"" style=""background-color: brown;""><span class=""dc-down dc-lang-en dc-orig"">backbenches</span></span><span class=""dc-down dc-lang-en dc-orig"">.</span><span class=""dc-down dc-lang-en dc-orig"">""</span></div><div class=""dc-line dc-translation dc-lang-fr""></div></div></div>"	depuis mon dernier discours depuis l'un de ces bancs.	Traduction Netflix : "depuis mon dernier discours depuis l'un de ces bancs.".	<a href="https://www.wordreference.com/enfr/backbenches">https://www.wordreference.com/enfr/backbenches</a>	[sound:1613551575308.mp3]
+        	<a href="https://www.wordreference.com/enfr/squeeze">https://www.wordreference.com/enfr/squeeze</a>	
