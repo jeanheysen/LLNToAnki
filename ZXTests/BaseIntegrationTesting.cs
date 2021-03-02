@@ -1,6 +1,7 @@
 ﻿using LLNToAnki.BE;
 using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
+using LLNToAnki.Infrastructure.AnkiConnect;
 
 namespace ZXTests
 {
@@ -38,7 +39,15 @@ namespace ZXTests
 
             LLNItemsBuilder = new LLNItemsBuilder();
 
-            Processor = new Processor(DataProvider, LLNItemsBuilder, WordItemBuilder, AnkiNoteBuilder, AnkiNoteExporter);
+            Processor = new Processor(
+                DataProvider, 
+                LLNItemsBuilder, 
+                WordItemBuilder, 
+                AnkiNoteBuilder, 
+                AnkiNoteExporter,
+                new ConnectNoteBuilder(),
+                new ConnectNotePoster()
+                );
         }
 
 

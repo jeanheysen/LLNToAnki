@@ -143,7 +143,7 @@ namespace ZXTests
             var filePath = GetPathInData("SingleWord_squeeze.csv");
 
             //Act
-            Processor.Process(filePath, TmpExportFilePath);
+            Processor.WriteInTextFile(filePath, TmpExportFilePath);
 
             //Assert
             string expected = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_ExpectedNote.txt"));
@@ -158,7 +158,7 @@ namespace ZXTests
             var filePath = GetPathInData("SingleWord_wagging.csv");
 
             //Act
-            Processor.Process(filePath, TmpExportFilePath);
+            Processor.WriteInTextFile(filePath, TmpExportFilePath);
 
             //Assert
             string expected = DataProvider.GetAllText(GetPathInData("SingleWord_wagging_ExpectedNote.txt"));
@@ -173,7 +173,7 @@ namespace ZXTests
             var filePath = GetPathInData("TwoWords_backbench_disregard.csv");
 
             //Act
-            Processor.Process(filePath, TmpExportFilePath);
+            Processor.WriteInTextFile(filePath, TmpExportFilePath);
 
             //Assert
             string expected = DataProvider.GetAllText(GetPathInData("TwoWords_backbench_disregard_expected.txt"));

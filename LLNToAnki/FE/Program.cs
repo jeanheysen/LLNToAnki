@@ -1,6 +1,7 @@
 ﻿using LLNToAnki.BE;
 using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
+using LLNToAnki.Infrastructure.AnkiConnect;
 using System.IO;
 
 namespace LLNToAnki.FE
@@ -24,11 +25,22 @@ namespace LLNToAnki.FE
             var dataPath = Path.Combine(dataFolder, dataFileName);
             var targetPath = Path.Combine(dataFolder, targetFileName);
             
-            var Processor = new Processor(FileReader, LLNItemsBuilder, WordItemBuilder, AnkiNoteBuilder, AnkiNoteExporter);
+            var Processor = new Processor(
+                FileReader, 
+                LLNItemsBuilder, 
+                WordItemBuilder, 
+                AnkiNoteBuilder, 
+                AnkiNoteExporter,
+                new ConnectNoteBuilder(),
+                new ConnectNotePoster()
+                );
 
-            var count = Processor.Process(dataPath, targetPath);
+            //var count = Processor.WriteInTextFile(dataPath, targetPath);
+            //System.Console.WriteLine($"{count} items were generated in {targetPath}");
 
-            System.Console.WriteLine($"{count} items were generated in {targetPath}");
+            var count = Processor.PushToAnkiThroughAPI(dataPath);
+            System.Console.WriteLine($"{count} items were directly added to Anki through API.");
+
             System.Console.WriteLine("Press a key to end.");
             System.Console.ReadKey();
         }
