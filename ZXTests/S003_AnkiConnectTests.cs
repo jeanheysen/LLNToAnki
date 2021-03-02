@@ -82,7 +82,7 @@ namespace ZXTests
 
 
         [Test]
-        public async Task T004_AddNoteWithQuestionWithSimpleHtmlInJson()
+        public async Task T005_AddNoteWithQuestionWithSimpleHtmlInJsonWorksFine()
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("simpleHtmlForJson.txt"));
@@ -95,7 +95,7 @@ namespace ZXTests
         }
 
         [Test]
-        public async Task T005_AddNoteWithQuestionFromCleanedHtmlForJson()
+        public async Task T006_AddNoteWithQuestionFromCleanedHtmlForJson()
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_CleanedHtmlForJson.txt"));

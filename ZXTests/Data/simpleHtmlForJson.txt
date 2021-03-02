@@ -1,1 +1,1 @@
-"<div class=\"ad_box\"><img class=\"banner\" src=\"black_cat.jpg\" alt=\"\" \/><h3>&quot;Hot&quot; Items <\/h3> <br \/> <ul id=\"items\" \/><\/div>"
+<div class="ad_box"><img class="banner" src="black_cat.jpg"><h3>&quot;Ce chat est gras&quot;</h3></div>
