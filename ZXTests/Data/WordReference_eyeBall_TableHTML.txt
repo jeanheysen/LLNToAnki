@@ -1,5 +1,13 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
 <body>
-    <table id="contenttable">
+
+    <!-- copyright 2 --><div><p class="wrcopyright"><a name="eyeball101"></a><span dir="auto">WordReference English-<span class="ph" data-ph="sLanguage">French</span> Dictionary © 2021:</span></p></div><table class="WRD" onclick='redirectWR(event,"WRenfr")'>
         <tbody>
             <tr class="wrtopsection"><td colspan="3" title="Principal Translations"><strong><span class="ph" data-ph="sMainMeanings">Principales traductions</span></strong></td></tr>
             <tr class="langHeader" style="font-size: 13px;text-decoration: underline;font-weight:bold;"><td class="FrWrd">Anglais</td><td></td><td class="ToWrd">Français</td></tr>
@@ -17,4 +25,18 @@
             <tr class="even"><td>&nbsp;</td><td colspan="2" class="ToEx"><span dir="ltr">Je ne sais pas pourquoi il me fixe du regard comme ça.</span></td></tr>
         </tbody>
     </table>
+    <table class="WRreporterror">
+        <tbody>
+            <tr class="odd more">
+                <td>&nbsp;</td>
+                <td style="text-align:right;"><a target="WRsug" title="Is something important missing? Report an error or suggest an improvement." href="https://forum.wordreference.com/forums/dictionary-error-reports-and-suggestions.30/post-thread?prefix_id=25&amp;title=eyeball"><span class="ph" data-ph="sReportError">Un oubli important ? Signalez une erreur ou suggérez une amélioration.</span></a></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <!-- This mobileAd_holder is from buildWRD5.aspx -->
+    <div id="mobileAd_holder" style="display:none;">
+    </div>
 </body>
+</html>
