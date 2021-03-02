@@ -108,7 +108,7 @@ namespace ZXTests
         }
 
         [Test]
-        public async Task T007_AddNote_CleanedWordReferenceTable()
+        public async Task T007_AddNote_CleanedWordReferenceTable_WorksFine()
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("WordReference_eyeBall_TableHTML.txt"));
