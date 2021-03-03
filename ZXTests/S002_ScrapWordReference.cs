@@ -112,6 +112,10 @@ namespace ZXTests
             StringAssert.DoesNotContain("Verb taking a direct object", r);
             StringAssert.DoesNotContain("verbe qui s'utilise avec un complément d'objet direct (COD)", r);
             //StringAssert.DoesNotContain("Is something important missing? Report an error or suggest an improvement.", r);
+
+            StringAssert.DoesNotContain("Verb not taking a direct object--for example", r);
+            StringAssert.DoesNotContain("verbe qui s'utilise sans complément d'objet direct (COD)", r);
+            StringAssert.DoesNotContain("verbe qui s'utilise avec le pronom réfléchi", r);
         }
     }
 }

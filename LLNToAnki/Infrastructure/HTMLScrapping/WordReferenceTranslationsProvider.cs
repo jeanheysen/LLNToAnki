@@ -40,6 +40,10 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
             toRemove.Add(": verbe qui s'utilise avec un complément d'objet direct (COD). <i>Ex : \"J'<b>écris</b> une lettre\". \"Elle <b>a retrouvé</b> son chat\".</i>");
             //toRemove.Add("<td style=\"text-align:right;\"><a target=\"WRsug\" title=\"Is something important missing? Report an error or suggest an improvement.\" href=\"https://forum.wordreference.com/forums/dictionary-error-reports-and-suggestions.30/post-thread?prefix_id=25&amp;title=eyeball\"><span class=\"ph\" data-ph=\"sReportError\">Un oubli important ? Signalez une erreur ou suggérez une amélioration.</span></a></td>");
 
+            toRemove.Add(": Verb not taking a direct object--for example, \"She <b>jokes</b>.\" \"He <b>has arrived</b>.\"");
+            toRemove.Add(": verbe qui s'utilise sans complément d'objet direct (COD). <i>Ex : \"Il est <b>parti</b>.\" \"Elle <b>a ri</b>.\"</i>");
+            toRemove.Add(": verbe qui s'utilise avec le pronom réfléchi \"se\", qui s'accorde avec le sujet. <i>Ex : <b>se regarder</b> : \"Je <b>me</b> regarde dans le miroir. Tu <b>te</b> regardes dans le miroir.\"</i>. Les verbes pronominaux se conjuguent toujours avec l'auxiliaire \"être\". <i>Ex : \"Elle <b>a</b> lavé la voiture\" mais \"Elle s'<b>est</b> lavée.\"</i>");
+
             foreach (var s in toRemove)
             {
                 if (content.Contains(s)) content = content.Replace(s, "");
