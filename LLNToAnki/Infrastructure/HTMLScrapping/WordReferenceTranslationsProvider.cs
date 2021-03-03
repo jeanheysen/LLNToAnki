@@ -50,6 +50,18 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
             toRemove.Add(": modifie un nom. Il est généralement placé après le nom et s'accorde avec le nom (<i>ex : un ballon bleu, un<b>e</b> balle bleu<b>e</b></i>). En général, seule la forme au masculin singulier est donnée. Pour former le <b>féminin</b>, on ajoute <b>\"e\"</b> (<i>ex : petit > petit<b>e</b></i>) et pour former le <b>pluriel</b>, on ajoute <b>\"s\"</b> (<i>ex : petit > petit<b>s</b></i>). Pour les formes qui sont \"irrégulières\" au féminin, celles-ci sont données (<i>ex : irrégulier, irrégulière</i> > irrégulier = forme masculine, irrégulière = forme féminine)");
             toRemove.Add(": Describes a noun or pronoun--for example, \"a <b>tall</b> girl,\" \"an <b>interesting</b> book,\" \"a <b>big</b> house.\"");
 
+            toRemove.Add(": s'utilise avec les articles <b>\"la\", \"l'\" </b>(devant une voyelle ou un h muet), <b>\"une\"</b>. <i>Ex : fille - nf > On dira \"<b>la</b> fille\" ou \"<b>une</b> fille\".</i> Avec un nom féminin, l'adjectif s'accorde. En général, on ajoute un \"e\" à l'adjectif. Par exemple, on dira \"une petit<b>e</b> fille\".");
+
+            toRemove.Add(": groupe de mots fonctionnant comme un verbe. <i>Ex : \"faire référence à\"");
+            toRemove.Add(": modifie un adjectif ou un verbe. Est toujours invariable ! <i>Ex : \"Elle est <b>très</b> grande.\" \"Je marche <b>lentement</b>.\"</i>");
+            toRemove.Add(": Phrase with special meaning functioning as verb--for example, \"put their heads together,\" \"come to an end.\"");
+            toRemove.Add(": Describes a verb, adjective, adverb, or clause--for example, \"come <b>quickly</b>,\" \"<b>very</b> rare,\"  \"happening <b>now</b>,\" \"fall <b>down</b>.\"");
+
+            toRemove.Add(": s'utilise avec l'article défini <b>\"les\"</b>. <b>nmpl</b> = nom pluriel au <b>masculin</b>, <b>nfpl</b> = nom pluriel au <b>féminin");
+            toRemove.Add(": s'utilise avec l'article défini <b>\"les\"</b>. <i>Ex : \"algues\"</i>");
+            toRemove.Add(": Verb with adverb(s) or preposition(s), having special meaning, divisible--for example, \"call off\" [=cancel], \"<b>call</b> the game <b>off</b>,\" \"<b>call off</b> the game.\"");
+            toRemove.Add(": <b>Adjectif invariable</b> : adjectif qui a la même forme au singulier et au pluriel, au masculin et au féminin. <i>Ex : \"canon\" : un garçon canon, une fille canon, des garçons canon, des filles canon.</i>");
+
 
             foreach (var s in toRemove)
             {
