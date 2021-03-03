@@ -18,9 +18,9 @@ namespace ZXTests
         private WordReferenceTranslationsProvider wordReferenceTranslationProvider;
         private Mock<IURLBuilder> urlBuilderMock;
 
-        private string LocalWordReferenceURL(string word)
+        private string LocalWordReferenceURL(string fileName)
         {
-            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\WR_{word}.html";
+            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\{fileName}";
         }
 
         public S002_ScrapWordReference()
@@ -29,11 +29,11 @@ namespace ZXTests
 
             urlBuilderMock = new Mock<IURLBuilder>() { DefaultValue = DefaultValue.Mock };
 
-            urlBuilderMock.Setup(b => b.OnlineWordReference(It.IsAny<string>())).Callback<string>(s => LocalWordReferenceURL(s));
+            urlBuilderMock.Setup(b => b.OnlineWordReference(It.IsAny<string>())).Returns<string>(s => LocalWordReferenceURL(s));
 
             wordReferenceTranslationProvider = new WordReferenceTranslationsProvider(urlBuilderMock.Object);
         }
-        
+
         [Test]
         public void T001_LoadEyeBallWordReferenceFully()
         {
@@ -83,7 +83,7 @@ namespace ZXTests
             if (File.Exists(localFilename)) File.Delete(localFilename);
 
             //Assert
-            Assert.Throws<System.Net.WebException>(()=> htmlreader.DirectDownload(remoteFilename, localFilename));
+            Assert.Throws<System.Net.WebException>(() => htmlreader.DirectDownload(remoteFilename, localFilename));
         }
 
         [Test]
@@ -99,14 +99,19 @@ namespace ZXTests
             Assert.Greater(r.InnerLength, 174000);
         }
 
-        [Test]
-        public void T006_LoadEyeBallWordReferenceFully()
+        [TestCase("WR_eyeball.html")]
+        [TestCase("WR_concurs.htm")]
+        public void T006_ParasitsGrammarExplanationAreRemovedFromWordReferenceExplanations(string fileName)
         {
             //Act
-            var r = wordReferenceTranslationProvider.GetTranslations("eyeball");
+            var r = wordReferenceTranslationProvider.GetTranslations(fileName);
 
             //Assert
             StringAssert.DoesNotContain(": Refers to person, place, thing, quality, etc.", r);
+            StringAssert.DoesNotContain("devant une voyelle ou un h muet", r);
+            StringAssert.DoesNotContain("Verb taking a direct object", r);
+            StringAssert.DoesNotContain("verbe qui s'utilise avec un complément d'objet direct (COD)", r);
+            //StringAssert.DoesNotContain("Is something important missing? Report an error or suggest an improvement.", r);
         }
     }
 }
