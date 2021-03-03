@@ -47,6 +47,10 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
             toRemove.Add(": verbe qui s'utilise sans complément d'objet direct (COD). <i>Ex : \"Il est <b>parti</b>.\" \"Elle <b>a ri</b>.\"</i>");
             toRemove.Add(": verbe qui s'utilise avec le pronom réfléchi \"se\", qui s'accorde avec le sujet. <i>Ex : <b>se regarder</b> : \"Je <b>me</b> regarde dans le miroir. Tu <b>te</b> regardes dans le miroir.\"</i>. Les verbes pronominaux se conjuguent toujours avec l'auxiliaire \"être\". <i>Ex : \"Elle <b>a</b> lavé la voiture\" mais \"Elle s'<b>est</b> lavée.\"</i>");
 
+            toRemove.Add(": modifie un nom. Il est généralement placé après le nom et s'accorde avec le nom (<i>ex : un ballon bleu, un<b>e</b> balle bleu<b>e</b></i>). En général, seule la forme au masculin singulier est donnée. Pour former le <b>féminin</b>, on ajoute <b>\"e\"</b> (<i>ex : petit > petit<b>e</b></i>) et pour former le <b>pluriel</b>, on ajoute <b>\"s\"</b> (<i>ex : petit > petit<b>s</b></i>). Pour les formes qui sont \"irrégulières\" au féminin, celles-ci sont données (<i>ex : irrégulier, irrégulière</i> > irrégulier = forme masculine, irrégulière = forme féminine)");
+            toRemove.Add(": Describes a noun or pronoun--for example, \"a <b>tall</b> girl,\" \"an <b>interesting</b> book,\" \"a <b>big</b> house.\"");
+
+
             foreach (var s in toRemove)
             {
                 if (content.Contains(s)) content = content.Replace(s, "");
