@@ -7,20 +7,22 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
 {
     public class WordReferenceTranslationsProvider : ITranslationsProvider
     {
+        private readonly IURLBuilder urlBuilder;
         private HTMLWebsiteReader websiteReader;
         private HTMLScraper scraper;
 
-        public WordReferenceTranslationsProvider()
+        public WordReferenceTranslationsProvider(IURLBuilder urlBuilder)
         {
             websiteReader = new HTMLWebsiteReader();
 
             scraper = new HTMLScraper();
+            this.urlBuilder = urlBuilder;
         }
 
         public string GetTranslations(string word)
         {
-            var url = $"https://www.wordreference.com/enfr/{word}";
-
+            var url = urlBuilder.OnlineWordReference(word);
+            
             var mainNode = websiteReader.GetHTML(url);
 
             var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");

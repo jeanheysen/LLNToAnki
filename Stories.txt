@@ -2,7 +2,7 @@ zip -> unzip, copy file to media, import, move csv to archive
 
 changer la couleur mettre le même rouge
 
-mettre le fond en transparent car sinon il fait un gros carré blanc sur téléphone
+regarder pourquoi problème de couleur de fond sur mobile certaines cartes sont ok
 
 Distinguer la langue pour aller pomper WR ou MWB
 

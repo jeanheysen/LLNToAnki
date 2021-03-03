@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.HTMLScrapping;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.IO;
@@ -15,11 +16,22 @@ namespace ZXTests
         string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
         private HTMLWebsiteReader htmlreader;
         private WordReferenceTranslationsProvider wordReferenceTranslationProvider;
+        private Mock<IURLBuilder> urlBuilderMock;
+
+        private string LocalWordReferenceURL(string word)
+        {
+            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\WR_{word}.html";
+        }
 
         public S002_ScrapWordReference()
         {
             htmlreader = new HTMLWebsiteReader();
-            wordReferenceTranslationProvider = new WordReferenceTranslationsProvider();
+
+            urlBuilderMock = new Mock<IURLBuilder>() { DefaultValue = DefaultValue.Mock };
+
+            urlBuilderMock.Setup(b => b.OnlineWordReference(It.IsAny<string>())).Callback<string>(s => LocalWordReferenceURL(s));
+
+            wordReferenceTranslationProvider = new WordReferenceTranslationsProvider(urlBuilderMock.Object);
         }
         
         [Test]

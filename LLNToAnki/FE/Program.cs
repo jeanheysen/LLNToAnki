@@ -20,7 +20,9 @@ namespace LLNToAnki.FE
             var HtmlScraper = new HTMLScraper();
             var WordItemBuilder = new WordItemBuilder(HtmlScraper);
             var AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
-            var AnkiNoteBuilder = new AnkiNoteBuilder(new WordReferenceTranslationsProvider());
+            var urlBuilder = new URLBuilder();
+            var translationsProvider = new WordReferenceTranslationsProvider(urlBuilder);
+            var AnkiNoteBuilder = new AnkiNoteBuilder(translationsProvider);
             var LLNItemsBuilder = new LLNItemsBuilder();
 
             var dataPath = Path.Combine(dataFolder, dataFileName);
