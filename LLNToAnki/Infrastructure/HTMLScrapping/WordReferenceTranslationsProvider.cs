@@ -36,6 +36,9 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
 
             toRemove.Add(": Refers to person, place, thing, quality, etc.");
             toRemove.Add(": s'utilise avec les articles <b>\"le\", \"l'\" </b>(devant une voyelle ou un h muet), <b>\"un\"</b>. <i>Ex : garçon - nm &gt; On dira \"<b>le</b> garçon\" ou \"<b>un</b> garçon\". </i>");
+            toRemove.Add(": s'utilise avec les articles <b>\"le\", \"l'\" </b>(devant une voyelle ou un h muet), <b>\"un\"</b>. <i>Ex : garçon - nm > On dira \"<b>le</b> garçon\" ou \"<b>un</b> garçon\". </i>");
+
+
             toRemove.Add(": Verb taking a direct object--for example, \"<b>Say</b> something.\" \"She <b>found</b> the cat.\"");
             toRemove.Add(": verbe qui s'utilise avec un complément d'objet direct (COD). <i>Ex : \"J'<b>écris</b> une lettre\". \"Elle <b>a retrouvé</b> son chat\".</i>");
             //toRemove.Add("<td style=\"text-align:right;\"><a target=\"WRsug\" title=\"Is something important missing? Report an error or suggest an improvement.\" href=\"https://forum.wordreference.com/forums/dictionary-error-reports-and-suggestions.30/post-thread?prefix_id=25&amp;title=eyeball\"><span class=\"ph\" data-ph=\"sReportError\">Un oubli important ? Signalez une erreur ou suggérez une amélioration.</span></a></td>");
