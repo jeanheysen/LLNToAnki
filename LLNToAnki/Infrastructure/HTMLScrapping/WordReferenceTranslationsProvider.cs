@@ -62,6 +62,12 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
             toRemove.Add(": Verb with adverb(s) or preposition(s), having special meaning, divisible--for example, \"call off\" [=cancel], \"<b>call</b> the game <b>off</b>,\" \"<b>call off</b> the game.\"");
             toRemove.Add(": <b>Adjectif invariable</b> : adjectif qui a la même forme au singulier et au pluriel, au masculin et au féminin. <i>Ex : \"canon\" : un garçon canon, une fille canon, des garçons canon, des filles canon.</i>");
 
+            toRemove.Add(": Verb with adverb(s) or preposition(s), having special meaning, not divisible--for example,\"go with\" [=combine nicely]: \"Those red shoes don't <b>go with</b> my dress.\" NOT [S]\"Those red shoes don't go my dress with.\"[/S]");
+            toRemove.Add(": nom masculin qui a la même forme au pluriel. <i>Ex : \"un <b>?porte-clés</b>, des <b>porte-clés</b>\"</i>");
+            toRemove.Add(": nom à la fois masculin et féminin qui a la même forme au pluriel. <i>Ex : \"un <b>casse-pieds</b>, une <b>casse-pieds</b>, des <b>casse-pieds</b>\"</i></span></em></td></tr><tr class='odd'><td>&nbsp;</td><td class='To2'>&nbsp;<span class='dsense'>(<i>très familier</i>)</span></td><td class='ToWrd'>lèche-cul <em class='tooltip POS2'>nmf inv<span><i>nom masculin et féminin invariable</i>: nom à la fois masculin et féminin qui a la même forme au pluriel. <i>Ex : \"un <b>casse-pieds</b>, une <b>casse-pieds</b>, des <b>casse-pieds</b>\"</i>");
+            toRemove.Add(": groupe de mots qui servent d'adverbe. Toujours invariable ! <i>Ex : \"avec souplesse\"</i>");
+            toRemove.Add(": Verb with adverb(s) or preposition(s), having special meaning and not taking direct object--for example, \"make up\" [=reconcile]: \"After they fought, they <b>made up</b>.\"");
+            toRemove.Add(": groupe de mots qui servent d'adjectif. Se place normalement après le nom et reste identique au pluriel<i>Ex : \"ballon <b>de football</b>, des ballons <b>de football</b>\"</i>");
 
             foreach (var s in toRemove)
             {

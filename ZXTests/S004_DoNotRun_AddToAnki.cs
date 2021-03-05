@@ -17,7 +17,7 @@ namespace ZXTests
         private ConnectNoteBuilder connectNoteBuilder;
         private ConnectNotePoster connectNotePoster;
         private HttpClient client;
-        private Mock<AnkiNote> ankiNoteMock;
+        private Mock<IAnkiNote> ankiNoteMock;
 
         public S004_DoNotRun_AddToAnki()
         {
@@ -26,7 +26,7 @@ namespace ZXTests
             client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8765/");
 
-            ankiNoteMock = new Mock<AnkiNote>() { DefaultValue = DefaultValue.Mock };
+            ankiNoteMock = new Mock<IAnkiNote>() { DefaultValue = DefaultValue.Mock };
             ankiNoteMock.SetupGet(a => a.Question).Returns("front content");
             ankiNoteMock.SetupGet(a => a.Answer).Returns("back content");
             ankiNoteMock.SetupGet(a => a.After).Returns("blabla");
@@ -93,7 +93,7 @@ namespace ZXTests
         }
 
         [Test]
-        public async Task T005_AddNoteSqueezeTriggerFromCleanedHtml_WorksFine()
+        public void T005_AddNoteSqueezeTriggerFromCleanedHtml_WorksFine()
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_CleanedHtmlForJson.txt"));
@@ -101,7 +101,7 @@ namespace ZXTests
             var ankiNote = connectNoteBuilder.Build(ankiNoteMock.Object);
 
             //Act
-            await connectNotePoster.Post(ankiNote);
+            connectNotePoster.Post(ankiNote).Wait();
 
         }
 
