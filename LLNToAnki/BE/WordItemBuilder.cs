@@ -67,7 +67,17 @@ namespace LLNToAnki.BE
             var a6 = a5.Replace("\"\"", "\"");
             var a7 = a6.Substring(1, a6.Length - 2);//remove the first " and the last "
 
-            return a7;
+            var a8 = a7.Replace(".nightMode.card {\n        background: black;\n    }\n    \n    ", "");
+            
+            a8 = a8.Replace("\n        background-color: white;", "");
+            
+            //a8 = a8.Replace("\n        background: rgb(255,243,248);", "");
+            
+            a8 = a8.Replace(".nightMode .dc-card {\n        background: #333;\n        border-bottom: none;\n    }", "");
+            
+            a8 = a8.Replace(".card {\n        background: rgb(255,243,248);\n        background: linear-gradient(76deg, rgba(255,243,248,1) 0%, rgba(238,246,255,1) 100%);\n    }", "");
+            
+            return a8;
         }
 
         private string GetTranslation(string html)
