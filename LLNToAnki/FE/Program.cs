@@ -28,7 +28,7 @@ namespace LLNToAnki.FE
             var dataPath = Path.Combine(dataFolder, dataFileName);
             var targetPath = Path.Combine(dataFolder, targetFileName);
             
-            var Processor = new Processor(
+            var processor = new Processor(
                 FileReader, 
                 LLNItemsBuilder, 
                 WordItemBuilder, 
@@ -38,10 +38,11 @@ namespace LLNToAnki.FE
                 new ConnectNotePoster()
                 );
 
-            //var count = Processor.WriteInTextFile(dataPath, targetPath);
-            //System.Console.WriteLine($"{count} items were generated in {targetPath}");
-
-            var count = Processor.PushToAnkiThroughAPI(dataPath);
+            System.Console.WriteLine("Please enter number of words to add : (0 or enter if all)");
+            var response = System.Console.ReadLine();
+            int nbOfItemsToParse = 0;
+            int.TryParse(response, out nbOfItemsToParse);
+            var count = processor.PushToAnkiThroughAPI(dataPath, nbOfItemsToParse);
             System.Console.WriteLine($"{count} items were directly added to Anki through API.");
 
             System.Console.WriteLine("Press a key to end.");

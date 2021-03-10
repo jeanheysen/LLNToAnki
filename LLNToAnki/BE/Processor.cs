@@ -67,22 +67,30 @@ namespace LLNToAnki.BE
             return notes;
         }
 
-        public int PushToAnkiThroughAPI(string filePath)
+        public int PushToAnkiThroughAPI(string filePath, int nbOfItemsToParse)
         {
-            List<IAnkiNote> notes = CreateAnkiNotes(filePath);
+            var notes = new List<IAnkiNote>();
 
-            var totalCount = notes.Count;
+            var data = dataProvider.GetAllText(filePath);
 
-            var connectNotes = new List<IConnectNote>();
+            var llnItems = lLNItemsBuilder.Build(data);
+
+            var totalCount = nbOfItemsToParse != 0 ? nbOfItemsToParse : llnItems.Count;
             var i = 0;
 
-            foreach (var ankiNote in notes)
+            foreach (var item in llnItems)
             {
+                var wordItem = wordItemBuilder.Build(item);
+
+                var ankiNote = ankiNoteBuilder.Build(wordItem);
+
                 var connectNote = connectNoteBuilder.Build(ankiNote);
 
                 connectNotePoster.Post(connectNote).Wait();
 
-                System.Console.WriteLine($"{++i} added out of {totalCount}.");
+                System.Console.WriteLine($"{++i} added out of {totalCount}. (word : {wordItem.Word}");
+
+                if (i == nbOfItemsToParse) break;
             }
 
             return notes.Count;
