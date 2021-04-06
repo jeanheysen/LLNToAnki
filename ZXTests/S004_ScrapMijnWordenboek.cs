@@ -5,7 +5,6 @@ namespace ZXTests
 {
     public class S004_ScrapMijnWordenboek : BaseIntegrationTesting
     {
-        string localHtmlPath = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\MWBbrood.htm";
         private HTMLWebsiteReader htmlreader;
 
         [OneTimeSetUp]
@@ -18,13 +17,14 @@ namespace ZXTests
         public void T001_LocalMWBBrood_Check26koIsLoaded()
         {
             //Arrange
-            var path = GetPathInData(@"WR\MWBbrood.htm");
+            var path = GetPathInData(@"MWB\brood.htm");
             
             //Act
             var mainNode = htmlreader.GetHTML(path);
 
             //Assert
-            Assert.AreEqual(mainNode.InnerLength, 26690);
+            Assert.Greater(mainNode.InnerLength, 26000);
+            Assert.Less(mainNode.InnerLength, 27000);
         }
     }
 }

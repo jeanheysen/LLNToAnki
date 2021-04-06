@@ -136,49 +136,21 @@ namespace ZXTests
             StringAssert.DoesNotContain("}}", r.ContextWithWordColored);
         }
 
-        [Test]
-        public void T010_SqueezeEndToEnd()
+        [TestCase("SingleWord_squeeze")]
+        [TestCase("SingleWord_wagging")]
+        [TestCase("TwoWords_backbench_disregard")]
+        public void T010_SqueezeEndToEnd(string word)
         {
             //Arrange
-            var filePath = GetPathInData("SingleWord_squeeze.csv");
+            var filePath = GetPathInData($"{word}.csv");
+            var tmpFile = GetPathInTmp($"{word}_ExpectedNote.txt");
+            var refFile = GetPathInData($"{word}_ExpectedNote.txt");
 
             //Act
-            Processor.WriteInTextFile(filePath, TmpExportFilePath);
+            Processor.WriteInTextFile(filePath, tmpFile);
 
             //Assert
-            string expected = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_ExpectedNote.txt"));
-            string actual = DataProvider.GetAllText(this.TmpExportFilePath);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void T011_WaggingEndToEnd()
-        {
-            //Arrange
-            var filePath = GetPathInData("SingleWord_wagging.csv");
-
-            //Act
-            Processor.WriteInTextFile(filePath, TmpExportFilePath);
-
-            //Assert
-            string expected = DataProvider.GetAllText(GetPathInData("SingleWord_wagging_ExpectedNote.txt"));
-            string actual = this.DataProvider.GetAllText(this.TmpExportFilePath);
-            Assert.AreEqual(expected, actual);
-        }
-
-        [Test]
-        public void T012_TwoWordsEndToEnd()
-        {
-            //Arrange
-            var filePath = GetPathInData("TwoWords_backbench_disregard.csv");
-
-            //Act
-            Processor.WriteInTextFile(filePath, TmpExportFilePath);
-
-            //Assert
-            string expected = DataProvider.GetAllText(GetPathInData("TwoWords_backbench_disregard_expected.txt"));
-            string actual = this.DataProvider.GetAllText(this.TmpExportFilePath);
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(DataProvider.GetAllText(refFile), DataProvider.GetAllText(tmpFile));
         }
 
         [Test]

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ZXTests
 {
-    public class S002_ScrapWordReference
+    public class S002_ScrapWordReference : BaseIntegrationTesting
     {
         string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
         private HTMLWebsiteReader htmlreader;
@@ -20,7 +20,7 @@ namespace ZXTests
 
         private string LocalWordReferenceURL(string fileName)
         {
-            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\{fileName}";
+            return GetPathInData(@"WR\" + fileName);
         }
 
         public S002_ScrapWordReference()
@@ -99,8 +99,8 @@ namespace ZXTests
             Assert.Greater(r.InnerLength, 174000);
         }
 
-        [TestCase("WR_eyeball.html")]
-        [TestCase("WR_concurs.htm")]
+        [TestCase("eyeball.html")]
+        [TestCase("concurs.htm")]
         public void T006_ParasitsGrammarExplanationAreRemovedFromWordReferenceExplanations(string fileName)
         {
             //Act
@@ -111,8 +111,6 @@ namespace ZXTests
             StringAssert.DoesNotContain("devant une voyelle ou un h muet", r);
             StringAssert.DoesNotContain("Verb taking a direct object", r);
             StringAssert.DoesNotContain("verbe qui s'utilise avec un complément d'objet direct (COD)", r);
-            //StringAssert.DoesNotContain("Is something important missing? Report an error or suggest an improvement.", r);
-
             StringAssert.DoesNotContain("Verb not taking a direct object--for example", r);
             StringAssert.DoesNotContain("verbe qui s'utilise sans complément d'objet direct (COD)", r);
             StringAssert.DoesNotContain("verbe qui s'utilise avec le pronom réfléchi", r);

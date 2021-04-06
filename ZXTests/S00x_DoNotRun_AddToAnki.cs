@@ -40,7 +40,7 @@ namespace ZXTests
         }
 
 
-        [Test]
+        [Test,Ignore("")]
         public async Task T001_AddNoteFromJsonInTextWorksFine()
         {
             //Arrange
@@ -53,7 +53,7 @@ namespace ZXTests
             //Assert - faire un get
         }
 
-        [Test]
+        [Test,Ignore("")]
         public async Task T002_AddNoteWithACatInTheQuestionWorksFine()
         {
             //Arrange
@@ -66,7 +66,7 @@ namespace ZXTests
             //Assert
         }
 
-        [Test]
+        [Test,Ignore("")]
         public async Task T003_AddNoteWithQuestionCoucouInHTML_WorksFine()
         {
             //Arrange
@@ -79,7 +79,7 @@ namespace ZXTests
 
         }
 
-        [Test]
+        [Test,Ignore("")]
         public async Task T004_AddNoteWithQuestionWithSimpleHtmlInJson_WorksFine()
         {
             //Arrange
@@ -92,7 +92,7 @@ namespace ZXTests
 
         }
 
-        [Test]
+        [Test,Ignore("")]
         public void T005_AddNoteSqueezeTriggerFromCleanedHtml_WorksFine()
         {
             //Arrange
@@ -105,7 +105,7 @@ namespace ZXTests
 
         }
 
-        [Test]
+        [Test,Ignore("")]
         public async Task T006_AddNote_CleanedWordReferenceTable_WorksFine()
         {
             //Arrange

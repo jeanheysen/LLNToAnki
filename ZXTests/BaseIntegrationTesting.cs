@@ -59,5 +59,10 @@ namespace ZXTests
         {
             return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\{fileNameWithExtension}";
         }
+
+        protected string GetPathInTmp(string fileNameWithExtension)
+        {
+            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp\{fileNameWithExtension}";
+        }
     }
 }
