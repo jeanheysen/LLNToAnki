@@ -21,7 +21,7 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
         }
 
 
-        public string GetTranslations(string word)
+        public string GetAll(string word)
         {
             var url = urlBuilder.CreateURL(word);
             

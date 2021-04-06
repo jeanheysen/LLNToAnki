@@ -46,7 +46,7 @@ namespace LLNToAnki.BE
 
             sb.Append($"Traduction Netflix : \"{sentence}\".");
 
-            var translations = translationsProvider.GetTranslations(word);
+            var translations = translationsProvider.GetAll(word);
 
             sb.Append(translations); 
 

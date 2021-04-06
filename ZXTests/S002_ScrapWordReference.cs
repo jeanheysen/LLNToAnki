@@ -17,7 +17,7 @@ namespace ZXTests
     public class S002_ScrapWordReference : BaseIntegrationTesting
     {
         private IHTMLWebsiteReader htmlreader;
-        private ITranslationDetailsProvider wordReferenceTranslationProvider;
+        private ITranslationDetailsProvider wrDetailsProvider;
         private IDataScraper scraper;
 
         private Mock<IURLBuilder> urlBuilderMock;
@@ -33,21 +33,18 @@ namespace ZXTests
 
             htmlreader = new HTMLWebsiteReader();
             scraper = new HTMLScraper();
-            wordReferenceTranslationProvider = new WordReferenceDetailsProvider(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
+            wrDetailsProvider = new WordReferenceDetailsProvider(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 
-        [Test]
-        public void T002_ExtractPrincipalTranslationFromPage()
+        [TestCase("The human eyeball is not perfectly spherical.")]
+        [TestCase("globe oculaire")]
+        public void T002_ExtractPrincipalTranslationFromPage(string txt)
         {
-            //Arrange
-            var mainNode = htmlreader.GetHTML(GetPathInData(@"WR/eyeball.html"));
-
             //act
-            var node = wordReferenceTranslationProvider.GetTranslations("eyeball");
+            var node = wrDetailsProvider.GetAll("eyeball");
 
             //Assert
-            StringAssert.Contains("The human eyeball is not perfectly spherical.", node);
-            StringAssert.Contains("globe oculaire", node);
+            StringAssert.Contains(txt, node);
         }
 
         [Test]
@@ -95,7 +92,7 @@ namespace ZXTests
         public void T006_ParasitsGrammarExplanationAreRemovedFromWordReferenceExplanations(string fileName)
         {
             //Act
-            var r = wordReferenceTranslationProvider.GetTranslations(fileName);
+            var r = wrDetailsProvider.GetAll(fileName);
 
             //Assert
             StringAssert.DoesNotContain(": Refers to person, place, thing, quality, etc.", r);

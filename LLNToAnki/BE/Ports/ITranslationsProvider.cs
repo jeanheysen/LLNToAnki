@@ -2,6 +2,6 @@
 {
     public interface ITranslationDetailsProvider
     {
-        string GetTranslations(string word);
+        string GetAll(string word);
     }
 }
