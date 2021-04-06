@@ -19,14 +19,14 @@ namespace ZXTests
         private IHTMLWebsiteReader htmlreader;
         private ITranslationDetailsProvider wordReferenceTranslationProvider;
         private IDataScraper scraper;
-        
+
         private Mock<IURLBuilder> urlBuilderMock;
 
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
             urlBuilderMock = new Mock<IURLBuilder>() { DefaultValue = DefaultValue.Mock };
-            urlBuilderMock.Setup(b => b.CreateURL(It.IsAny<string>())).Returns<string>(s => GetPathInData(@"WR\" + s));
+            urlBuilderMock.Setup(b => b.CreateURL(It.IsAny<string>())).Returns<string>(s => GetPathInData(@"WR\" + s + ".html"));
 
             var urlBuilderFactoryMock = new Mock<IUrlLAbstractFactory>() { DefaultValue = DefaultValue.Mock };
             urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
@@ -43,11 +43,11 @@ namespace ZXTests
             var mainNode = htmlreader.GetHTML(GetPathInData(@"WR/eyeball.html"));
 
             //act
-            var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");
+            var node = wordReferenceTranslationProvider.GetTranslations("eyeball");
 
             //Assert
-            StringAssert.Contains("The human eyeball is not perfectly spherical.", mainNode.InnerText);
-            StringAssert.Contains("globe oculaire", node.InnerText);
+            StringAssert.Contains("The human eyeball is not perfectly spherical.", node);
+            StringAssert.Contains("globe oculaire", node);
         }
 
         [Test]
@@ -90,8 +90,8 @@ namespace ZXTests
             Assert.Greater(r.InnerLength, 174000);
         }
 
-        [TestCase("eyeball.html")]
-        [TestCase("concurs.htm")]
+        [TestCase("eyeball")]
+        [TestCase("concurs")]
         public void T006_ParasitsGrammarExplanationAreRemovedFromWordReferenceExplanations(string fileName)
         {
             //Act
