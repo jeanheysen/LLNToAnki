@@ -31,7 +31,7 @@ namespace ZXTests
 
             urlBuilderMock.Setup(b => b.OnlineWordReference(It.IsAny<string>())).Returns<string>(s => LocalWordReferenceURL(s));
 
-            wordReferenceTranslationProvider = new WordReferenceDetailsProvider(urlBuilderMock.Object, new HTMLScraper());
+            wordReferenceTranslationProvider = new WordReferenceDetailsProvider(urlBuilderMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 
         [Test]

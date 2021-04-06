@@ -9,16 +9,14 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
     {
         private readonly IURLBuilder urlBuilder;
         private IHTMLWebsiteReader websiteReader;
-        
-        public IDataScraper scraper { get; }
+        private IDataScraper scraper;
 
-        public WordReferenceDetailsProvider(IURLBuilder urlBuilder, IDataScraper scraper)
+
+        public WordReferenceDetailsProvider(IURLBuilder urlBuilder, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
         {
-            //todo injecter les deux
-            websiteReader = new HTMLWebsiteReader();
-
             this.urlBuilder = urlBuilder;
             this.scraper = scraper;
+            this.websiteReader = websiteReader;
         }
 
 
