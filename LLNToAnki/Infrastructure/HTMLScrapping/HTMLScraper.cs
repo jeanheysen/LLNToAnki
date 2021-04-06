@@ -26,7 +26,7 @@ namespace LLNToAnki.Infrastructure
                 }
             }
 
-            return l.First();
+            return l.Last();
         }
 
         public HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute)
