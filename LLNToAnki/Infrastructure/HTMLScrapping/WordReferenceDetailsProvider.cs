@@ -5,19 +5,22 @@ using System.Text;
 
 namespace LLNToAnki.Infrastructure.HTMLScrapping
 {
-    public class WordReferenceTranslationsProvider : ITranslationsProvider
+    public class WordReferenceDetailsProvider : ITranslationsProvider
     {
         private readonly IURLBuilder urlBuilder;
-        private HTMLWebsiteReader websiteReader;
-        private HTMLScraper scraper;
+        private IHTMLWebsiteReader websiteReader;
+        
+        public IDataScraper scraper { get; }
 
-        public WordReferenceTranslationsProvider(IURLBuilder urlBuilder)
+        public WordReferenceDetailsProvider(IURLBuilder urlBuilder, IDataScraper scraper)
         {
+            //todo injecter les deux
             websiteReader = new HTMLWebsiteReader();
 
-            scraper = new HTMLScraper();
             this.urlBuilder = urlBuilder;
+            this.scraper = scraper;
         }
+
 
         public string GetTranslations(string word)
         {

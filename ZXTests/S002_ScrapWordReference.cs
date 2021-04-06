@@ -15,7 +15,7 @@ namespace ZXTests
     {
         string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
         private HTMLWebsiteReader htmlreader;
-        private WordReferenceTranslationsProvider wordReferenceTranslationProvider;
+        private WordReferenceDetailsProvider wordReferenceTranslationProvider;
         private Mock<IURLBuilder> urlBuilderMock;
 
         private string LocalWordReferenceURL(string fileName)
@@ -31,7 +31,7 @@ namespace ZXTests
 
             urlBuilderMock.Setup(b => b.OnlineWordReference(It.IsAny<string>())).Returns<string>(s => LocalWordReferenceURL(s));
 
-            wordReferenceTranslationProvider = new WordReferenceTranslationsProvider(urlBuilderMock.Object);
+            wordReferenceTranslationProvider = new WordReferenceDetailsProvider(urlBuilderMock.Object, new HTMLScraper());
         }
 
         [Test]

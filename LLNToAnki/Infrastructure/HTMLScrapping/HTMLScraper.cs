@@ -7,10 +7,6 @@ namespace LLNToAnki.Infrastructure
 
     public class HTMLScraper : IDataScraper
     {
-        public HTMLScraper()
-        {
-        }
-
         public HtmlNode GetNodeByNameAndAttribute(HtmlNode htmlNode, string name, string attribute)
         {
             var divs = htmlNode.Descendants().Where(n => n.Name == name).ToList();

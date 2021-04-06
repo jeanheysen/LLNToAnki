@@ -14,7 +14,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T001_LocalMWBBrood_Check26koIsLoaded()
+        public void T001_LocalFile_Check26koIsLoaded()
         {
             //Arrange
             var path = GetPathInData(@"MWB\brood.htm");
