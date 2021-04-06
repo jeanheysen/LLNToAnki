@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace ZXTests
 {
-    class S004_DoNotRun_AddToAnki : BaseIntegrationTesting
+    class S00x_DoNotRun_AddToAnki : BaseIntegrationTesting
     {
         private ConnectNoteBuilder connectNoteBuilder;
         private ConnectNotePoster connectNotePoster;
         private HttpClient client;
         private Mock<IAnkiNote> ankiNoteMock;
 
-        public S004_DoNotRun_AddToAnki()
+        public S00x_DoNotRun_AddToAnki()
         {
             connectNoteBuilder = new ConnectNoteBuilder();
             connectNotePoster = new ConnectNotePoster();
