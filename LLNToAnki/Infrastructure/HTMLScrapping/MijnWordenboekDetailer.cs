@@ -29,7 +29,9 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
 
             var node = scraper.GetNodeByNameAndAttribute(mainNode, "div", "class", "slider-wrap");
 
-            return CleanFromSyntaxExplanations(node.ParentNode.InnerHtml);
+            var endNode = new NodeRemover().Remove(node, "script");
+
+            return CleanFromSyntaxExplanations(endNode.ParentNode.InnerHtml);
         }
 
         private string CleanFromSyntaxExplanations(string content)

@@ -4,6 +4,7 @@ using LLNToAnki.Infrastructure.URLBuilding;
 using NUnit.Framework;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace ZXTests
 {
@@ -80,13 +81,13 @@ namespace ZXTests
             //Arrange
             var remoteFilename = GetPathInData(@"MWB\trekken.html");
             var mainNode = htmlreader.GetHTML(remoteFilename);
-            Assert.IsTrue(mainNode.InnerHtml.Contains("<script>"));
+            Assert.AreEqual(22, mainNode.Descendants("script").Count());
 
             //Act
             var cleanedNode = new NodeRemover().Remove(mainNode, "script");
 
             //Assert
-            Assert.IsFalse(cleanedNode.InnerHtml.Contains("<script>"));
+            Assert.LessOrEqual(cleanedNode.Descendants("script").Count(),9);
         }
     }
 
