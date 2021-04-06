@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using LLNToAnki.BE.Ports;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LLNToAnki.Infrastructure
@@ -8,9 +9,10 @@ namespace LLNToAnki.Infrastructure
     {
         public HtmlNode GetNodeByNameAndAttribute(HtmlNode htmlNode, string name, string attribute, string value)
         {
-            var divs = htmlNode.Descendants(name).ToList();
+            var allWithName = htmlNode.Descendants(name).ToList();
+            var l = new List<HtmlNode>();
 
-            foreach (var div in divs)
+            foreach (var div in allWithName)
             {
                 foreach (var att in div.Attributes)
                 {
@@ -18,12 +20,13 @@ namespace LLNToAnki.Infrastructure
                     {
                         if (string.IsNullOrEmpty(value) || value.Equals(att.Value))
                         {
-                            return div;
+                            l.Add(div);
                         }
                     }
                 }
             }
-            return null;
+
+            return l.First();
         }
 
         public HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute)

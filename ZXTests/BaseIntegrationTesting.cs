@@ -3,6 +3,7 @@ using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.ReadingWriting;
+using LLNToAnki.Infrastructure.URLBuilding;
 using Moq;
 using System.IO;
 
@@ -40,6 +41,7 @@ namespace ZXTests
             AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
 
             TranslationsProvider = new Mock<ITranslationDetailer>() { DefaultValue = DefaultValue.Mock };
+            TranslationsProvider.SetupGet(p => p.UrlBuilder).Returns(new WordReferenceURLBuilder());
 
             AnkiNoteBuilder = new AnkiNoteBuilder(TranslationsProvider.Object);
 
