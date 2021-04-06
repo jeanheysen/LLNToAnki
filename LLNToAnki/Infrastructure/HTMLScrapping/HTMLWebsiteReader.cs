@@ -6,13 +6,13 @@ using System.Text;
 
 namespace LLNToAnki.Infrastructure
 {
-    public interface IHTMLWebsiteReader
+    public interface htmlReader
     {
         void DirectDownload(string url, string localPath);
         HtmlNode GetHTML(string path);
     }
 
-    public class HTMLWebsiteReader : IHTMLWebsiteReader
+    public class HTMLWebsiteReader : htmlReader
     {
         public HtmlNode GetHTML(string path)
         {

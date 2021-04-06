@@ -8,9 +8,9 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
     {
         private readonly IUrlLAbstractFactory uRLAbstractFactory;
         private readonly IDataScraper scraper;
-        private readonly IHTMLWebsiteReader websiteReader;
+        private readonly htmlReader websiteReader;
 
-        public DetailerFactory(IUrlLAbstractFactory uRLAbstractFactory, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
+        public DetailerFactory(IUrlLAbstractFactory uRLAbstractFactory, IDataScraper scraper, htmlReader websiteReader)
         {
             this.uRLAbstractFactory = uRLAbstractFactory;
             this.scraper = scraper;

@@ -7,17 +7,17 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
     public class MijnWordenboekDetailer : ITranslationDetailer
     {
         public IURLBuilder UrlBuilder { get; }
-        private IHTMLWebsiteReader websiteReader;
+        private htmlReader htmlReader;
         private IDataScraper scraper;
 
 
-        public MijnWordenboekDetailer(IURLBuilder urlBuilder, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
+        public MijnWordenboekDetailer(IURLBuilder urlBuilder, IDataScraper scraper, htmlReader htmlReader)
         {
             this.UrlBuilder = urlBuilder;
 
             this.scraper = scraper;
 
-            this.websiteReader = websiteReader;
+            this.htmlReader = htmlReader;
         }
 
 
@@ -25,7 +25,7 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
         {
             var url = UrlBuilder.CreateURL(word);
 
-            var mainNode = websiteReader.GetHTML(url);
+            var mainNode = htmlReader.GetHTML(url);
 
             var node = scraper.GetNodeByNameAndAttribute(mainNode, "div", "class", "slider-wrap");
 
