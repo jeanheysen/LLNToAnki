@@ -2,7 +2,7 @@
 using LLNToAnki.BE.Ports;
 using System.Collections.Generic;
 
-namespace LLNToAnki.Infrastructure.AnkiConnect
+namespace LLNToAnki.Infrastructure.AnkiConnecting
 {
     public class ConnectNoteBuilder : IConnectNoteBuilder
     {

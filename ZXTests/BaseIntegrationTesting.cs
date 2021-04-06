@@ -1,7 +1,8 @@
 ﻿using LLNToAnki.BE;
 using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
-using LLNToAnki.Infrastructure.AnkiConnect;
+using LLNToAnki.Infrastructure.AnkiConnecting;
+using LLNToAnki.Infrastructure.ReadingWriting;
 using Moq;
 
 namespace ZXTests

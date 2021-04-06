@@ -1,7 +1,7 @@
 ﻿using LLNToAnki.BE.Ports;
 using System.IO;
 
-namespace LLNToAnki.Infrastructure
+namespace LLNToAnki.Infrastructure.ReadingWriting
 {
     public class FileReader : IDataProvider
     {

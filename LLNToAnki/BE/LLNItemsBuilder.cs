@@ -38,7 +38,7 @@ namespace LLNToAnki.BE
 
         private LLNItem CreateItemForRawCut(string content)
         {
-            var subitems = content.Split("\t");
+            var subitems = content.Split("\t"); //todo use splitter
             return new LLNItem()
             {
                 HtmlContent = subitems[0],

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LLNToAnki.Infrastructure
+namespace LLNToAnki.BE
 {
 
     public class TextSplitter : ITextSplitter

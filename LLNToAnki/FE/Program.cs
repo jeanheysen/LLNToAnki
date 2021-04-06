@@ -1,9 +1,8 @@
 ﻿using LLNToAnki.BE;
-using LLNToAnki.BE.Enums;
-using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
-using LLNToAnki.Infrastructure.AnkiConnect;
+using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.HTMLScrapping;
+using LLNToAnki.Infrastructure.ReadingWriting;
 using LLNToAnki.Infrastructure.URL;
 using System.IO;
 
