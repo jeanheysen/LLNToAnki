@@ -44,7 +44,7 @@ namespace ZXTests
 
         [TestCase("eyeball")]
         [TestCase("concurs")]
-        public void T003_ParasitsGrammarExplanationAreRemovedFromWordReferenceExplanations(string fileName)
+        public void T002_ParasitsGrammarExplanationAreRemovedFromWordReferenceExplanations(string fileName)
         {
             //Act
             var r = wrDetailsProvider.GetAll(fileName);
