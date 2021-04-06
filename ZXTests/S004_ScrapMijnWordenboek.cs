@@ -22,7 +22,7 @@ namespace ZXTests
             var urlBuilderFactoryMock = new Mock<IUrlLAbstractFactory>() { DefaultValue = DefaultValue.Mock };
             urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
 
-            detailer = new MijnWordenboekDetailer(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
+            detailer = new MijnWordenboekDetailer(urlBuilderMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 
         [TestCase("wit en bruin brood")]

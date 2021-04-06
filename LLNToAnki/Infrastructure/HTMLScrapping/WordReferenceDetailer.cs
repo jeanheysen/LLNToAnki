@@ -11,9 +11,9 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
         private IDataScraper scraper;
 
 
-        public WordReferenceDetailer(IUrlLAbstractFactory uRLAbstractFactory, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
+        public WordReferenceDetailer(IURLBuilder urlBuilder, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
         {
-            this.urlBuilder = uRLAbstractFactory.CreateUrlBuilder(BE.Enums.Language.English);
+            this.urlBuilder = urlBuilder;
 
             this.scraper = scraper;
 

@@ -28,7 +28,7 @@ namespace ZXTests
             var urlBuilderFactoryMock = new Mock<IUrlLAbstractFactory>() { DefaultValue = DefaultValue.Mock };
             urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
 
-            wrDetailsProvider = new WordReferenceDetailer(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
+            wrDetailsProvider = new WordReferenceDetailer(urlBuilderMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 
         [TestCase("The human eyeball is not perfectly spherical.")]
