@@ -44,6 +44,34 @@ namespace ZXTests
             Assert.Less(sw.ElapsedMilliseconds, 1000);
             Assert.Greater(File.ReadAllText(GetPathInTmp("brood.html")).Length, 26000);
         }
+
+        [Test]
+        public void T003_LocalFile_Check26koIsLoaded()
+        {
+            //Arrange
+            var path = GetPathInData(@"MWB\brood.htm");
+
+            //Act
+            var mainNode = htmlreader.GetHTML(path);
+
+            //Assert
+            Assert.Greater(mainNode.InnerLength, 26000);
+            Assert.Less(mainNode.InnerLength, 27000);
+        }
+
+        [Test]
+        public void T004_ExtractHTMLWithAgilityPackWordReferenceBreadReturns174koFile()
+        {
+            //Arrange
+            var remoteFilename = @"https://www.wordreference.com/enfr/bread";
+
+            //Act
+            var r = htmlreader.GetHTML(remoteFilename);
+
+            //Assert
+            Assert.Greater(r.InnerLength, 174000);
+            Assert.Less(r.InnerLength, 180000);
+        }
     }
 
 }

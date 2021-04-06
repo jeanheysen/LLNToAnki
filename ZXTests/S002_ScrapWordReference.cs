@@ -16,21 +16,18 @@ namespace ZXTests
 {
     public class S002_ScrapWordReference : BaseIntegrationTesting
     {
-        private IHTMLWebsiteReader htmlreader;
         private ITranslationDetailer wrDetailsProvider;
-
-        private Mock<IURLBuilder> urlBuilderMock;
+        
 
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
-            urlBuilderMock = new Mock<IURLBuilder>() { DefaultValue = DefaultValue.Mock };
+            var urlBuilderMock = new Mock<IURLBuilder>() { DefaultValue = DefaultValue.Mock };
             urlBuilderMock.Setup(b => b.CreateURL(It.IsAny<string>())).Returns<string>(s => GetPathInData(@"WR\" + s + ".html"));
 
             var urlBuilderFactoryMock = new Mock<IUrlLAbstractFactory>() { DefaultValue = DefaultValue.Mock };
             urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
 
-            htmlreader = new HTMLWebsiteReader();
             wrDetailsProvider = new WordReferenceDetailer(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 
@@ -43,20 +40,6 @@ namespace ZXTests
 
             //Assert
             StringAssert.Contains(txt, node);
-        }
-
-        [Test]
-        public void T002_ExtractHTMLWithAgilityPackWordReferenceBreadReturns174koFile()
-        {
-            //Arrange
-            var remoteFilename = @"https://www.wordreference.com/enfr/bread";
-
-            //Act
-            var r = htmlreader.GetHTML(remoteFilename);
-
-            //Assert
-            Assert.Greater(r.InnerLength, 174000);
-            Assert.Less(r.InnerLength, 180000);
         }
 
         [TestCase("eyeball")]
