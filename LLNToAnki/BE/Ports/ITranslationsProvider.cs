@@ -1,6 +1,6 @@
 ﻿namespace LLNToAnki.BE.Ports
 {
-    public interface ITranslationsProvider
+    public interface ITranslationDetailsProvider
     {
         string GetTranslations(string word);
     }

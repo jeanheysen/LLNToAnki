@@ -19,7 +19,7 @@ namespace ZXTests
         protected IAnkiNoteBuilder AnkiNoteBuilder { get; }
         protected ILLNItemsBuilder LLNItemsBuilder { get; }
         protected IProcessor Processor { get; }
-        protected Mock<ITranslationsProvider> TranslationsProvider { get; set; }
+        protected Mock<ITranslationDetailsProvider> TranslationsProvider { get; set; }
 
         protected string TmpExportFilePath => GetPathInData("tmp_export.txt");
 
@@ -38,7 +38,7 @@ namespace ZXTests
 
             AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
 
-            TranslationsProvider = new Mock<ITranslationsProvider>() { DefaultValue = DefaultValue.Mock };
+            TranslationsProvider = new Mock<ITranslationDetailsProvider>() { DefaultValue = DefaultValue.Mock };
 
             AnkiNoteBuilder = new AnkiNoteBuilder(TranslationsProvider.Object);
 

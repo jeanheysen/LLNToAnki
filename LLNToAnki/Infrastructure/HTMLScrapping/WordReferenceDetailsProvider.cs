@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace LLNToAnki.Infrastructure.HTMLScrapping
 {
-    public class WordReferenceDetailsProvider : ITranslationsProvider
+    public class WordReferenceDetailsProvider : ITranslationDetailsProvider
     {
         private readonly IURLBuilder urlBuilder;
         private IHTMLWebsiteReader websiteReader;

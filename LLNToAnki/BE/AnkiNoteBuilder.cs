@@ -11,9 +11,9 @@ namespace LLNToAnki.BE
 
     public class AnkiNoteBuilder : IAnkiNoteBuilder
     {
-        private readonly ITranslationsProvider translationsProvider;
+        private readonly ITranslationDetailsProvider translationsProvider;
 
-        public AnkiNoteBuilder(ITranslationsProvider translationsProvider)
+        public AnkiNoteBuilder(ITranslationDetailsProvider translationsProvider)
         {
             this.translationsProvider = translationsProvider;
         }

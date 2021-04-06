@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using LLNToAnki.BE.Enums;
+using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.HTMLScrapping;
 using LLNToAnki.Infrastructure.URLBuilding;
@@ -15,9 +16,8 @@ namespace ZXTests
 {
     public class S002_ScrapWordReference : BaseIntegrationTesting
     {
-        string localWordReferenceEyball = @"C:\Users\felix\source\repos\LLNToAnki\Dictionaries\WordReference\eyeball - English-French Dictionary WordReference.com.htm";
-        private HTMLWebsiteReader htmlreader;
-        private WordReferenceDetailsProvider wordReferenceTranslationProvider;
+        private IHTMLWebsiteReader htmlreader;
+        private ITranslationDetailsProvider wordReferenceTranslationProvider;
         private Mock<IURLBuilder> urlBuilderMock;
 
         private string LocalWordReferenceURL(string fileName)
@@ -42,7 +42,7 @@ namespace ZXTests
         public void T001_LoadEyeBallWordReferenceFully()
         {
             //Act
-            var mainNode = htmlreader.GetHTML(localWordReferenceEyball);
+            var mainNode = htmlreader.GetHTML(GetPathInData(@"WR/eyeball.html"));
 
             //Assert
             Assert.Greater(mainNode.InnerLength, 120000);
@@ -52,7 +52,7 @@ namespace ZXTests
         public void T002_ExtractPrincipalTranslationFromPage()
         {
             //Arrange
-            var mainNode = htmlreader.GetHTML(localWordReferenceEyball);
+            var mainNode = htmlreader.GetHTML(GetPathInData(@"WR/eyeball.html"));
             var scraper = new HTMLScraper();
 
             //act
