@@ -14,9 +14,9 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
         public WordReferenceDetailer(IUrlLAbstractFactory uRLAbstractFactory, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
         {
             this.urlBuilder = uRLAbstractFactory.CreateUrlBuilder(BE.Enums.Language.English);
-            
+
             this.scraper = scraper;
-            
+
             this.websiteReader = websiteReader;
         }
 
@@ -24,10 +24,10 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
         public string GetAll(string word)
         {
             var url = urlBuilder.CreateURL(word);
-            
+
             var mainNode = websiteReader.GetHTML(url);
 
-            var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");
+            var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class", null);
 
             return CleanFromSyntaxExplanations(node.ParentNode.InnerHtml);
         }

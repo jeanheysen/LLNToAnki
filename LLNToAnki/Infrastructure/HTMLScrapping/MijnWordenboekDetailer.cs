@@ -27,7 +27,7 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
 
             var mainNode = websiteReader.GetHTML(url);
 
-            var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");
+            var node = scraper.GetNodeByNameAndAttribute(mainNode, "div", "class", "slider-wrap");
 
             return CleanFromSyntaxExplanations(node.ParentNode.InnerHtml);
         }

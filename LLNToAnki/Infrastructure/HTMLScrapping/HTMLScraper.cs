@@ -6,9 +6,9 @@ namespace LLNToAnki.Infrastructure
 {
     public class HTMLScraper : IDataScraper
     {
-        public HtmlNode GetNodeByNameAndAttribute(HtmlNode htmlNode, string name, string attribute)
+        public HtmlNode GetNodeByNameAndAttribute(HtmlNode htmlNode, string name, string attribute, string value)
         {
-            var divs = htmlNode.Descendants().Where(n => n.Name == name).ToList();
+            var divs = htmlNode.Descendants(name).ToList();
 
             foreach (var div in divs)
             {
@@ -16,7 +16,10 @@ namespace LLNToAnki.Infrastructure
                 {
                     if (att.Name == attribute)
                     {
-                        return div;
+                        if (string.IsNullOrEmpty(value) || value.Equals(att.Value))
+                        {
+                            return div;
+                        }
                     }
                 }
             }
@@ -26,10 +29,12 @@ namespace LLNToAnki.Infrastructure
         public HtmlNode GetNodeByNameAndAttribute(string html, string name, string attribute)
         {
             var htmlDoc = new HtmlDocument();
+
             htmlDoc.LoadHtml(html);
+
             var htmlNode = htmlDoc.DocumentNode;
 
-            return GetNodeByNameAndAttribute(htmlNode, name, attribute);
+            return GetNodeByNameAndAttribute(htmlNode, name, attribute, null);
         }
     }
 }

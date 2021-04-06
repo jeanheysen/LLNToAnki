@@ -49,7 +49,7 @@ namespace ZXTests
         public void T003_LocalFile_Check26koIsLoaded()
         {
             //Arrange
-            var path = GetPathInData(@"MWB\brood.htm");
+            var path = GetPathInData(@"MWB\brood.html");
 
             //Act
             var mainNode = htmlreader.GetHTML(path);
