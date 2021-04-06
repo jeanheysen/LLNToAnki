@@ -18,34 +18,22 @@ namespace ZXTests
     {
         private IHTMLWebsiteReader htmlreader;
         private ITranslationDetailsProvider wordReferenceTranslationProvider;
+        private IDataScraper scraper;
+        
         private Mock<IURLBuilder> urlBuilderMock;
 
-        private string LocalWordReferenceURL(string fileName)
+        [OneTimeSetUp]
+        public void OneTimeSetup()
         {
-            return GetPathInData(@"WR\" + fileName);
-        }
-
-        public S002_ScrapWordReference()
-        {
-            htmlreader = new HTMLWebsiteReader();
-
             urlBuilderMock = new Mock<IURLBuilder>() { DefaultValue = DefaultValue.Mock };
-            urlBuilderMock.Setup(b => b.CreateURL(It.IsAny<string>())).Returns<string>(s => LocalWordReferenceURL(s));
+            urlBuilderMock.Setup(b => b.CreateURL(It.IsAny<string>())).Returns<string>(s => GetPathInData(@"WR\" + s));
 
             var urlBuilderFactoryMock = new Mock<IUrlLAbstractFactory>() { DefaultValue = DefaultValue.Mock };
             urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
 
+            htmlreader = new HTMLWebsiteReader();
+            scraper = new HTMLScraper();
             wordReferenceTranslationProvider = new WordReferenceDetailsProvider(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
-        }
-
-        [Test]
-        public void T001_LoadEyeBallWordReferenceFully()
-        {
-            //Act
-            var mainNode = htmlreader.GetHTML(GetPathInData(@"WR/eyeball.html"));
-
-            //Assert
-            Assert.Greater(mainNode.InnerLength, 120000);
         }
 
         [Test]
@@ -53,7 +41,6 @@ namespace ZXTests
         {
             //Arrange
             var mainNode = htmlreader.GetHTML(GetPathInData(@"WR/eyeball.html"));
-            var scraper = new HTMLScraper();
 
             //act
             var node = scraper.GetNodeByNameAndAttribute(mainNode, "table", "class");
@@ -120,4 +107,5 @@ namespace ZXTests
             StringAssert.DoesNotContain("verbe qui s'utilise avec le pronom réfléchi", r);
         }
     }
+
 }
