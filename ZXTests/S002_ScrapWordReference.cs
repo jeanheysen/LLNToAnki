@@ -2,7 +2,7 @@
 using LLNToAnki.BE.Enums;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.HTMLScrapping;
-using LLNToAnki.Infrastructure.URL;
+using LLNToAnki.Infrastructure.URLBuilding;
 using Moq;
 using NUnit.Framework;
 using System;

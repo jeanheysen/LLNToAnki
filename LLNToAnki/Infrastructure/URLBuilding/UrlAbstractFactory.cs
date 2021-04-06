@@ -1,6 +1,6 @@
 ﻿using LLNToAnki.BE.Enums;
 
-namespace LLNToAnki.Infrastructure.URL
+namespace LLNToAnki.Infrastructure.URLBuilding
 {
     public interface IUrlLAbstractFactory
     {

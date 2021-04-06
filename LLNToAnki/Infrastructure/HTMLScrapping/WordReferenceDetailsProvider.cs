@@ -1,8 +1,6 @@
 ﻿using LLNToAnki.BE.Ports;
-using LLNToAnki.Infrastructure.URL;
-using System;
+using LLNToAnki.Infrastructure.URLBuilding;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LLNToAnki.Infrastructure.HTMLScrapping
 {

@@ -1,4 +1,4 @@
-﻿namespace LLNToAnki.Infrastructure.URL
+﻿namespace LLNToAnki.Infrastructure.URLBuilding
 {
     public interface IURLBuilder
     {

@@ -3,7 +3,7 @@ using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.HTMLScrapping;
 using LLNToAnki.Infrastructure.ReadingWriting;
-using LLNToAnki.Infrastructure.URL;
+using LLNToAnki.Infrastructure.URLBuilding;
 using System.IO;
 
 namespace LLNToAnki.FE
