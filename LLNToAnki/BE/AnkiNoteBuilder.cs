@@ -37,7 +37,9 @@ namespace LLNToAnki.BE
 
         private string BuildSource(string word)
         {
-            return $"<a href=\"https://www.wordreference.com/enfr/{word}\">https://www.wordreference.com/enfr/{word}</a>";
+            var url = translationsProvider.UrlBuilder.CreateURL(word);
+            
+            return $"<a href=\"{url}\">{url}</a>";
         }
 
         private string BuildAfter(string sentence,string word)

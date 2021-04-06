@@ -6,14 +6,14 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
 {
     public class WordReferenceDetailer : ITranslationDetailer
     {
-        private readonly IURLBuilder urlBuilder;
+        public IURLBuilder UrlBuilder { get; }
         private IHTMLWebsiteReader websiteReader;
         private IDataScraper scraper;
 
 
         public WordReferenceDetailer(IURLBuilder urlBuilder, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
         {
-            this.urlBuilder = urlBuilder;
+            this.UrlBuilder = urlBuilder;
 
             this.scraper = scraper;
 
@@ -23,7 +23,7 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
 
         public string GetAll(string word)
         {
-            var url = urlBuilder.CreateURL(word);
+            var url = UrlBuilder.CreateURL(word);
 
             var mainNode = websiteReader.GetHTML(url);
 
