@@ -46,34 +46,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T003_DownloadPageMinjWoordenBoekForBreadReturnsA26koFile()
-        {
-            //Arrange
-            var remoteFilename = @"https://www.mijnwoordenboek.nl/vertaal/NL/FR/brood";
-            var localFilename = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\MWBbrood.htm";
-            if (File.Exists(localFilename)) File.Delete(localFilename);
-
-            //Act
-            htmlreader.DirectDownload(remoteFilename, localFilename);
-
-            //Assert
-            Assert.Greater(File.ReadAllText(localFilename).Length, 26000);
-        }
-
-        [Test]
-        public void T004_DirectDownloadWordReferenceThrowsException()
-        {
-            //Arrange
-            var remoteFilename = @"https://www.wordreference.com/enfr/bread";
-            var localFilename = @"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\WR\WRbread.htm";
-            if (File.Exists(localFilename)) File.Delete(localFilename);
-
-            //Assert
-            Assert.Throws<System.Net.WebException>(() => htmlreader.DirectDownload(remoteFilename, localFilename));
-        }
-
-        [Test]
-        public void T005_ExtractHTMLWithAgilityPackWordReferenceBreadReturns174koFile()
+        public void T002_ExtractHTMLWithAgilityPackWordReferenceBreadReturns174koFile()
         {
             //Arrange
             var remoteFilename = @"https://www.wordreference.com/enfr/bread";
@@ -83,6 +56,7 @@ namespace ZXTests
 
             //Assert
             Assert.Greater(r.InnerLength, 174000);
+            Assert.Less(r.InnerLength, 180000);
         }
 
         [TestCase("eyeball")]

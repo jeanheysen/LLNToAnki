@@ -21,6 +21,7 @@ namespace LLNToAnki.Infrastructure
             return web.Load(path).DocumentNode;
         }
 
+        [Obsolete("use with caution, crashes on WR for unknown reasons.")]
         public void DirectDownload(string url, string localPath)
         {
             WebClient client = new WebClient();
