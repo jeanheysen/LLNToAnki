@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace LLNToAnki.Infrastructure
 {
-
     public class HTMLScraper : IDataScraper
     {
         public HtmlNode GetNodeByNameAndAttribute(HtmlNode htmlNode, string name, string attribute)
