@@ -1,4 +1,5 @@
 ﻿using LLNToAnki.BE.Ports;
+using LLNToAnki.Infrastructure.URL;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,17 +13,19 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
         private IDataScraper scraper;
 
 
-        public WordReferenceDetailsProvider(IURLBuilder urlBuilder, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
+        public WordReferenceDetailsProvider(IUrlLAbstractFactory uRLAbstractFactory, IDataScraper scraper, IHTMLWebsiteReader websiteReader)
         {
-            this.urlBuilder = urlBuilder;
+            this.urlBuilder = uRLAbstractFactory.CreateUrlBuilder(BE.Enums.Language.English);
+            
             this.scraper = scraper;
+            
             this.websiteReader = websiteReader;
         }
 
 
         public string GetTranslations(string word)
         {
-            var url = urlBuilder.OnlineWordReference(word);
+            var url = urlBuilder.CreateURL(word);
             
             var mainNode = websiteReader.GetHTML(url);
 

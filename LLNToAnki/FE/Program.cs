@@ -1,8 +1,10 @@
 ﻿using LLNToAnki.BE;
+using LLNToAnki.BE.Enums;
 using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.AnkiConnect;
 using LLNToAnki.Infrastructure.HTMLScrapping;
+using LLNToAnki.Infrastructure.URL;
 using System.IO;
 
 namespace LLNToAnki.FE
@@ -20,8 +22,7 @@ namespace LLNToAnki.FE
             var HtmlScraper = new HTMLScraper();
             var WordItemBuilder = new WordItemBuilder(HtmlScraper);
             var AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
-            var urlBuilder = new URLBuilder();
-            var translationsProvider = new WordReferenceDetailsProvider(urlBuilder, HtmlScraper, new HTMLWebsiteReader());
+            var translationsProvider = new WordReferenceDetailsProvider(new UrlAbstractFactory(), HtmlScraper, new HTMLWebsiteReader());
             var AnkiNoteBuilder = new AnkiNoteBuilder(translationsProvider);
             var LLNItemsBuilder = new LLNItemsBuilder();
 

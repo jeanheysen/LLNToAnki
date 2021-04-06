@@ -1,6 +1,8 @@
 ﻿using HtmlAgilityPack;
+using LLNToAnki.BE.Enums;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.HTMLScrapping;
+using LLNToAnki.Infrastructure.URL;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -28,10 +30,12 @@ namespace ZXTests
             htmlreader = new HTMLWebsiteReader();
 
             urlBuilderMock = new Mock<IURLBuilder>() { DefaultValue = DefaultValue.Mock };
+            urlBuilderMock.Setup(b => b.CreateURL(It.IsAny<string>())).Returns<string>(s => LocalWordReferenceURL(s));
 
-            urlBuilderMock.Setup(b => b.OnlineWordReference(It.IsAny<string>())).Returns<string>(s => LocalWordReferenceURL(s));
+            var urlBuilderFactoryMock = new Mock<IUrlLAbstractFactory>() { DefaultValue = DefaultValue.Mock };
+            urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
 
-            wordReferenceTranslationProvider = new WordReferenceDetailsProvider(urlBuilderMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
+            wordReferenceTranslationProvider = new WordReferenceDetailsProvider(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 
         [Test]
