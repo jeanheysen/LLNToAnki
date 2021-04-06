@@ -1,4 +1,5 @@
 ﻿using LLNToAnki.Infrastructure;
+using LLNToAnki.Infrastructure.HTMLScrapping;
 using LLNToAnki.Infrastructure.URLBuilding;
 using NUnit.Framework;
 using System.Diagnostics;
@@ -71,6 +72,21 @@ namespace ZXTests
             //Assert
             Assert.Greater(r.InnerLength, 174000);
             Assert.Less(r.InnerLength, 180000);
+        }
+
+        [Test]
+        public void T005_RemoveScriptFromTrekken()
+        {
+            //Arrange
+            var remoteFilename = GetPathInData(@"MWB\trekken.html");
+            var mainNode = htmlreader.GetHTML(remoteFilename);
+            Assert.IsTrue(mainNode.InnerHtml.Contains("<script>"));
+
+            //Act
+            var cleanedNode = new NodeRemover().Remove(mainNode, "script");
+
+            //Assert
+            Assert.IsFalse(cleanedNode.InnerHtml.Contains("<script>"));
         }
     }
 
