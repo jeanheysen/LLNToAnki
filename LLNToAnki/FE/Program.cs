@@ -21,7 +21,7 @@ namespace LLNToAnki.FE
             var HtmlScraper = new HTMLScraper();
             var WordItemBuilder = new WordItemBuilder(HtmlScraper);
             var AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
-            var translationsProvider = new WordReferenceDetailsProvider(new UrlAbstractFactory(), HtmlScraper, new HTMLWebsiteReader());
+            var translationsProvider = new WordReferenceDetailer(new UrlAbstractFactory(), HtmlScraper, new HTMLWebsiteReader());
             var AnkiNoteBuilder = new AnkiNoteBuilder(translationsProvider);
             var LLNItemsBuilder = new LLNItemsBuilder();
 

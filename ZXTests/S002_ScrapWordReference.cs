@@ -17,7 +17,7 @@ namespace ZXTests
     public class S002_ScrapWordReference : BaseIntegrationTesting
     {
         private IHTMLWebsiteReader htmlreader;
-        private ITranslationDetailsProvider wrDetailsProvider;
+        private ITranslationDetailer wrDetailsProvider;
 
         private Mock<IURLBuilder> urlBuilderMock;
 
@@ -31,7 +31,7 @@ namespace ZXTests
             urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
 
             htmlreader = new HTMLWebsiteReader();
-            wrDetailsProvider = new WordReferenceDetailsProvider(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
+            wrDetailsProvider = new WordReferenceDetailer(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 
         [TestCase("The human eyeball is not perfectly spherical.")]
@@ -61,7 +61,7 @@ namespace ZXTests
 
         [TestCase("eyeball")]
         [TestCase("concurs")]
-        public void T006_ParasitsGrammarExplanationAreRemovedFromWordReferenceExplanations(string fileName)
+        public void T003_ParasitsGrammarExplanationAreRemovedFromWordReferenceExplanations(string fileName)
         {
             //Act
             var r = wrDetailsProvider.GetAll(fileName);
