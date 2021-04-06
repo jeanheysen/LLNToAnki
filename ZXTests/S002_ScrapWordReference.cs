@@ -18,7 +18,6 @@ namespace ZXTests
     {
         private IHTMLWebsiteReader htmlreader;
         private ITranslationDetailsProvider wrDetailsProvider;
-        private IDataScraper scraper;
 
         private Mock<IURLBuilder> urlBuilderMock;
 
@@ -32,13 +31,12 @@ namespace ZXTests
             urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
 
             htmlreader = new HTMLWebsiteReader();
-            scraper = new HTMLScraper();
             wrDetailsProvider = new WordReferenceDetailsProvider(urlBuilderFactoryMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 
         [TestCase("The human eyeball is not perfectly spherical.")]
         [TestCase("globe oculaire")]
-        public void T002_ExtractPrincipalTranslationFromPage(string txt)
+        public void T001_ExtractPrincipalTranslationFromPage(string txt)
         {
             //act
             var node = wrDetailsProvider.GetAll("eyeball");

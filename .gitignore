@@ -15,3 +15,6 @@ LLNToAnki/obj
 /Dictionaries
 /LLNToAnki.sln.DotSettings.user
 /ZXTests/Data/WR/bread.htm
+/ZXTests/Data/tmp/SingleWord_squeeze_ExpectedNote.txt
+/ZXTests/Data/tmp/SingleWord_wagging_ExpectedNote.txt
+/ZXTests/Data/tmp/TwoWords_backbench_disregard_ExpectedNote.txt

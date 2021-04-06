@@ -4,6 +4,7 @@ using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.ReadingWriting;
 using Moq;
+using System.IO;
 
 namespace ZXTests
 {
@@ -64,6 +65,16 @@ namespace ZXTests
         protected string GetPathInTmp(string fileNameWithExtension)
         {
             return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp\{fileNameWithExtension}";
+        }
+
+        public void ClearTmp()
+        {
+            var files = Directory.GetFiles(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp");
+
+            foreach (var f in files)
+            {
+                File.Delete(f);
+            }
         }
     }
 }
