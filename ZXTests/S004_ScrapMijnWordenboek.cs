@@ -28,10 +28,23 @@ namespace ZXTests
         [TestCase("wit en bruin brood")]
         [TestCase("du pain blanc et du pain gris")]
         [TestCase("broden")]
-        public void T001_ExtractPrincipalTranslationFromPage(string txt)
+        public void T001_ExtractPrincipalDetails_brood(string txt)
         {
             //act
             var node = detailer.GetAll("brood");
+
+            //Assert
+            StringAssert.Contains(txt, node);
+        }
+
+        [TestCase("tirer")]
+        [TestCase("met kracht naar je toe halen")]
+        [TestCase("iemand aan de haren trekken")]
+        [TestCase("migrer , parcourir")]
+        public void T002_ExtractPrincipalDetails_brood(string txt)
+        {
+            //act
+            var node = detailer.GetAll("trekken");
 
             //Assert
             StringAssert.Contains(txt, node);
