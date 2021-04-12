@@ -1,10 +1,13 @@
 ﻿using LLNToAnki.BE;
 using LLNToAnki.BE.Ports;
 using LLNToAnki.Infrastructure;
+using LLNToAnki.Infrastructure.HTMLScrapping;
 using LLNToAnki.Infrastructure.ReadingWriting;
 using Moq;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ZXTests
 {
@@ -223,6 +226,20 @@ namespace ZXTests
 
             //Assert
             Assert.AreEqual("Traduction Netflix : \"c'est la traduction\".", note.After);
+        }
+
+        [Test]
+        public void T018_ReadResources()
+        {
+            //Arrange
+            var reader = new LocalResourceReader();
+            
+            //Act
+            var r = reader.Read("wmb_to_replace.json");
+
+            //Assert
+            Assert.AreEqual("color:navy", r.First().Key);
+            Assert.AreEqual("color:aqua", r.First().Value);
         }
     }
 }
