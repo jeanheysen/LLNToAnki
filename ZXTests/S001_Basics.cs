@@ -38,7 +38,7 @@ namespace ZXTests
             string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze.csv"));
 
             //Act
-            var splittedContent = TextSplitter.SplitOnTab(text);
+            var splittedContent = text.Split("\t").ToList();
 
             //Assert
             Assert.AreEqual(3, splittedContent.Count);
@@ -88,7 +88,7 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze.csv"));
-            var splittedContent = TextSplitter.SplitOnTab(text);
+            var splittedContent = text.Split("\t").ToList();
 
             //Act
             var item = WordItemBuilder.Build(new Snapshot() { HtmlContent = splittedContent[0] });
@@ -101,7 +101,7 @@ namespace ZXTests
         {
             //Arrange
             string text = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze.csv"));
-            var splittedContent = TextSplitter.SplitOnTab(text);
+            var splittedContent = text.Split("\t").ToList();
 
             //Act
             var word = WordItemBuilder.Build(new Snapshot() { HtmlContent = splittedContent[0] });
@@ -178,7 +178,7 @@ namespace ZXTests
             var item = new TargetSequence { Sequence = "bread" };
 
             //Act
-            var note = AnkiNoteBuilder.Build(item);
+            var note = AnkiNoteBuilder.Create(item);
 
             //Assert
             Assert.AreEqual($"<a href=\"https://www.wordreference.com/enfr/bread\">https://www.wordreference.com/enfr/bread</a>", note.Source);
@@ -207,7 +207,7 @@ namespace ZXTests
             var item = new TargetSequence { Translation = "c'est la traduction" };
 
             //Act
-            var note = AnkiNoteBuilder.Build(item);
+            var note = AnkiNoteBuilder.Create(item);
 
             //Assert
             Assert.AreEqual("Traduction Netflix : \"c'est la traduction\".", note.After);

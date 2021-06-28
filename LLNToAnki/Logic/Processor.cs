@@ -16,7 +16,7 @@ namespace LLNToAnki.Business.Logic
         private readonly IDataProvider dataProvider;
         private readonly ISnapshotBL lLNItemsBuilder;
         private readonly IWordItemBuilder wordItemBuilder;
-        private readonly IAnkiNoteBuilder ankiNoteBuilder;
+        private readonly IAnkiNoteBL ankiNoteBuilder;
         private readonly IAnkiNoteExporter ankiNoteExporter;
         private readonly IConnectNoteBuilder connectNoteBuilder;
         private readonly IConnectNotePoster connectNotePoster;
@@ -24,7 +24,7 @@ namespace LLNToAnki.Business.Logic
         public Processor(IDataProvider dataProvider,
             ISnapshotBL lLNItemsBuilder,
             IWordItemBuilder wordItemBuilder,
-            IAnkiNoteBuilder ankiNoteBuilder,
+            IAnkiNoteBL ankiNoteBuilder,
             IAnkiNoteExporter ankiNoteExporter,
             IConnectNoteBuilder connectNoteBuilder,
             IConnectNotePoster connectNotePoster
@@ -63,7 +63,7 @@ namespace LLNToAnki.Business.Logic
                 {
                     var wordItem = wordItemBuilder.Build(item);
 
-                    var ankiNote = ankiNoteBuilder.Build(wordItem);
+                    var ankiNote = ankiNoteBuilder.Create(wordItem);
 
                     notes.Add(ankiNote);
                 }
@@ -92,7 +92,7 @@ namespace LLNToAnki.Business.Logic
                 {
                     var wordItem = wordItemBuilder.Build(item);
 
-                    var ankiNote = ankiNoteBuilder.Build(wordItem);
+                    var ankiNote = ankiNoteBuilder.Create(wordItem);
 
                     var connectNote = connectNoteBuilder.Build(ankiNote);
 

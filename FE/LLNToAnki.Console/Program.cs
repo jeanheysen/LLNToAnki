@@ -25,12 +25,16 @@ namespace LLNToAnki.Console
 
             var detailer = detailerFactory.Provide(language);
 
+            AnkiNoteExporter ankiNoteExporter = new AnkiNoteExporter(new FileWriter());
+            var ankiNoteBuilder = new AnkiNoteBuilder(detailer);
+            var ankiNoteBL = new AnkiNoteBL(ankiNoteBuilder, ankiNoteExporter);
+
             var processor = new Processor(
                 new FileReader(),
                 new SnapshotBL(),
                 new WordItemBuilder(new HTMLScraper()),
-                new AnkiNoteBuilder(detailer),
-                new AnkiNoteExporter(new FileWriter()),
+                ankiNoteBL,
+                ankiNoteExporter,
                 new ConnectNoteBuilder(),
                 new ConnectNotePoster()
                 );

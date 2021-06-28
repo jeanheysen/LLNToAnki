@@ -6,7 +6,7 @@ namespace LLNToAnki.Business.Logic
 {
     public interface IAnkiNoteBuilder
     {
-        AnkiNote Build(TargetSequence item);
+        AnkiNote Create(TargetSequence item);
     }
 
     public class AnkiNoteBuilder : IAnkiNoteBuilder
@@ -18,8 +18,9 @@ namespace LLNToAnki.Business.Logic
             this.translationsProvider = translationsProvider;
         }
 
-        public AnkiNote Build(TargetSequence item)
+        public AnkiNote Create(TargetSequence item)
         {
+            //todo devrait etre séparé en deux méthode : Post et Get
             var note = new AnkiNote();
 
             note.Question = item.ContextWithWordColored;
@@ -30,7 +31,7 @@ namespace LLNToAnki.Business.Logic
 
             note.Source = BuildSource(item.Sequence);
 
-            note.After = BuildAfter(item.Translation, item.Sequence) ;
+            note.After = BuildAfter(item.Translation, item.Sequence);
 
             return note;
         }
@@ -38,11 +39,11 @@ namespace LLNToAnki.Business.Logic
         private string BuildSource(string word)
         {
             var url = translationsProvider.UrlBuilder.CreateURL(word);
-            
+
             return $"<a href=\"{url}\">{url}</a>";
         }
 
-        private string BuildAfter(string sentence,string word)
+        private string BuildAfter(string sentence, string word)
         {
             var sb = new StringBuilder();
 
@@ -50,9 +51,10 @@ namespace LLNToAnki.Business.Logic
 
             var translations = translationsProvider.GetAll(word);
 
-            sb.Append(translations); 
+            sb.Append(translations);
 
             return sb.ToString();
         }
     }
+
 }

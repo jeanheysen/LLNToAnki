@@ -11,12 +11,11 @@ namespace ZXTests
     public class BaseIntegrationTesting : BaseTesting
     {
         protected IDataProvider DataProvider { get; }
-        protected ITextSplitter TextSplitter { get; }
         protected IDataWriter FileWriter { get; }
         protected IDataScraper HtmlScraper { get; }
         protected IWordItemBuilder WordItemBuilder { get; }
         protected AnkiNoteExporter AnkiNoteExporter { get; }
-        protected AnkiNoteBuilder AnkiNoteBuilder { get; }
+        protected AnkiNoteBL AnkiNoteBuilder { get; }
         protected ISnapshotBL LLNItemsBuilder { get; }
         protected IConnectNoteBuilder ConnectNoteBuilder { get; }
         protected IConnectNotePoster ConnectNotePoster { get; }
@@ -30,7 +29,6 @@ namespace ZXTests
         public BaseIntegrationTesting()
         {
             DataProvider = new FileReader();
-            TextSplitter = new TextSplitter();
             
             HtmlScraper = new HTMLScraper();
             WordItemBuilder = new WordItemBuilder(HtmlScraper);
@@ -40,7 +38,8 @@ namespace ZXTests
 
             TranslationsProviderMock = new Mock<ITranslationDetailer>() { DefaultValue = DefaultValue.Mock };
             TranslationsProviderMock.SetupGet(p => p.UrlBuilder).Returns(new WordReferenceURLBuilder());
-            AnkiNoteBuilder = new AnkiNoteBuilder(TranslationsProviderMock.Object);
+            var builder = new AnkiNoteBuilder(TranslationsProviderMock.Object);
+            AnkiNoteBuilder = new AnkiNoteBL(builder, AnkiNoteExporter);
 
             LLNItemsBuilder = new SnapshotBL();
             ConnectNoteBuilder = new ConnectNoteBuilder();
