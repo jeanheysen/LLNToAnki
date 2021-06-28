@@ -1,4 +1,5 @@
 ﻿using LLNToAnki.BE.Ports;
+using LLNToAnki.Domain;
 using LLNToAnki.Infrastructure;
 using System.Text;
 

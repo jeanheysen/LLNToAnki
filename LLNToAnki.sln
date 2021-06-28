@@ -4,8 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LLNToAnki.Business", "LLNToAnki\LLNToAnki.Business.csproj", "{757EDC4D-D087-4F19-A445-00810692BABD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{967D7DF2-50A3-4FD6-934F-E0AB13D38943} = {967D7DF2-50A3-4FD6-934F-E0AB13D38943}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZXTests", "ZXTests\ZXTests.csproj", "{084A000A-F469-4843-8A2C-52EA42CC6F74}"
+	ProjectSection(ProjectDependencies) = postProject
+		{02678C07-C40B-4EA9-B7AC-3B9BE7C5212E} = {02678C07-C40B-4EA9-B7AC-3B9BE7C5212E}
+		{967D7DF2-50A3-4FD6-934F-E0AB13D38943} = {967D7DF2-50A3-4FD6-934F-E0AB13D38943}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BE", "BE", "{CF242E95-6430-4579-8A5D-DF9E3CE11F1D}"
 EndProject

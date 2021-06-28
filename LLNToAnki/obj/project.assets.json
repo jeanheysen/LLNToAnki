@@ -19,6 +19,16 @@
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
+      },
+      "LLNToAnki.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/LLNToAnki.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LLNToAnki.Domain.dll": {}
+        }
       }
     }
   },
@@ -101,11 +111,17 @@
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
+    },
+    "LLNToAnki.Domain/1.0.0": {
+      "type": "project",
+      "path": "../BE/LLNToAnki.Domain/LLNToAnki.Domain.csproj",
+      "msbuildProject": "../BE/LLNToAnki.Domain/LLNToAnki.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "HtmlAgilityPack >= 1.11.30",
+      "LLNToAnki.Domain >= 1.0.0",
       "Newtonsoft.Json >= 12.0.3"
     ]
   },
@@ -134,7 +150,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\BE\\LLNToAnki.Domain\\LLNToAnki.Domain.csproj": {
+              "projectPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\BE\\LLNToAnki.Domain\\LLNToAnki.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
