@@ -11,5 +11,7 @@
         public string Translation { get; set; }
 
         public string Audio { get; set; }
+
+        public Snapshot SnapShot { get; set; }
     }
 }
