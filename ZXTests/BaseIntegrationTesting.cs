@@ -15,8 +15,8 @@ namespace ZXTests
         protected IDataWriter FileWriter { get; }
         protected IDataScraper HtmlScraper { get; }
         protected IWordItemBuilder WordItemBuilder { get; }
-        protected IAnkiNoteExporter AnkiNoteExporter { get; }
-        protected IAnkiNoteBuilder AnkiNoteBuilder { get; }
+        protected AnkiNoteExporter AnkiNoteExporter { get; }
+        protected AnkiNoteBuilder AnkiNoteBuilder { get; }
         protected ILLNItemsBuilder LLNItemsBuilder { get; }
         protected IConnectNoteBuilder ConnectNoteBuilder { get; }
         protected IConnectNotePoster ConnectNotePoster { get; }

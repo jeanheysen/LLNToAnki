@@ -8,7 +8,7 @@ namespace LLNToAnki.Business.Ports
 {
     public interface IConnectNoteBuilder
     {
-        IConnectNote Build(IAnkiNote ankiNote);
+        IConnectNote Build(AnkiNote ankiNote);
     }
 
     public interface IConnectNotePoster

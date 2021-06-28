@@ -7,7 +7,7 @@ namespace LLNToAnki.Business.Logic
 {
     public interface IAnkiNoteExporter
     {
-        void Export(string path, IReadOnlyList<IAnkiNote> notes);
+        void Export(string path, IReadOnlyList<AnkiNote> notes);
     }
 
     public class AnkiNoteExporter : IAnkiNoteExporter
@@ -24,7 +24,7 @@ namespace LLNToAnki.Business.Logic
 
 
         //METHOD
-        public void Export(string path, IReadOnlyList<IAnkiNote> notes)
+        public void Export(string path, IReadOnlyList<AnkiNote> notes)
         {
             var sb = new StringBuilder();
             int i = 0;
@@ -37,7 +37,7 @@ namespace LLNToAnki.Business.Logic
             Write(path, sb);
         }
 
-        private void AppendContent(IAnkiNote note, StringBuilder sb)
+        private void AppendContent(AnkiNote note, StringBuilder sb)
         {
             sb.Append("\"");
             sb.Append(note.Question.Replace("\"", "\"\""));

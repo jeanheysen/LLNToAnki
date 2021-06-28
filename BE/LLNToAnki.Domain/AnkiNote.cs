@@ -1,20 +1,6 @@
 ﻿namespace LLNToAnki.Domain
 {
-    public interface IAnkiNote //todo virer l'abstraction
-    {
-        string AddReverseAnswer { get; set; }
-        string AddReverseQuestion { get; set; }
-        string After { get; set; }
-        string Answer { get; set; }
-        string Audio { get; set; }
-        string Before { get; set; }
-        string Mem_Image { get; set; }
-        string Mem_Text { get; set; }
-        string Question { get; set; }
-        string Source { get; set; }
-    }
-
-    public class AnkiNote : IAnkiNote
+    public class AnkiNote
     {
         public string Question { get; set; }
         public string Before { get; set; }

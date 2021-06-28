@@ -42,16 +42,16 @@ namespace LLNToAnki.Business.Logic
 
         public int WriteInTextFile(string filePath, string targetPath)
         {
-            List<IAnkiNote> notes = CreateAnkiNotes(filePath);
+            List<AnkiNote> notes = CreateAnkiNotes(filePath);
 
             ankiNoteExporter.Export(targetPath, notes);
 
             return notes.Count;
         }
 
-        private List<IAnkiNote> CreateAnkiNotes(string filePath)
+        private List<AnkiNote> CreateAnkiNotes(string filePath)
         {
-            var notes = new List<IAnkiNote>();
+            var notes = new List<AnkiNote>();
 
             var data = dataProvider.GetAllText(filePath);
 

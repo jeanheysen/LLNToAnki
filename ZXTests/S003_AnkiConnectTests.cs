@@ -38,13 +38,13 @@ namespace ZXTests
         public void T001_BuildContentWithJsonConverterReturnsSameResultWithCase()
         {
             //Arrange
-            var ankiNoteMock = new Mock<IAnkiNote>() { DefaultValue = DefaultValue.Mock };
-            ankiNoteMock.SetupGet(a => a.Question).Returns("front content");
-            ankiNoteMock.SetupGet(a => a.Answer).Returns("back content");
-            ankiNoteMock.SetupGet(a => a.After).Returns("blabla");
-            ankiNoteMock.SetupGet(a => a.Audio).Returns("");
-            ankiNoteMock.SetupGet(a => a.Source).Returns("");
-            var note = connectNoteBuilder.Build(ankiNoteMock.Object);
+            var ankiNote = new AnkiNote();
+            ankiNote.Question="front content";
+            ankiNote.Answer="back content";
+            ankiNote.After="blabla";
+            ankiNote.Audio="";
+            ankiNote.Source="";
+            var note = connectNoteBuilder.Build(ankiNote);
 
             //Act
             var json = JsonConvert.SerializeObject(note);

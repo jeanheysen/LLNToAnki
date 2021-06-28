@@ -113,14 +113,14 @@ namespace ZXTests
         public void T008_ExporterSeparatesWithTab()
         {
             //Arrange
-            var ankiNoteMock = new Mock<IAnkiNote>() { DefaultValue = DefaultValue.Mock };
-            ankiNoteMock.SetupGet(a => a.Question).Returns("q");
-            ankiNoteMock.SetupGet(a => a.Answer).Returns("a");
-            ankiNoteMock.SetupGet(a => a.Audio).Returns("ad");
+            var ankiNote = new AnkiNote();
+            ankiNote.Question="q";
+            ankiNote.Answer="a";
+            ankiNote.Audio="ad";
             var fileWriterMock = new Mock<IDataWriter>() { DefaultValue = DefaultValue.Mock };
 
             //Act
-            new AnkiNoteExporter(fileWriterMock.Object).Export("", new List<IAnkiNote>() { ankiNoteMock.Object });
+            new AnkiNoteExporter(fileWriterMock.Object).Export("", new List<AnkiNote>() { ankiNote });
 
 
             //Assert
@@ -189,13 +189,13 @@ namespace ZXTests
         public void T016_ExportedNoteContainsTheSource()
         {
             //Arrange
-            var note = new Mock<IAnkiNote>() { DefaultValue = DefaultValue.Mock };
+            var note = new Mock<AnkiNote>() { DefaultValue = DefaultValue.Mock };
             note.SetupGet(n => n.Question).Returns("");
             note.SetupGet(n => n.Source).Returns("https://www.wordreference.com/enfr/pig");
             var exporter = new AnkiNoteExporter(dataWriterMock.Object);
 
             //Act
-            exporter.Export("", new List<IAnkiNote>() { note.Object });
+            exporter.Export("", new List<AnkiNote>() { note.Object });
 
             //Assert
             dataWriterMock.Verify(dw => dw.Write(It.IsAny<string>(), It.Is<string>(c => c.Contains("https://www.wordreference.com/enfr/pig"))));

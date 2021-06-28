@@ -7,7 +7,7 @@ namespace LLNToAnki.Infrastructure.AnkiConnecting
 {
     public class ConnectNoteBuilder : IConnectNoteBuilder
     {
-        public IConnectNote Build(IAnkiNote ankiNote)
+        public IConnectNote Build(AnkiNote ankiNote)
         {
             return Build(ankiNote.Question, ankiNote.Answer, ankiNote.After, ankiNote.Source, ankiNote.Audio);
         }
