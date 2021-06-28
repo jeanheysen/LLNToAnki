@@ -5,7 +5,12 @@ using System;
 
 namespace LLNToAnki.Facade.Controllers
 {
-    public class FlowController
+    public interface IFlowController
+    {
+        FlowDto GetById(Guid flowId);
+    }
+
+    public class FlowController : IFlowController
     {
         private readonly IFlowBL flowBL;
         private IMapper mapper;

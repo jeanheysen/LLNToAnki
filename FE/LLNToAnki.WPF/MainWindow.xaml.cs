@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LLNToAnki.WPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace LLNToAnki.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public FlowPageVM ViewModel { get; }
+        
         public MainWindow()
         {
             InitializeComponent();
+
+            this.ViewModel = DataContext as FlowPageVM;
         }
+
     }
 }

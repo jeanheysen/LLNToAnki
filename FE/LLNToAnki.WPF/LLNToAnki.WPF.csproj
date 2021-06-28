@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\BE\LLNToAnki.Facade\LLNToAnki.Facade.csproj" />
+  </ItemGroup>
+
 </Project>
