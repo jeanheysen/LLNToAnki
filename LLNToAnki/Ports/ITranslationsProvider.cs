@@ -1,11 +1,14 @@
-﻿using LLNToAnki.Infrastructure.URLBuilding;
-
-namespace LLNToAnki.BE.Ports
+﻿namespace LLNToAnki.BE.Ports
 {
     public interface ITranslationDetailer
     {
         IURLBuilder UrlBuilder { get; }
 
         string GetAll(string word);
+    }
+
+    public interface IURLBuilder
+    {
+        string CreateURL(string word);
     }
 }

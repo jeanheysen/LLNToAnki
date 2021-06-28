@@ -14,10 +14,6 @@
     <ProjectReference Include="..\BE\LLNToAnki.Domain\LLNToAnki.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="BE\Enums\" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

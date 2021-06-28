@@ -1,4 +1,6 @@
-﻿namespace LLNToAnki.Infrastructure.URLBuilding
+﻿using LLNToAnki.BE.Ports;
+
+namespace LLNToAnki.Infrastructure.URLBuilding
 {
     public class MijnWordenboekURLBuilder : IURLBuilder
     {
