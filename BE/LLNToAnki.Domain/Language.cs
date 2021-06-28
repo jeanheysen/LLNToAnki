@@ -1,9 +1,8 @@
 ﻿namespace LLNToAnki.Domain
 {
-    public enum Language //todo remplacer enum par une classe
+    public class Language
     {
-        English,
-        Dutch
+        public string Name { get; set; }
     }
 }
 

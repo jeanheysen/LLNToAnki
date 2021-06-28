@@ -19,9 +19,6 @@ namespace ZXTests
             var urlBuilderMock = new Mock<IURLBuilder>() { DefaultValue = DefaultValue.Mock };
             urlBuilderMock.Setup(b => b.CreateURL(It.IsAny<string>())).Returns<string>(s => GetPathInData(@"MWB\" + s + ".html"));
 
-            var urlBuilderFactoryMock = new Mock<IUrlLAbstractFactory>() { DefaultValue = DefaultValue.Mock };
-            urlBuilderFactoryMock.Setup(f => f.CreateUrlBuilder(It.IsAny<Language>())).Returns(urlBuilderMock.Object);
-
             detailer = new MijnWordenboekDetailer(urlBuilderMock.Object, new HTMLScraper(), new HTMLWebsiteReader());
         }
 

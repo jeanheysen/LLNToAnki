@@ -6,27 +6,29 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
 {
     public class DetailerFactory
     {
-        private readonly IUrlLAbstractFactory uRLAbstractFactory;
         private readonly IDataScraper scraper;
         private readonly htmlReader websiteReader;
 
-        public DetailerFactory(IUrlLAbstractFactory uRLAbstractFactory, IDataScraper scraper, htmlReader websiteReader)
+        public DetailerFactory( IDataScraper scraper, htmlReader websiteReader)
         {
-            this.uRLAbstractFactory = uRLAbstractFactory;
             this.scraper = scraper;
             this.websiteReader = websiteReader;
         }
 
         public ITranslationDetailer Provide(Language language)
         {
-            switch (language)
+            if (language.Name == "English")
             {
-                case Language.English: return new WordReferenceDetailer(uRLAbstractFactory.CreateUrlBuilder(language),scraper, websiteReader);
-                case Language.Dutch: return new   MijnWordenboekDetailer(uRLAbstractFactory.CreateUrlBuilder(language), scraper, websiteReader);
-                
-                default: throw new System.Exception($"No detailer for the language {language}");
-                    
+                return new WordReferenceDetailer(new WordReferenceURLBuilder(), scraper, websiteReader);
             }
+
+            else if (language.Name == "Dutch")
+            {
+                return new MijnWordenboekDetailer(new MijnWordenboekURLBuilder(), scraper, websiteReader);
+            }
+            else throw new System.Exception($"No detailer for the language {language}");
+
         }
     }
 }
+

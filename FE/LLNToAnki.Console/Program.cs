@@ -20,7 +20,6 @@ namespace LLNToAnki.Console
             var total = InputNumberOfItemsToParse();
             var language = InputLanguage();
             var detailerFactory = new DetailerFactory(
-                new UrlAbstractFactory(),
                     new HTMLScraper(),
                     new HTMLWebsiteReader());
 
@@ -67,10 +66,9 @@ namespace LLNToAnki.Console
             System.Console.WriteLine("english (en) or dutch (nl) ? default or unrecknownized character means english.");
             var response = System.Console.ReadLine();
 
-            if (response == "en") return Language.English;
-            if (response == "nl") return Language.Dutch;
-
-            return Language.English;
+            var languageBL = new LanguageBL(); //todo à injecter
+         
+            return languageBL.GetFromAcronymeOrDefault(response);
         }
     }
 
