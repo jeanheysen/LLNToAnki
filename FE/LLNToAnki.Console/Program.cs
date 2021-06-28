@@ -19,25 +19,21 @@ namespace LLNToAnki.Console
         {
             var total = InputNumberOfItemsToParse();
             var language = InputLanguage();
-            var detailerFactory = new DetailerFactory(
-                    new HTMLScraper(),
-                    new HTMLWebsiteReader());
 
+            //services
+            var detailerFactory = new DetailerFactory(new HTMLScraper(), new HTMLWebsiteReader());
             var detailer = detailerFactory.Provide(language);
-
-            AnkiNoteExporter ankiNoteExporter = new AnkiNoteExporter(new FileWriter());
+            var ankiNoteExporter = new AnkiNoteExporter(new FileWriter());
             var ankiNoteBuilder = new AnkiNoteBuilder(detailer);
             var ankiNoteBL = new AnkiNoteBL(ankiNoteBuilder, ankiNoteExporter);
+            var dataprovider = new FileReader();
+            var snapshotBL = new SnapshotBL();
+            var targetSequenceBuilder = new TargetSequenceBuilder(new HTMLScraper());
+            var targetSequenceBL = new TargetSequenceBL(targetSequenceBuilder);
+            var connectNoteBuilder = new ConnectNoteBuilder();
+            var connectNotePoster = new ConnectNotePoster();
 
-            var processor = new Processor(
-                new FileReader(),
-                new SnapshotBL(),
-                new TargetSequenceBuilder(new HTMLScraper()),
-                ankiNoteBL,
-                ankiNoteExporter,
-                new ConnectNoteBuilder(),
-                new ConnectNotePoster()
-                );
+            var processor = new Processor(dataprovider, snapshotBL, targetSequenceBL, ankiNoteBL, connectNoteBuilder, connectNotePoster);
 
             var dataPath = Path.Combine(dataFolder, dataFileName);
             var count = processor.PushToAnkiThroughAPI(dataPath, total);
@@ -71,7 +67,7 @@ namespace LLNToAnki.Console
             var response = System.Console.ReadLine();
 
             var languageBL = new LanguageBL(); //todo à injecter
-         
+
             return languageBL.GetFromAcronymeOrDefault(response);
         }
     }

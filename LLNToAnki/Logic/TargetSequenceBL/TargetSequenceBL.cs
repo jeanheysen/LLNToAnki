@@ -2,7 +2,12 @@
 
 namespace LLNToAnki.Business.Logic
 {
-    public class TargetSequenceBL
+    public interface ITargetSequenceBL
+    {
+        TargetSequence Build(Snapshot snapshot);
+    }
+
+    public class TargetSequenceBL : ITargetSequenceBL
     {
         private readonly ITargetSequenceBuilder targetSequenceBuilder;
 

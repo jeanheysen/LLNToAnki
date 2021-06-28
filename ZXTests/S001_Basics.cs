@@ -161,7 +161,7 @@ namespace ZXTests
             var item = new TargetSequence { Sequence = "bread" };
 
             //Act
-            var note = AnkiNoteBuilder.Create(item);
+            var note = AnkiNoteBL.Create(item);
 
             //Assert
             Assert.AreEqual($"<a href=\"https://www.wordreference.com/enfr/bread\">https://www.wordreference.com/enfr/bread</a>", note.Source);
@@ -190,7 +190,7 @@ namespace ZXTests
             var item = new TargetSequence { Translation = "c'est la traduction" };
 
             //Act
-            var note = AnkiNoteBuilder.Create(item);
+            var note = AnkiNoteBL.Create(item);
 
             //Assert
             Assert.AreEqual("Traduction Netflix : \"c'est la traduction\".", note.After);

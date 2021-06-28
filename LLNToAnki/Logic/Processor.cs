@@ -9,27 +9,24 @@ namespace LLNToAnki.Business.Logic
     public class Processor
     {
         private readonly IDataProvider dataProvider;
-        private readonly ISnapshotBL lLNItemsBuilder;
-        private readonly ITargetSequenceBuilder wordItemBuilder;
+        private readonly ISnapshotBL snapshotBL;
+        private readonly ITargetSequenceBL targetSequenceBL;
         private readonly IAnkiNoteBL ankiNoteBuilder;
-        private readonly IAnkiNoteExporter ankiNoteExporter;
         private readonly IConnectNoteBuilder connectNoteBuilder;
         private readonly IConnectNotePoster connectNotePoster;
 
         public Processor(IDataProvider dataProvider,
-            ISnapshotBL lLNItemsBuilder,
-            ITargetSequenceBuilder wordItemBuilder,
+            ISnapshotBL snapshotBL,
+            ITargetSequenceBL targetSequenceBL,
             IAnkiNoteBL ankiNoteBuilder,
-            IAnkiNoteExporter ankiNoteExporter,
             IConnectNoteBuilder connectNoteBuilder,
             IConnectNotePoster connectNotePoster
             )
         {
             this.dataProvider = dataProvider;
-            this.lLNItemsBuilder = lLNItemsBuilder;
-            this.wordItemBuilder = wordItemBuilder;
+            this.snapshotBL = snapshotBL;
+            this.targetSequenceBL = targetSequenceBL;
             this.ankiNoteBuilder = ankiNoteBuilder;
-            this.ankiNoteExporter = ankiNoteExporter;
             this.connectNoteBuilder = connectNoteBuilder;
             this.connectNotePoster = connectNotePoster;
         }
@@ -39,7 +36,7 @@ namespace LLNToAnki.Business.Logic
         {
             var data = dataProvider.GetAllText(filePath);
 
-            var llnItems = lLNItemsBuilder.Create(data);
+            var llnItems = snapshotBL.Create(data);
 
             var totalCount = nbOfItemsToParse != 0 ? nbOfItemsToParse : llnItems.Count;
             var i = 0;
@@ -48,7 +45,7 @@ namespace LLNToAnki.Business.Logic
             {
                 try
                 {
-                    var wordItem = wordItemBuilder.Build(item);
+                    var wordItem = targetSequenceBL.Build(item);
 
                     var ankiNote = ankiNoteBuilder.Create(wordItem);
 

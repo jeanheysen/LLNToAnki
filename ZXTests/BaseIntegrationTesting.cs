@@ -15,12 +15,12 @@ namespace ZXTests
         protected IDataScraper HtmlScraper { get; }
         protected ITargetSequenceBuilder WordItemBuilder { get; }
         protected AnkiNoteExporter AnkiNoteExporter { get; }
-        protected AnkiNoteBL AnkiNoteBuilder { get; }
+        protected AnkiNoteBL AnkiNoteBL { get; }
         protected ISnapshotBL LLNItemsBuilder { get; }
         protected IConnectNoteBuilder ConnectNoteBuilder { get; }
         protected IConnectNotePoster ConnectNotePoster { get; }
         protected Processor Processor { get; }
-        
+
         protected Mock<ITranslationDetailer> TranslationsProviderMock { get; }
 
         protected string TmpExportFilePath => GetPathInData("tmp_export.txt");
@@ -29,32 +29,29 @@ namespace ZXTests
         public BaseIntegrationTesting()
         {
             DataProvider = new FileReader();
-            
+
             HtmlScraper = new HTMLScraper();
             WordItemBuilder = new TargetSequenceBuilder(HtmlScraper);
-            
+
             FileWriter = new FileWriter();
             AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
 
             TranslationsProviderMock = new Mock<ITranslationDetailer>() { DefaultValue = DefaultValue.Mock };
             TranslationsProviderMock.SetupGet(p => p.UrlBuilder).Returns(new WordReferenceURLBuilder());
             var builder = new AnkiNoteBuilder(TranslationsProviderMock.Object);
-            AnkiNoteBuilder = new AnkiNoteBL(builder, AnkiNoteExporter);
+            AnkiNoteBL = new AnkiNoteBL(builder, AnkiNoteExporter);
 
             LLNItemsBuilder = new SnapshotBL();
             ConnectNoteBuilder = new ConnectNoteBuilder();
             ConnectNotePoster = new ConnectNotePoster();
 
-            Processor = new Processor(
-                DataProvider,
-                LLNItemsBuilder,
-                WordItemBuilder,
-                AnkiNoteBuilder,
-                AnkiNoteExporter,
-                ConnectNoteBuilder,
-                ConnectNotePoster
-                );
+            var snapshotBL = new SnapshotBL();
+            var targetSequenceBuilder = new TargetSequenceBuilder(HtmlScraper);
+            var targetSequenceBL = new TargetSequenceBL(targetSequenceBuilder);
+
+
+            Processor = new Processor(DataProvider, snapshotBL, targetSequenceBL, AnkiNoteBL, ConnectNoteBuilder, ConnectNotePoster);
         }
-        
+
     }
 }
