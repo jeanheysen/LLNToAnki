@@ -22,3 +22,5 @@ LLNToAnki/obj
 /ZXTests/tmp.html
 /FE/LLNToAnki.WPF/obj/Debug/
 /FE/LLNToAnki.WPF/bin/Debug/
+/BE/LLNToAnki.Domain/obj/Debug/
+/BE/LLNToAnki.Domain/bin/Debug/
