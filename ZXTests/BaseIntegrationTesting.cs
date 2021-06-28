@@ -17,7 +17,7 @@ namespace ZXTests
         protected IWordItemBuilder WordItemBuilder { get; }
         protected AnkiNoteExporter AnkiNoteExporter { get; }
         protected AnkiNoteBuilder AnkiNoteBuilder { get; }
-        protected ILLNItemsBuilder LLNItemsBuilder { get; }
+        protected ISnapshotBL LLNItemsBuilder { get; }
         protected IConnectNoteBuilder ConnectNoteBuilder { get; }
         protected IConnectNotePoster ConnectNotePoster { get; }
         protected IProcessor Processor { get; }
@@ -42,7 +42,7 @@ namespace ZXTests
             TranslationsProviderMock.SetupGet(p => p.UrlBuilder).Returns(new WordReferenceURLBuilder());
             AnkiNoteBuilder = new AnkiNoteBuilder(TranslationsProviderMock.Object);
 
-            LLNItemsBuilder = new LLNItemsBuilder();
+            LLNItemsBuilder = new SnapshotBL();
             ConnectNoteBuilder = new ConnectNoteBuilder();
             ConnectNotePoster = new ConnectNotePoster();
 

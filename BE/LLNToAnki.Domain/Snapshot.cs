@@ -1,6 +1,6 @@
 ﻿namespace LLNToAnki.Domain
 {
-    public class LLNItem
+    public class Snapshot
     {
         public string HtmlContent { get; set; }
         public string Audio { get; set; }

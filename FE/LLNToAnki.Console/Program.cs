@@ -27,7 +27,7 @@ namespace LLNToAnki.Console
 
             var processor = new Processor(
                 new FileReader(),
-                new LLNItemsBuilder(),
+                new SnapshotBL(),
                 new WordItemBuilder(new HTMLScraper()),
                 new AnkiNoteBuilder(detailer),
                 new AnkiNoteExporter(new FileWriter()),

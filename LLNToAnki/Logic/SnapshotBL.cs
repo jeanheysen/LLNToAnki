@@ -4,24 +4,24 @@ using System.Linq;
 
 namespace LLNToAnki.Business.Logic
 {
-    public interface ILLNItemsBuilder
+    public interface ISnapshotBL
     {
-        IReadOnlyList<LLNItem> Build(string rawLlnOutput);
+        IReadOnlyList<Snapshot> Create(string rawLlnOutput);
     }
 
-    public class LLNItemsBuilder : ILLNItemsBuilder
+    public class SnapshotBL : ISnapshotBL
     {
-        public LLNItemsBuilder()
+        public SnapshotBL()
         {
         }
 
-        public IReadOnlyList<LLNItem> Build(string rawLlnOutput)
+        public IReadOnlyList<Snapshot> Create(string rawLlnOutput)
         {
             var separator = "\"<style>";
 
             var all = rawLlnOutput.Split(separator).ToList();
 
-            var r = new List<LLNItem>();
+            var r = new List<Snapshot>();
             int counter = 0;
 
             foreach (var item in all)
@@ -36,10 +36,10 @@ namespace LLNToAnki.Business.Logic
             return r;
         }
 
-        private LLNItem CreateItemForRawCut(string content)
+        private Snapshot CreateItemForRawCut(string content)
         {
             var subitems = content.Split("\t"); //todo use splitter
-            return new LLNItem()
+            return new Snapshot()
             {
                 HtmlContent = subitems[0],
                 Audio = subitems[1],

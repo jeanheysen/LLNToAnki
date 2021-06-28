@@ -14,7 +14,7 @@ namespace LLNToAnki.Business.Logic
     public class Processor : IProcessor
     {
         private readonly IDataProvider dataProvider;
-        private readonly ILLNItemsBuilder lLNItemsBuilder;
+        private readonly ISnapshotBL lLNItemsBuilder;
         private readonly IWordItemBuilder wordItemBuilder;
         private readonly IAnkiNoteBuilder ankiNoteBuilder;
         private readonly IAnkiNoteExporter ankiNoteExporter;
@@ -22,7 +22,7 @@ namespace LLNToAnki.Business.Logic
         private readonly IConnectNotePoster connectNotePoster;
 
         public Processor(IDataProvider dataProvider,
-            ILLNItemsBuilder lLNItemsBuilder,
+            ISnapshotBL lLNItemsBuilder,
             IWordItemBuilder wordItemBuilder,
             IAnkiNoteBuilder ankiNoteBuilder,
             IAnkiNoteExporter ankiNoteExporter,
@@ -55,7 +55,7 @@ namespace LLNToAnki.Business.Logic
 
             var data = dataProvider.GetAllText(filePath);
 
-            var llnItems = lLNItemsBuilder.Build(data);
+            var llnItems = lLNItemsBuilder.Create(data);
 
             foreach (var item in llnItems)
             {
@@ -81,7 +81,7 @@ namespace LLNToAnki.Business.Logic
         {
             var data = dataProvider.GetAllText(filePath);
 
-            var llnItems = lLNItemsBuilder.Build(data);
+            var llnItems = lLNItemsBuilder.Create(data);
 
             var totalCount = nbOfItemsToParse != 0 ? nbOfItemsToParse : llnItems.Count;
             var i = 0;

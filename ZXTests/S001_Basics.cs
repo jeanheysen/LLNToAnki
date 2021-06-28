@@ -51,7 +51,7 @@ namespace ZXTests
             var html = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
 
             //Act
-            var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
+            var r = WordItemBuilder.Build(new Snapshot() { HtmlContent = html });
 
             //Assert
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", r.EpisodTitle);
@@ -64,7 +64,7 @@ namespace ZXTests
             var html = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
 
             //Act
-            var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
+            var r = WordItemBuilder.Build(new Snapshot() { HtmlContent = html });
 
             //Assert
             Assert.AreEqual("squeeze", r.Sequence);
@@ -77,7 +77,7 @@ namespace ZXTests
             var html = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
 
             //Act
-            var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
+            var r = WordItemBuilder.Build(new Snapshot() { HtmlContent = html });
 
             //Assert
             Assert.AreEqual("Et appuyez doucement sur la gâchette.", r.Translation);
@@ -91,7 +91,7 @@ namespace ZXTests
             var splittedContent = TextSplitter.SplitOnTab(text);
 
             //Act
-            var item = WordItemBuilder.Build(new LLNItem() { HtmlContent = splittedContent[0] });
+            var item = WordItemBuilder.Build(new Snapshot() { HtmlContent = splittedContent[0] });
 
             Assert.AreEqual("The Crown S4:E2 L'épreuve de Balmoral", item.EpisodTitle);
         }
@@ -104,7 +104,7 @@ namespace ZXTests
             var splittedContent = TextSplitter.SplitOnTab(text);
 
             //Act
-            var word = WordItemBuilder.Build(new LLNItem() { HtmlContent = splittedContent[0] });
+            var word = WordItemBuilder.Build(new Snapshot() { HtmlContent = splittedContent[0] });
 
             Assert.AreEqual("squeeze", word.Sequence);
         }
@@ -134,7 +134,7 @@ namespace ZXTests
             var html = DataProvider.GetAllText(GetPathInData("SingleWord_squeeze_onlyHtml.csv"));
 
             //Act
-            var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
+            var r = WordItemBuilder.Build(new Snapshot() { HtmlContent = html });
 
             //Assert
             StringAssert.DoesNotContain("{{c1::", r.ContextWithWordColored);
@@ -165,7 +165,7 @@ namespace ZXTests
             string text = DataProvider.GetAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
 
             //Act
-            var llnItems = LLNItemsBuilder.Build(text);
+            var llnItems = LLNItemsBuilder.Create(text);
 
             //Assert
             Assert.AreEqual(2, llnItems.Count);
