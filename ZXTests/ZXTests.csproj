@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LLNToAnki\LLNToAnki.csproj" />
+    <ProjectReference Include="..\LLNToAnki\LLNToAnki.Business.csproj" />
   </ItemGroup>
 
 </Project>
