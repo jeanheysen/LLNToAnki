@@ -13,13 +13,13 @@ namespace ZXTests
         protected IDataProvider DataProvider { get; }
         protected IDataWriter FileWriter { get; }
         protected IDataScraper HtmlScraper { get; }
-        protected IWordItemBuilder WordItemBuilder { get; }
+        protected ITargetSequenceBuilder WordItemBuilder { get; }
         protected AnkiNoteExporter AnkiNoteExporter { get; }
         protected AnkiNoteBL AnkiNoteBuilder { get; }
         protected ISnapshotBL LLNItemsBuilder { get; }
         protected IConnectNoteBuilder ConnectNoteBuilder { get; }
         protected IConnectNotePoster ConnectNotePoster { get; }
-        protected IProcessor Processor { get; }
+        protected Processor Processor { get; }
         
         protected Mock<ITranslationDetailer> TranslationsProviderMock { get; }
 
@@ -31,7 +31,7 @@ namespace ZXTests
             DataProvider = new FileReader();
             
             HtmlScraper = new HTMLScraper();
-            WordItemBuilder = new WordItemBuilder(HtmlScraper);
+            WordItemBuilder = new TargetSequenceBuilder(HtmlScraper);
             
             FileWriter = new FileWriter();
             AnkiNoteExporter = new AnkiNoteExporter(FileWriter);

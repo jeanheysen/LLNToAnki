@@ -141,23 +141,6 @@ namespace ZXTests
             StringAssert.DoesNotContain("}}", r.ContextWithWordColored);
         }
 
-        [TestCase("SingleWord_squeeze")]
-        [TestCase("SingleWord_wagging")]
-        [TestCase("TwoWords_backbench_disregard")]
-        public void T010_SqueezeEndToEnd(string word)
-        {
-            //Arrange
-            var filePath = GetPathInData($"{word}.csv");
-            var tmpFile = GetPathInTmp($"{word}_ExpectedNote.txt");
-            var refFile = GetPathInData($"{word}_ExpectedNote.txt");
-
-            //Act
-            Processor.WriteInTextFile(filePath, tmpFile);
-
-            //Assert
-            Assert.AreEqual(DataProvider.GetAllText(refFile), DataProvider.GetAllText(tmpFile));
-        }
-
         [Test]
         public void T013_LLNBuilderReturnsTwoItemsForTwoOutputtedWordsInLLN()
         {

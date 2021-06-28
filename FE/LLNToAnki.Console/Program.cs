@@ -32,7 +32,7 @@ namespace LLNToAnki.Console
             var processor = new Processor(
                 new FileReader(),
                 new SnapshotBL(),
-                new WordItemBuilder(new HTMLScraper()),
+                new TargetSequenceBuilder(new HTMLScraper()),
                 ankiNoteBL,
                 ankiNoteExporter,
                 new ConnectNoteBuilder(),

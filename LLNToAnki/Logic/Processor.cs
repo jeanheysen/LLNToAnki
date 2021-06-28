@@ -6,16 +6,11 @@ using System.Linq;
 
 namespace LLNToAnki.Business.Logic
 {
-    public interface IProcessor
-    {
-        int WriteInTextFile(string filePath, string targetPath);
-    }
-
-    public class Processor : IProcessor
+    public class Processor
     {
         private readonly IDataProvider dataProvider;
         private readonly ISnapshotBL lLNItemsBuilder;
-        private readonly IWordItemBuilder wordItemBuilder;
+        private readonly ITargetSequenceBuilder wordItemBuilder;
         private readonly IAnkiNoteBL ankiNoteBuilder;
         private readonly IAnkiNoteExporter ankiNoteExporter;
         private readonly IConnectNoteBuilder connectNoteBuilder;
@@ -23,7 +18,7 @@ namespace LLNToAnki.Business.Logic
 
         public Processor(IDataProvider dataProvider,
             ISnapshotBL lLNItemsBuilder,
-            IWordItemBuilder wordItemBuilder,
+            ITargetSequenceBuilder wordItemBuilder,
             IAnkiNoteBL ankiNoteBuilder,
             IAnkiNoteExporter ankiNoteExporter,
             IConnectNoteBuilder connectNoteBuilder,
@@ -39,43 +34,6 @@ namespace LLNToAnki.Business.Logic
             this.connectNotePoster = connectNotePoster;
         }
 
-
-        public int WriteInTextFile(string filePath, string targetPath)
-        {
-            List<AnkiNote> notes = CreateAnkiNotes(filePath);
-
-            ankiNoteExporter.Export(targetPath, notes);
-
-            return notes.Count;
-        }
-
-        private List<AnkiNote> CreateAnkiNotes(string filePath)
-        {
-            var notes = new List<AnkiNote>();
-
-            var data = dataProvider.GetAllText(filePath);
-
-            var llnItems = lLNItemsBuilder.Create(data);
-
-            foreach (var item in llnItems)
-            {
-                try
-                {
-                    var wordItem = wordItemBuilder.Build(item);
-
-                    var ankiNote = ankiNoteBuilder.Create(wordItem);
-
-                    notes.Add(ankiNote);
-                }
-                finally
-                {
-
-                }
-               
-            }
-
-            return notes;
-        }
 
         public int PushToAnkiThroughAPI(string filePath, int nbOfItemsToParse)
         {

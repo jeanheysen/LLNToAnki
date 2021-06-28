@@ -3,18 +3,18 @@ using LLNToAnki.Domain;
 
 namespace LLNToAnki.Business.Logic
 {
-    public interface IWordItemBuilder
+    public interface ITargetSequenceBuilder
     {
         TargetSequence Build(Snapshot llnItem);
     }
 
-    public class WordItemBuilder : IWordItemBuilder
+    public class TargetSequenceBuilder : ITargetSequenceBuilder
     {
         //FIELDS
         private readonly IDataScraper htmlScraper;
 
         //CONSTRUCTOR
-        public WordItemBuilder(IDataScraper htmlScraper)
+        public TargetSequenceBuilder(IDataScraper htmlScraper)
         {
             this.htmlScraper = htmlScraper;
         }
