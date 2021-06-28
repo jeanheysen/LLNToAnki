@@ -1,8 +1,8 @@
-﻿using LLNToAnki.BE.Ports;
+﻿using LLNToAnki.Business.Ports;
 using LLNToAnki.Domain;
 using System.Text;
 
-namespace LLNToAnki.BE
+namespace LLNToAnki.Business.Logic
 {
     public interface IAnkiNoteBuilder
     {

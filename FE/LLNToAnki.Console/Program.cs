@@ -1,4 +1,4 @@
-﻿using LLNToAnki.BE;
+﻿using LLNToAnki.Business.Logic;
 using LLNToAnki.Domain;
 using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.HTMLScrapping;

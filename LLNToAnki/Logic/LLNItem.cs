@@ -1,4 +1,4 @@
-﻿namespace LLNToAnki.BE
+﻿namespace LLNToAnki.Business.Logic
 {
     public interface ILLNItem
     {

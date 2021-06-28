@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LLNToAnki.BE.Ports
+namespace LLNToAnki.Business.Ports
 {
     public interface ITextSplitter
     {

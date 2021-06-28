@@ -1,6 +1,5 @@
-﻿using LLNToAnki.BE;
-using LLNToAnki.BE.Ports;
-using LLNToAnki.Infrastructure;
+﻿using LLNToAnki.Business.Logic;
+using LLNToAnki.Business.Ports;
 using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.HTMLScrapping;
 using LLNToAnki.Infrastructure.ReadingWriting;

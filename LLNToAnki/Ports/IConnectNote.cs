@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LLNToAnki.BE.Ports
+namespace LLNToAnki.Business.Ports
 {
     public interface IConnectNoteBuilder
     {

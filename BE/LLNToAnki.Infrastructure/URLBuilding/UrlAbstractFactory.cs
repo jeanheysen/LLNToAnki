@@ -1,4 +1,4 @@
-﻿using LLNToAnki.BE.Ports;
+﻿using LLNToAnki.Business.Ports;
 using LLNToAnki.Domain;
 
 namespace LLNToAnki.Infrastructure.URLBuilding

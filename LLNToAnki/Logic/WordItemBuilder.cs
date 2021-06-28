@@ -1,7 +1,7 @@
-﻿using LLNToAnki.BE.Ports;
+﻿using LLNToAnki.Business.Ports;
 using LLNToAnki.Domain;
 
-namespace LLNToAnki.BE
+namespace LLNToAnki.Business.Logic
 {
     public interface IWordItemBuilder
     {

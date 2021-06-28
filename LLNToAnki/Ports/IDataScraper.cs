@@ -1,6 +1,6 @@
 ﻿using HtmlAgilityPack;
 
-namespace LLNToAnki.BE.Ports
+namespace LLNToAnki.Business.Ports
 {
     public interface IDataScraper
     {
