@@ -67,7 +67,7 @@ namespace ZXTests
             var r = WordItemBuilder.Build(new LLNItem() { HtmlContent = html });
 
             //Assert
-            Assert.AreEqual("squeeze", r.Word);
+            Assert.AreEqual("squeeze", r.Sequence);
         }
 
         [Test]
@@ -106,7 +106,7 @@ namespace ZXTests
             //Act
             var word = WordItemBuilder.Build(new LLNItem() { HtmlContent = splittedContent[0] });
 
-            Assert.AreEqual("squeeze", word.Word);
+            Assert.AreEqual("squeeze", word.Sequence);
         }
 
         [Test]
@@ -175,7 +175,7 @@ namespace ZXTests
         public void T015_NoteBuildsSourceWithWordReference()
         {
             //Arrange
-            var item = new WordItem { Word = "bread" };
+            var item = new TargetSequence { Sequence = "bread" };
 
             //Act
             var note = AnkiNoteBuilder.Build(item);
@@ -204,7 +204,7 @@ namespace ZXTests
         public void T017_NoteBuildsAfterWithTranslation()
         {
             //Arrange
-            var item = new WordItem { Translation = "c'est la traduction" };
+            var item = new TargetSequence { Translation = "c'est la traduction" };
 
             //Act
             var note = AnkiNoteBuilder.Build(item);

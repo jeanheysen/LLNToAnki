@@ -1,8 +1,8 @@
 ﻿namespace LLNToAnki.Domain
 {
-    public class WordItem
+    public class TargetSequence
     {
-        public string Word { get; set; }
+        public string Sequence { get; set; }
 
         public string EpisodTitle { get; set; }
 

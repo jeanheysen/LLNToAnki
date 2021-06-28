@@ -6,7 +6,7 @@ namespace LLNToAnki.Business.Logic
 {
     public interface IAnkiNoteBuilder
     {
-        AnkiNote Build(WordItem item);
+        AnkiNote Build(TargetSequence item);
     }
 
     public class AnkiNoteBuilder : IAnkiNoteBuilder
@@ -18,7 +18,7 @@ namespace LLNToAnki.Business.Logic
             this.translationsProvider = translationsProvider;
         }
 
-        public AnkiNote Build(WordItem item)
+        public AnkiNote Build(TargetSequence item)
         {
             var note = new AnkiNote();
 
@@ -28,9 +28,9 @@ namespace LLNToAnki.Business.Logic
 
             note.Audio = item.Audio;
 
-            note.Source = BuildSource(item.Word);
+            note.Source = BuildSource(item.Sequence);
 
-            note.After = BuildAfter(item.Translation, item.Word) ;
+            note.After = BuildAfter(item.Translation, item.Sequence) ;
 
             return note;
         }

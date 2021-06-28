@@ -98,7 +98,7 @@ namespace LLNToAnki.Business.Logic
 
                     var body = connectNotePoster.Post(connectNote).Result;
 
-                    System.Console.WriteLine($"{++i} / {totalCount}. Word : {wordItem.Word}. ({body})");
+                    System.Console.WriteLine($"{++i} / {totalCount}. Word : {wordItem.Sequence}. ({body})");
 
                     if (i == nbOfItemsToParse) break;
                 }
