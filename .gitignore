@@ -26,3 +26,4 @@ LLNToAnki/obj
 /BE/LLNToAnki.Domain/bin/Debug/
 /BE/LLNToAnki.Infrastructure/obj/Debug/
 /FE/LLNToAnki.Console/bin/Debug/
+/BE/LLNToAnki.Facade/obj/Debug/
