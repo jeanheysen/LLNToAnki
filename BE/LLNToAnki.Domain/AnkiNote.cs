@@ -1,6 +1,6 @@
 ﻿namespace LLNToAnki.Domain
 {
-    public interface IAnkiNote
+    public interface IAnkiNote //todo virer l'abstraction
     {
         string AddReverseAnswer { get; set; }
         string AddReverseQuestion { get; set; }

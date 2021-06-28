@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LLNToAnki.Domain;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LLNToAnki.Business.Logic
