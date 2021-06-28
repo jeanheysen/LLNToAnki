@@ -5,23 +5,24 @@ using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.ReadingWriting;
 using LLNToAnki.Infrastructure.URLBuilding;
 using Moq;
-using System.IO;
 
 namespace ZXTests
 {
-    public class BaseIntegrationTesting
+    public class BaseIntegrationTesting : BaseTesting
     {
         protected IDataProvider DataProvider { get; }
         protected ITextSplitter TextSplitter { get; }
         protected IDataWriter FileWriter { get; }
-
         protected IDataScraper HtmlScraper { get; }
         protected IWordItemBuilder WordItemBuilder { get; }
         protected IAnkiNoteExporter AnkiNoteExporter { get; }
         protected IAnkiNoteBuilder AnkiNoteBuilder { get; }
         protected ILLNItemsBuilder LLNItemsBuilder { get; }
+        protected IConnectNoteBuilder ConnectNoteBuilder { get; }
+        protected IConnectNotePoster ConnectNotePoster { get; }
         protected IProcessor Processor { get; }
-        protected Mock<ITranslationDetailer> TranslationsProvider { get; set; }
+        
+        protected Mock<ITranslationDetailer> TranslationsProviderMock { get; }
 
         protected string TmpExportFilePath => GetPathInData("tmp_export.txt");
 
@@ -29,72 +30,32 @@ namespace ZXTests
         public BaseIntegrationTesting()
         {
             DataProvider = new FileReader();
-
             TextSplitter = new TextSplitter();
-
-            FileWriter = new FileWriter();
-
+            
             HtmlScraper = new HTMLScraper();
-
             WordItemBuilder = new WordItemBuilder(HtmlScraper);
-
+            
+            FileWriter = new FileWriter();
             AnkiNoteExporter = new AnkiNoteExporter(FileWriter);
 
-            TranslationsProvider = new Mock<ITranslationDetailer>() { DefaultValue = DefaultValue.Mock };
-            TranslationsProvider.SetupGet(p => p.UrlBuilder).Returns(new WordReferenceURLBuilder());
-
-            AnkiNoteBuilder = new AnkiNoteBuilder(TranslationsProvider.Object);
+            TranslationsProviderMock = new Mock<ITranslationDetailer>() { DefaultValue = DefaultValue.Mock };
+            TranslationsProviderMock.SetupGet(p => p.UrlBuilder).Returns(new WordReferenceURLBuilder());
+            AnkiNoteBuilder = new AnkiNoteBuilder(TranslationsProviderMock.Object);
 
             LLNItemsBuilder = new LLNItemsBuilder();
+            ConnectNoteBuilder = new ConnectNoteBuilder();
+            ConnectNotePoster = new ConnectNotePoster();
 
             Processor = new Processor(
-                DataProvider, 
-                LLNItemsBuilder, 
-                WordItemBuilder, 
-                AnkiNoteBuilder, 
+                DataProvider,
+                LLNItemsBuilder,
+                WordItemBuilder,
+                AnkiNoteBuilder,
                 AnkiNoteExporter,
-                new ConnectNoteBuilder(),
-                new ConnectNotePoster()
+                ConnectNoteBuilder,
+                ConnectNotePoster
                 );
         }
-
-
-        protected string GetPathInData(string fileNameWithExtension)
-        {
-            return Path.Combine(DataDirectory, fileNameWithExtension);
-        }
-
-        protected string GetPathInTmp(string fileNameWithExtension)
-        {
-            return Path.Combine(TmpDirectory, fileNameWithExtension);
-        }
-
-
-        public string TmpDirectory => Path.Combine(DataDirectory, "tmp");
-
-        public string DataDirectory
-        {
-            get
-            {
-                var current = Directory.GetCurrentDirectory();
-
-                string parent = current;
-                parent = Directory.GetParent(parent).FullName;
-                parent = Directory.GetParent(parent).FullName;
-                parent = Directory.GetParent(parent).FullName;
-
-                return Path.Combine(parent, "Data");
-            }
-        }
-
-        public void ClearTmp()
-        {
-            var files = Directory.GetFiles(TmpDirectory);
-
-            foreach (var f in files)
-            {
-                File.Delete(f);
-            }
-        }
+        
     }
 }
