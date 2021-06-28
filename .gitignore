@@ -20,3 +20,5 @@ LLNToAnki/obj
 /ZXTests/Data/tmp/TwoWords_backbench_disregard_ExpectedNote.txt
 /ZXTests/Data/tmp/brood.html
 /ZXTests/tmp.html
+/FE/LLNToAnki.WPF/obj/Debug/
+/FE/LLNToAnki.WPF/bin/Debug/

@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BE", "BE", "{CF242E95-6430-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FE", "FE", "{43A71227-859A-4753-BF32-7516D6F664DD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LLNToAnki.WPF", "FE\LLNToAnki.WPF\LLNToAnki.WPF.csproj", "{02678C07-C40B-4EA9-B7AC-3B9BE7C5212E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,12 +27,17 @@ Global
 		{084A000A-F469-4843-8A2C-52EA42CC6F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{084A000A-F469-4843-8A2C-52EA42CC6F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{084A000A-F469-4843-8A2C-52EA42CC6F74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02678C07-C40B-4EA9-B7AC-3B9BE7C5212E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02678C07-C40B-4EA9-B7AC-3B9BE7C5212E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02678C07-C40B-4EA9-B7AC-3B9BE7C5212E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02678C07-C40B-4EA9-B7AC-3B9BE7C5212E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{757EDC4D-D087-4F19-A445-00810692BABD} = {CF242E95-6430-4579-8A5D-DF9E3CE11F1D}
+		{02678C07-C40B-4EA9-B7AC-3B9BE7C5212E} = {43A71227-859A-4753-BF32-7516D6F664DD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00B3E963-0BEE-4969-A1B3-04E4FA6BFBE2}
