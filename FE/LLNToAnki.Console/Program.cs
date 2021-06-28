@@ -1,13 +1,13 @@
 ﻿using LLNToAnki.BE;
 using LLNToAnki.Domain;
-using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.HTMLScrapping;
 using LLNToAnki.Infrastructure.ReadingWriting;
 using LLNToAnki.Infrastructure.URLBuilding;
+using System;
 using System.IO;
 
-namespace LLNToAnki.FE
+namespace LLNToAnki.Console
 {
     class Program
     {
@@ -38,7 +38,7 @@ namespace LLNToAnki.FE
 
             var dataPath = Path.Combine(dataFolder, dataFileName);
             var count = processor.PushToAnkiThroughAPI(dataPath, total);
-            
+
             EndProcessWithMessage(total, count);
         }
 
@@ -73,4 +73,5 @@ namespace LLNToAnki.FE
             return Language.English;
         }
     }
+
 }

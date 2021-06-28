@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\LLNToAnki\LLNToAnki.Business.csproj" />
+    <ProjectReference Include="..\..\BE\LLNToAnki.Infrastructure\LLNToAnki.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

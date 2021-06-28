@@ -44,6 +44,19 @@
         "runtime": {
           "bin/placeholder/LLNToAnki.Domain.dll": {}
         }
+      },
+      "LLNToAnki.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "LLNToAnki.Business": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/LLNToAnki.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LLNToAnki.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -134,13 +147,18 @@
     },
     "LLNToAnki.Domain/1.0.0": {
       "type": "project",
-      "path": "../LLNToAnki.Domain/LLNToAnki.Domain.csproj",
-      "msbuildProject": "../LLNToAnki.Domain/LLNToAnki.Domain.csproj"
+      "path": "../../BE/LLNToAnki.Domain/LLNToAnki.Domain.csproj",
+      "msbuildProject": "../../BE/LLNToAnki.Domain/LLNToAnki.Domain.csproj"
+    },
+    "LLNToAnki.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../../BE/LLNToAnki.Infrastructure/LLNToAnki.Infrastructure.csproj",
+      "msbuildProject": "../../BE/LLNToAnki.Infrastructure/LLNToAnki.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "LLNToAnki.Business >= 1.0.0"
+      "LLNToAnki.Infrastructure >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -149,11 +167,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\BE\\LLNToAnki.Infrastructure\\LLNToAnki.Infrastructure.csproj",
-      "projectName": "LLNToAnki.Infrastructure",
-      "projectPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\BE\\LLNToAnki.Infrastructure\\LLNToAnki.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\FE\\LLNToAnki.Console\\LLNToAnki.Console.csproj",
+      "projectName": "LLNToAnki.Console",
+      "projectPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\FE\\LLNToAnki.Console\\LLNToAnki.Console.csproj",
       "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\BE\\LLNToAnki.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\FE\\LLNToAnki.Console\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -169,8 +187,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\LLNToAnki\\LLNToAnki.Business.csproj": {
-              "projectPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\LLNToAnki\\LLNToAnki.Business.csproj"
+            "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\BE\\LLNToAnki.Infrastructure\\LLNToAnki.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\BE\\LLNToAnki.Infrastructure\\LLNToAnki.Infrastructure.csproj"
             }
           }
         }

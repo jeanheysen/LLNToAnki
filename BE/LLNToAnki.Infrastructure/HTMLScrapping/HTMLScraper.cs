@@ -3,7 +3,7 @@ using LLNToAnki.BE.Ports;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LLNToAnki.Infrastructure
+namespace LLNToAnki.Infrastructure.HTMLScrapping
 {
     public class HTMLScraper : IDataScraper
     {
