@@ -1,5 +1,5 @@
 ﻿using LLNToAnki.BE;
-using LLNToAnki.BE.Enums;
+using LLNToAnki.Domain;
 using LLNToAnki.Infrastructure;
 using LLNToAnki.Infrastructure.AnkiConnecting;
 using LLNToAnki.Infrastructure.HTMLScrapping;

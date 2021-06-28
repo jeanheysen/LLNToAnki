@@ -1,4 +1,4 @@
-﻿using LLNToAnki.BE.Enums;
+﻿using LLNToAnki.Domain;
 
 namespace LLNToAnki.Infrastructure.URLBuilding
 {

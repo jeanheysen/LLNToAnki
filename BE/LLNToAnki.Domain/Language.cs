@@ -1,4 +1,4 @@
-﻿namespace LLNToAnki.BE.Enums
+﻿namespace LLNToAnki.Domain
 {
     public enum Language
     {
