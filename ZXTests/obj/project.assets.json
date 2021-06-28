@@ -4540,11 +4540,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\ZXTests\\ZXTests.csproj",
+      "projectUniqueName": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\ZXTests\\ZXTests.csproj",
       "projectName": "ZXTests",
-      "projectPath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\ZXTests\\ZXTests.csproj",
+      "projectPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\ZXTests\\ZXTests.csproj",
       "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\ZXTests\\obj\\",
+      "outputPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\ZXTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4560,8 +4560,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\felix\\source\\repos\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj": {
-              "projectPath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj"
+            "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj": {
+              "projectPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj"
             }
           }
         }

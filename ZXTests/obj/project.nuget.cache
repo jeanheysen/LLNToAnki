@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NWoeSA7eNIXziQEQlLfmop4lUoHfwCmJw8fSkPuphYzH0qlYWvSxea978hYyCaU2Yj3xWCcLC+n4kndU/PoU1g==",
+  "dgSpecHash": "IAN+1v4qXxiygZyBLfS3frPk3g7dbBidJ1sU9QgvCY9v+YHPSPRXeZWbS/tWoJYptf0qoZrrTVOq5UsyIcLuig==",
   "success": true,
-  "projectFilePath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\ZXTests\\ZXTests.csproj",
+  "projectFilePath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\ZXTests\\ZXTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\felix\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\htmlagilitypack\\1.11.30\\htmlagilitypack.1.11.30.nupkg.sha512",

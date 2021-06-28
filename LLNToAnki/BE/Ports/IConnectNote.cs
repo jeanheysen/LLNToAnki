@@ -12,7 +12,7 @@ namespace LLNToAnki.BE.Ports
 
     public interface IConnectNotePoster
     {
-        Task<bool> Post(IConnectNote connectNote);
+        Task<string> Post(IConnectNote connectNote);
     }
 
     public interface IConnectNote

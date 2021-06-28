@@ -115,11 +115,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj",
+      "projectUniqueName": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj",
       "projectName": "LLNToAnki",
-      "projectPath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj",
+      "projectPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\LLNToAnki\\LLNToAnki.csproj",
       "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\felix\\source\\repos\\LLNToAnki\\LLNToAnki\\obj\\",
+      "outputPath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\LLNToAnki\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",

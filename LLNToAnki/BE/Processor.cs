@@ -1,4 +1,5 @@
 ﻿using LLNToAnki.BE.Ports;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -57,11 +58,19 @@ namespace LLNToAnki.BE
 
             foreach (var item in llnItems)
             {
-                var wordItem = wordItemBuilder.Build(item);
+                try
+                {
+                    var wordItem = wordItemBuilder.Build(item);
 
-                var ankiNote = ankiNoteBuilder.Build(wordItem);
+                    var ankiNote = ankiNoteBuilder.Build(wordItem);
 
-                notes.Add(ankiNote);
+                    notes.Add(ankiNote);
+                }
+                finally
+                {
+
+                }
+               
             }
 
             return notes;
@@ -69,8 +78,6 @@ namespace LLNToAnki.BE
 
         public int PushToAnkiThroughAPI(string filePath, int nbOfItemsToParse)
         {
-            var notes = new List<IAnkiNote>();
-
             var data = dataProvider.GetAllText(filePath);
 
             var llnItems = lLNItemsBuilder.Build(data);
@@ -80,20 +87,27 @@ namespace LLNToAnki.BE
 
             foreach (var item in llnItems)
             {
-                var wordItem = wordItemBuilder.Build(item);
+                try
+                {
+                    var wordItem = wordItemBuilder.Build(item);
 
-                var ankiNote = ankiNoteBuilder.Build(wordItem);
+                    var ankiNote = ankiNoteBuilder.Build(wordItem);
 
-                var connectNote = connectNoteBuilder.Build(ankiNote);
+                    var connectNote = connectNoteBuilder.Build(ankiNote);
 
-                connectNotePoster.Post(connectNote).Wait();
+                    var body = connectNotePoster.Post(connectNote).Result;
 
-                System.Console.WriteLine($"{++i} added out of {totalCount}. (word : {wordItem.Word}");
+                    System.Console.WriteLine($"{++i} / {totalCount}. Word : {wordItem.Word}. ({body})");
 
-                if (i == nbOfItemsToParse) break;
+                    if (i == nbOfItemsToParse) break;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
-            return notes.Count;
+            return llnItems.Count;
         }
     }
 }

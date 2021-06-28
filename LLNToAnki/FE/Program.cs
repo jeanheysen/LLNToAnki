@@ -44,6 +44,9 @@ namespace LLNToAnki.FE
 
         private static void EndProcessWithMessage(int total, int count)
         {
+            System.Console.WriteLine();
+            System.Console.WriteLine();
+            System.Console.WriteLine();
             var totalToDisplay = total != 0 ? total : count;
             System.Console.WriteLine($"{totalToDisplay } items were directly added to Anki through API.");
 

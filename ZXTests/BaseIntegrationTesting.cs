@@ -61,17 +61,35 @@ namespace ZXTests
 
         protected string GetPathInData(string fileNameWithExtension)
         {
-            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\{fileNameWithExtension}";
+            return Path.Combine(DataDirectory, fileNameWithExtension);
         }
 
         protected string GetPathInTmp(string fileNameWithExtension)
         {
-            return @$"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp\{fileNameWithExtension}";
+            return Path.Combine(TmpDirectory, fileNameWithExtension);
+        }
+
+
+        public string TmpDirectory => Path.Combine(DataDirectory, "tmp");
+
+        public string DataDirectory
+        {
+            get
+            {
+                var current = Directory.GetCurrentDirectory();
+
+                string parent = current;
+                parent = Directory.GetParent(parent).FullName;
+                parent = Directory.GetParent(parent).FullName;
+                parent = Directory.GetParent(parent).FullName;
+
+                return Path.Combine(parent, "Data");
+            }
         }
 
         public void ClearTmp()
         {
-            var files = Directory.GetFiles(@"C:\Users\felix\source\repos\LLNToAnki\ZXTests\Data\tmp");
+            var files = Directory.GetFiles(TmpDirectory);
 
             foreach (var f in files)
             {

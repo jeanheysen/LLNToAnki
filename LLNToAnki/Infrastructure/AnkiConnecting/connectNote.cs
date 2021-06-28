@@ -43,7 +43,7 @@ namespace LLNToAnki.Infrastructure.AnkiConnecting
         {
             fields = new fields();
             options = new options();
-            options.allowDuplicate = false;
+            options.allowDuplicate = true;
             options.duplicateScope = "deck";
             options.duplicateScopeOptions = new duplicateScopeOptions();
             options.duplicateScopeOptions.deckName = "All";

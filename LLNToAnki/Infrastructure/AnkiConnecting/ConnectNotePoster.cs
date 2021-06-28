@@ -17,7 +17,7 @@ namespace LLNToAnki.Infrastructure.AnkiConnecting
             client.BaseAddress = new Uri("http://localhost:8765/");
         }
 
-        public async Task<bool> Post(IConnectNote connectNote)
+        public async Task<string> Post(IConnectNote connectNote)
         {
             var json = JsonConvert.SerializeObject(connectNote);
 
@@ -25,7 +25,9 @@ namespace LLNToAnki.Infrastructure.AnkiConnecting
 
             HttpResponseMessage response = await client.PostAsync("", data);
 
-            return response.StatusCode == System.Net.HttpStatusCode.OK;
+            var body = await response.Content.ReadAsStringAsync();
+
+            return body;
         }
     }
 }

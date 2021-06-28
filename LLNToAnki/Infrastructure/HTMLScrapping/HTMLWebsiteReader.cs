@@ -17,8 +17,17 @@ namespace LLNToAnki.Infrastructure
         public HtmlNode GetHTML(string path)
         {
             var web = new HtmlWeb();
+            HtmlNode node;
+            try
+            {
+                node = web.Load(path).DocumentNode;
+            }
+            catch (Exception)
+            {
+                throw new Exception($"Failed while downloading translation from {path}");
+            }
 
-            return web.Load(path).DocumentNode;
+            return node;
         }
 
         [Obsolete("use with caution, crashes on WR for unknown reasons.")]
