@@ -1,4 +1,5 @@
 ﻿using LLNToAnki.BE;
+using LLNToAnki.Domain;
 using LLNToAnki.Infrastructure.AnkiConnecting;
 using Moq;
 using Newtonsoft.Json;

@@ -1,5 +1,6 @@
 ﻿using LLNToAnki.BE;
 using LLNToAnki.BE.Ports;
+using LLNToAnki.Domain;
 using System.Collections.Generic;
 
 namespace LLNToAnki.Infrastructure.AnkiConnecting
