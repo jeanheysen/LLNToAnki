@@ -6,14 +6,24 @@
         margin: 0;
     }
 
-    
+    .card {
+        background: rgb(255,243,248);
+        background: linear-gradient(76deg, rgba(255,243,248,1) 0%, rgba(238,246,255,1) 100%);
+    }
 
-    .dc-card {
+    .nightMode.card {
+        background: black;
+    }
+    
+    .dc-card {
         padding-bottom: 1rem;
         border-bottom: 0.5px solid grey;
     }
 
-    
+    .nightMode .dc-card {
+        background: #333;
+        border-bottom: none;
+    }
 
     .nightMode .cloze {
         color: #1569C7;
@@ -93,14 +103,24 @@
         margin: 0;
     }
 
-    
+    .card {
+        background: rgb(255,243,248);
+        background: linear-gradient(76deg, rgba(255,243,248,1) 0%, rgba(238,246,255,1) 100%);
+    }
 
-    .dc-card {
+    .nightMode.card {
+        background: black;
+    }
+    
+    .dc-card {
         padding-bottom: 1rem;
         border-bottom: 0.5px solid grey;
     }
 
-    
+    .nightMode .dc-card {
+        background: #333;
+        border-bottom: none;
+    }
 
     .nightMode .cloze {
         color: #1569C7;

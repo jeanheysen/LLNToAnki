@@ -62,7 +62,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T004_ExtractHTMLWithAgilityPackWordReferenceBreadReturns174koFile()
+        public void T004_ExtractHTMLWithAgilityPackWordReferenceBreadReturnsAbout200koFile()
         {
             //Arrange
             var remoteFilename = @"https://www.wordreference.com/enfr/bread";
@@ -71,8 +71,8 @@ namespace ZXTests
             var r = htmlreader.GetHTML(remoteFilename);
 
             //Assert
-            Assert.Greater(r.InnerLength, 174000);
-            Assert.Less(r.InnerLength, 180000);
+            Assert.Greater(r.InnerLength, 170000);
+            Assert.Less(r.InnerLength, 200000);
         }
 
         [Test]

@@ -27,7 +27,7 @@ namespace ZXTests
             string text = new FileReader().GetAllText(GetPathInData("SingleWord_squeeze.csv"));
 
             //Assert
-            Assert.AreEqual("\"<style>\n\n    html,\n    body {", text.Substring(0, 30));
+            Assert.AreEqual("\"<style>", text.Substring(0, 8));
         }
 
         [Test]
@@ -171,20 +171,6 @@ namespace ZXTests
         }
 
         [Test]
-        public void T014_LLNItemsStartWithHTMLStyleBalise()
-        {
-            //Arrange
-            string text = DataProvider.GetAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
-
-            //Act
-            var llnItems = LLNItemsBuilder.Build(text);
-
-            //Assert
-            Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[0].HtmlContent.Substring(0, 51));
-            Assert.AreEqual("\"<style>\n\n    html,\n    body {\n        padding: 0;\n", llnItems[1].HtmlContent.Substring(0, 51));
-        }
-
-        [Test]
         public void T015_NoteBuildsSourceWithWordReference()
         {
             //Arrange
@@ -226,20 +212,6 @@ namespace ZXTests
 
             //Assert
             Assert.AreEqual("Traduction Netflix : \"c'est la traduction\".", note.After);
-        }
-
-        [Test]
-        public void T018_ReadResources()
-        {
-            //Arrange
-            var reader = new LocalResourceReader();
-            
-            //Act
-            var r = reader.Read("wmb_to_replace.json");
-
-            //Assert
-            Assert.AreEqual("color:navy", r.First().Key);
-            Assert.AreEqual("color:aqua", r.First().Value);
         }
     }
 }
