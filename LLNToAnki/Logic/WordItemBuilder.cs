@@ -5,7 +5,7 @@ namespace LLNToAnki.Business.Logic
 {
     public interface IWordItemBuilder
     {
-        IWordItem Build(ILLNItem llnItem);
+        WordItem Build(LLNItem llnItem);
     }
 
     public class WordItemBuilder : IWordItemBuilder
@@ -21,7 +21,7 @@ namespace LLNToAnki.Business.Logic
 
 
         //METHODS
-        public IWordItem Build(ILLNItem llnItem)
+        public WordItem Build(LLNItem llnItem)
         {
             var html = llnItem.HtmlContent;
 

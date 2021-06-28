@@ -1,15 +1,6 @@
 ﻿namespace LLNToAnki.Domain
 {
-    public interface IWordItem//todo virer l'abstraction
-    {
-        string EpisodTitle { get; set; }
-        string ContextWithWordColored { get; set; }
-        string Translation { get; set; }
-        string Word { get; set; }
-        string Audio { get; set; }
-    }
-
-    public class WordItem : IWordItem
+    public class WordItem
     {
         public string Word { get; set; }
 

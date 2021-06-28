@@ -6,7 +6,7 @@ namespace LLNToAnki.Business.Logic
 {
     public interface IAnkiNoteBuilder
     {
-        AnkiNote Build(IWordItem item);
+        AnkiNote Build(WordItem item);
     }
 
     public class AnkiNoteBuilder : IAnkiNoteBuilder
@@ -18,7 +18,7 @@ namespace LLNToAnki.Business.Logic
             this.translationsProvider = translationsProvider;
         }
 
-        public AnkiNote Build(IWordItem item)
+        public AnkiNote Build(WordItem item)
         {
             var note = new AnkiNote();
 

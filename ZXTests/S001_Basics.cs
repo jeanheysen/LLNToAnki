@@ -114,9 +114,9 @@ namespace ZXTests
         {
             //Arrange
             var ankiNote = new AnkiNote();
-            ankiNote.Question="q";
-            ankiNote.Answer="a";
-            ankiNote.Audio="ad";
+            ankiNote.Question = "q";
+            ankiNote.Answer = "a";
+            ankiNote.Audio = "ad";
             var fileWriterMock = new Mock<IDataWriter>() { DefaultValue = DefaultValue.Mock };
 
             //Act
@@ -175,11 +175,10 @@ namespace ZXTests
         public void T015_NoteBuildsSourceWithWordReference()
         {
             //Arrange
-            var item = new Mock<IWordItem>() { DefaultValue = DefaultValue.Mock };
-            item.SetupGet(n => n.Word).Returns("bread");
+            var item = new WordItem { Word = "bread" };
 
             //Act
-            var note = AnkiNoteBuilder.Build(item.Object);
+            var note = AnkiNoteBuilder.Build(item);
 
             //Assert
             Assert.AreEqual($"<a href=\"https://www.wordreference.com/enfr/bread\">https://www.wordreference.com/enfr/bread</a>", note.Source);
@@ -189,13 +188,13 @@ namespace ZXTests
         public void T016_ExportedNoteContainsTheSource()
         {
             //Arrange
-            var note = new Mock<AnkiNote>() { DefaultValue = DefaultValue.Mock };
-            note.SetupGet(n => n.Question).Returns("");
-            note.SetupGet(n => n.Source).Returns("https://www.wordreference.com/enfr/pig");
+            var note = new AnkiNote();
+            note.Question = "";
+            note.Source = "https://www.wordreference.com/enfr/pig";
             var exporter = new AnkiNoteExporter(dataWriterMock.Object);
 
             //Act
-            exporter.Export("", new List<AnkiNote>() { note.Object });
+            exporter.Export("", new List<AnkiNote>() { note });
 
             //Assert
             dataWriterMock.Verify(dw => dw.Write(It.IsAny<string>(), It.Is<string>(c => c.Contains("https://www.wordreference.com/enfr/pig"))));
@@ -205,11 +204,10 @@ namespace ZXTests
         public void T017_NoteBuildsAfterWithTranslation()
         {
             //Arrange
-            var item = new Mock<IWordItem>() { DefaultValue = DefaultValue.Mock };
-            item.SetupGet(n => n.Translation).Returns("c'est la traduction");
+            var item = new WordItem { Translation = "c'est la traduction" };
 
             //Act
-            var note = AnkiNoteBuilder.Build(item.Object);
+            var note = AnkiNoteBuilder.Build(item);
 
             //Assert
             Assert.AreEqual("Traduction Netflix : \"c'est la traduction\".", note.After);

@@ -6,7 +6,7 @@ namespace LLNToAnki.Business.Logic
 {
     public interface ILLNItemsBuilder
     {
-        IReadOnlyList<ILLNItem> Build(string rawLlnOutput);
+        IReadOnlyList<LLNItem> Build(string rawLlnOutput);
     }
 
     public class LLNItemsBuilder : ILLNItemsBuilder
@@ -15,13 +15,13 @@ namespace LLNToAnki.Business.Logic
         {
         }
 
-        public IReadOnlyList<ILLNItem> Build(string rawLlnOutput)
+        public IReadOnlyList<LLNItem> Build(string rawLlnOutput)
         {
             var separator = "\"<style>";
 
             var all = rawLlnOutput.Split(separator).ToList();
 
-            var r = new List<ILLNItem>();
+            var r = new List<LLNItem>();
             int counter = 0;
 
             foreach (var item in all)
