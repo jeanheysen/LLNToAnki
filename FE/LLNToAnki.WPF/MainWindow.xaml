@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LLNToAnki.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow"
+        Height="450"
+        Width="800">
+   <Grid x:Name="MainGrid">
+      <Grid.RowDefinitions>
+         <RowDefinition Height="50" />
+         <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Button Content="Import"
+              Grid.Row="0"
+              HorizontalAlignment="Center"
+              Margin="0,10,0,0"
+              VerticalAlignment="Top"
+              Height="30"
+              Width="104" />
+      <ListView x:Name="TargetSequenceListView"
+                Grid.Row="1">
+         <ListView.View>
+            <GridView>
+               <GridViewColumn />
+            </GridView>
+         </ListView.View>
+      </ListView>
 
-    </Grid>
+   </Grid>
 </Window>

@@ -2,7 +2,7 @@
 
 namespace LLNToAnki.Facade.Dto
 {
-    class TargetSequenceDto
+    public class TargetSequenceDto
     {
         public string Sequence { get; set; }
 

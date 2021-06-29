@@ -11,7 +11,7 @@ namespace LLNToAnki.WPF.ViewModels
     {
         private readonly IFlowController flowController;
 
-        public ObservableCollection<FlowDto> Flows { get; set; }
+        public FlowDto CurrentFlow { get; set; }
 
         public FlowPageVM(IFlowController flowController)
         {

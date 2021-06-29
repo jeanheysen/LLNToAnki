@@ -5,8 +5,10 @@ namespace LLNToAnki.Facade.Dto
 {
     public class FlowDto
     {
-        Guid Id;
+        public Guid Id { get; set; }
 
-        List<TargetSequenceDto> TargetSequences;
+        public string Name { get; set; }
+
+        public List<TargetSequenceDto> TargetSequences { get; set; }
     }
 }
