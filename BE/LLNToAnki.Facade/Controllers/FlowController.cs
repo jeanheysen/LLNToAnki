@@ -8,7 +8,7 @@ namespace LLNToAnki.Facade.Controllers
 {
     public interface IFlowController
     {
-        void Create(string path);
+        Guid Create(string path);
         FlowDto Get(Guid flowId);
     }
 
@@ -33,9 +33,9 @@ namespace LLNToAnki.Facade.Controllers
             return mapper.Map<FlowDto>(flow);
         }
 
-        public void Create(string path)
+        public Guid Create(string path)
         {
-
+            return flowBL.Create(path);
         }
     }
 }

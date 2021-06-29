@@ -110,13 +110,27 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "AutoMapper": "10.1.1",
-          "LLNToAnki.Business": "1.0.0"
+          "LLNToAnki.Business": "1.0.0",
+          "LLNToAnki.Infrastructure": "1.0.0"
         },
         "compile": {
           "bin/placeholder/LLNToAnki.Facade.dll": {}
         },
         "runtime": {
           "bin/placeholder/LLNToAnki.Facade.dll": {}
+        }
+      },
+      "LLNToAnki.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "LLNToAnki.Business": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/LLNToAnki.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LLNToAnki.Infrastructure.dll": {}
         }
       }
     }
@@ -440,6 +454,11 @@
       "type": "project",
       "path": "../../BE/LLNToAnki.Facade/LLNToAnki.Facade.csproj",
       "msbuildProject": "../../BE/LLNToAnki.Facade/LLNToAnki.Facade.csproj"
+    },
+    "LLNToAnki.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../../BE/LLNToAnki.Infrastructure/LLNToAnki.Infrastructure.csproj",
+      "msbuildProject": "../../BE/LLNToAnki.Infrastructure/LLNToAnki.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {

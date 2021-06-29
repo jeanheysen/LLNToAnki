@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\LLNToAnki\LLNToAnki.Business.csproj" />
+    <ProjectReference Include="..\LLNToAnki.Infrastructure\LLNToAnki.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

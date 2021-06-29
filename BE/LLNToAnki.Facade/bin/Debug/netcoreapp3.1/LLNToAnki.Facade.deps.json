@@ -9,7 +9,8 @@
       "LLNToAnki.Facade/1.0.0": {
         "dependencies": {
           "AutoMapper": "10.1.1",
-          "LLNToAnki.Business": "1.0.0"
+          "LLNToAnki.Business": "1.0.0",
+          "LLNToAnki.Infrastructure": "1.0.0"
         },
         "runtime": {
           "LLNToAnki.Facade.dll": {}
@@ -77,6 +78,14 @@
         "runtime": {
           "LLNToAnki.Domain.dll": {}
         }
+      },
+      "LLNToAnki.Infrastructure/1.0.0": {
+        "dependencies": {
+          "LLNToAnki.Business": "1.0.0"
+        },
+        "runtime": {
+          "LLNToAnki.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -141,6 +150,11 @@
       "sha512": ""
     },
     "LLNToAnki.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LLNToAnki.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

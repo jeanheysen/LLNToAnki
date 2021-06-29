@@ -9,6 +9,7 @@ namespace LLNToAnki.Business.Logic
         IReadOnlyList<Snapshot> Create(string rawLlnOutput);
     }
 
+    [System.ComponentModel.Composition.Export(typeof(ISnapshotBL)), System.Composition.Shared]
     public class SnapshotBL : ISnapshotBL
     {
         public SnapshotBL()

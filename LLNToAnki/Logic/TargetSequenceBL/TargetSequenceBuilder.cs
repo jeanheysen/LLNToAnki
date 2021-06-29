@@ -8,12 +8,14 @@ namespace LLNToAnki.Business.Logic
         TargetSequence Build(Snapshot llnItem);
     }
 
+    [System.ComponentModel.Composition.Export(typeof(ITargetSequenceBuilder)), System.Composition.Shared]
     public class TargetSequenceBuilder : ITargetSequenceBuilder
     {
         //FIELDS
         private readonly IDataScraper htmlScraper;
 
         //CONSTRUCTOR
+        [System.ComponentModel.Composition.ImportingConstructor]
         public TargetSequenceBuilder(IDataScraper htmlScraper)
         {
             this.htmlScraper = htmlScraper;

@@ -54,17 +54,9 @@ namespace LLNToAnki.WPF.ViewModels
         {
             var path = Path.Combine(@"C:\Tmp\", s);
 
-            facadeClient.Flow_Create(path);
+            var id = facadeClient.Flow_Create(path);
 
-            var f = new FlowModel
-            {
-                TargetSequences = new ObservableCollection<TargetSequenceDto>()
-            {
-                new TargetSequenceDto() { Sequence = "blabla" }
-            }
-            };
-
-            CurrentFlow = f;
+            CurrentFlow = facadeClient.Flow_Get(id);
         }
     }
 }

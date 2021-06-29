@@ -10,7 +10,7 @@ namespace LLNToAnki.WPF.Client
 {
     public interface IFacadeClient
     {
-        void Flow_Create(string path);
+        Guid Flow_Create(string path);
         FlowModel Flow_Get(Guid id);
     }
 
@@ -36,9 +36,9 @@ namespace LLNToAnki.WPF.Client
             return mapper.Map<FlowModel>(f);
         }
 
-        public void Flow_Create(string path)
+        public Guid Flow_Create(string path)
         {
-            flowController.Create(path);
+            return flowController.Create(path);
         }
     }
 }

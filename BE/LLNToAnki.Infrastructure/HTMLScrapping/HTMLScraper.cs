@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace LLNToAnki.Infrastructure.HTMLScrapping
 {
+    [System.ComponentModel.Composition.Export(typeof(IDataScraper)), System.Composition.Shared]
     public class HTMLScraper : IDataScraper
     {
         public HtmlNode GetNodeByNameAndAttribute(HtmlNode htmlNode, string name, string attribute, string value)
