@@ -1,5 +1,6 @@
 ﻿using LLNToAnki.Facade.Controllers;
 using LLNToAnki.Facade.Dto;
+using LLNToAnki.WPF.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace LLNToAnki.WPF.ViewModels
     {
         private readonly IFlowController flowController;
 
-        public FlowDto CurrentFlow { get; set; }
+        public FlowModel CurrentFlow { get; set; }
 
         public FlowPageVM(IFlowController flowController)
         {
