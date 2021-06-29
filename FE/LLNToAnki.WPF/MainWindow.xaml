@@ -25,7 +25,7 @@
       
       <ListView x:Name="TargetSequenceListView"
                 Grid.Row="1"
-                ItemsSource="{Binding CurrentSequences, Mode=TwoWay}">
+                ItemsSource="{Binding CurrentFlow.TargetSequences, Mode=OneWay}">
          <ListView.View>
             <GridView>
                <GridView.Columns>

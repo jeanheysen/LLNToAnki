@@ -6,21 +6,39 @@ using Prism.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
 
 namespace LLNToAnki.WPF.ViewModels
 {
-    public class FlowPageVM
+    public class FlowPageVM : INotifyPropertyChanged
     {
         //services
         private readonly IFacadeClient facadeClient;
 
-        //ui bindings
-        public FlowModel CurrentFlow { get; set; }
-        public ObservableCollection<TargetSequenceDto> CurrentSequences { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
+        //ui bindings
+        private FlowModel currentFlow;
+        public FlowModel CurrentFlow
+        {
+            get
+            {
+                return currentFlow;
+            }
+            set
+            {
+                currentFlow = value;
+                OnPropertyChanged("CurrentFlow");
+            }
+        }
 
         //commands
         public ICommand AddFlowCommand { get; set; }
@@ -38,13 +56,15 @@ namespace LLNToAnki.WPF.ViewModels
 
             facadeClient.Flow_Create(path);
 
-            CurrentFlow = new FlowModel();
-
-            CurrentFlow.TargetSequences = new ObservableCollection<TargetSequenceDto>()
+            var f = new FlowModel
+            {
+                TargetSequences = new ObservableCollection<TargetSequenceDto>()
             {
                 new TargetSequenceDto() { Sequence = "blabla" }
+            }
             };
-            CurrentSequences = CurrentFlow.TargetSequences;
+
+            CurrentFlow = f;
         }
     }
 }
