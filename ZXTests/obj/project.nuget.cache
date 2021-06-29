@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JIR7kBLVyUbulAF9DX6R7/ape3JB4VMgxgxmRfN70kHU+9MZaqzXhokRvn6j5D1jzxwfCOtKptB0jP1xZaaZIA==",
+  "dgSpecHash": "h9aUEEVHDP4XUROeCYhZgLV0g95dEzVYKz6ByKn7H7ub+JPj4JtfWKpQ4zMuHm81AEYVXqMVE0U7Qus+upysdA==",
   "success": true,
   "projectFilePath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\ZXTests\\ZXTests.csproj",
   "expectedPackageFiles": [
@@ -27,9 +27,11 @@
     "C:\\Users\\felix\\.nuget\\packages\\system.collections.nongeneric\\4.3.0\\system.collections.nongeneric.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.collections.specialized\\4.3.0\\system.collections.specialized.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.componentmodel\\4.3.0\\system.componentmodel.4.3.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\system.componentmodel.composition\\5.0.0\\system.componentmodel.composition.5.0.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.componentmodel.eventbasedasync\\4.3.0\\system.componentmodel.eventbasedasync.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.componentmodel.primitives\\4.3.0\\system.componentmodel.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.componentmodel.typeconverter\\4.3.0\\system.componentmodel.typeconverter.4.3.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\system.composition.attributedmodel\\5.0.1\\system.composition.attributedmodel.5.0.1.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.diagnostics.process\\4.3.0\\system.diagnostics.process.4.3.0.nupkg.sha512",
     "C:\\Users\\felix\\.nuget\\packages\\system.diagnostics.tracesource\\4.3.0\\system.diagnostics.tracesource.4.3.0.nupkg.sha512",

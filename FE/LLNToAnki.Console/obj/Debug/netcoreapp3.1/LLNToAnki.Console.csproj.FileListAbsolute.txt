@@ -20,3 +20,5 @@ C:\Users\felix\source\repos\MyProjects\LLNToAnki\FE\LLNToAnki.Console\obj\Debug\
 C:\Users\felix\source\repos\MyProjects\LLNToAnki\FE\LLNToAnki.Console\obj\Debug\netcoreapp3.1\LLNToAnki.Console.dll
 C:\Users\felix\source\repos\MyProjects\LLNToAnki\FE\LLNToAnki.Console\obj\Debug\netcoreapp3.1\LLNToAnki.Console.pdb
 C:\Users\felix\source\repos\MyProjects\LLNToAnki\FE\LLNToAnki.Console\obj\Debug\netcoreapp3.1\LLNToAnki.Console.genruntimeconfig.cache
+C:\Users\felix\source\repos\MyProjects\LLNToAnki\FE\LLNToAnki.Console\bin\Debug\netcoreapp3.1\System.ComponentModel.Composition.dll
+C:\Users\felix\source\repos\MyProjects\LLNToAnki\FE\LLNToAnki.Console\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll

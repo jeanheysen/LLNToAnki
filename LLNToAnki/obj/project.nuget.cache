@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "/IORvE9F4IGLgMg76veGBIAhbni/y4HNaWHDrEMVwNp+ETPe4o6QUBtH5+TRja+74D4AYuWbXSE3dgtwfGr/yw==",
+  "dgSpecHash": "hZfRbbWzEQa3S3ZP58MEjCPVfFm0kOIaahMvS8EAJZOn+Xhu03yGlWWxHnD5yZXYqA5W+ezn0u7hyMApm/y7Ng==",
   "success": true,
   "projectFilePath": "C:\\Users\\felix\\source\\repos\\MyProjects\\LLNToAnki\\LLNToAnki\\LLNToAnki.Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\felix\\.nuget\\packages\\htmlagilitypack\\1.11.30\\htmlagilitypack.1.11.30.nupkg.sha512",
-    "C:\\Users\\felix\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\felix\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\system.componentmodel.composition\\5.0.0\\system.componentmodel.composition.5.0.0.nupkg.sha512",
+    "C:\\Users\\felix\\.nuget\\packages\\system.composition.attributedmodel\\5.0.1\\system.composition.attributedmodel.5.0.1.nupkg.sha512"
   ],
   "logs": []
 }
