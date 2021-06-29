@@ -1,4 +1,5 @@
-﻿using LLNToAnki.WPF.Client;
+﻿using LLNToAnki.Facade.Controllers;
+using LLNToAnki.WPF.Client;
 using LLNToAnki.WPF.ViewModels;
 using System.Windows;
 
@@ -12,7 +13,7 @@ namespace LLNToAnki.WPF
         {
             InitializeComponent();
 
-            DataContext = new FlowPageVM(new FacadeClient(null));
+            DataContext = new FlowPageVM(new FacadeClient(new FlowController()));
         }
 
     }

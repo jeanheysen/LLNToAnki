@@ -15,7 +15,7 @@ namespace LLNToAnki.Business
             {
                 if (container == null)
                 {
-                    var catalog = new DirectoryCatalog(".", "LLNToAnki.*");
+                    var catalog = new DirectoryCatalog(".", "LLNToAnki.*.dll");
 
                     container = new CompositionContainer(catalog);
                 }

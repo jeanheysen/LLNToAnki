@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LLNToAnki.Business;
 using LLNToAnki.Business.Logic;
 using LLNToAnki.Facade.Dto;
 using System;
@@ -16,9 +17,9 @@ namespace LLNToAnki.Facade.Controllers
         private readonly IFlowBL flowBL;
         private IMapper mapper;
 
-        public FlowController(IFlowBL flowBL)
+        public FlowController()
         {
-            this.flowBL = flowBL;
+            flowBL = Mef.Container.GetExportedValue<IFlowBL>();
 
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(typeof(MappingProfile)));
 
