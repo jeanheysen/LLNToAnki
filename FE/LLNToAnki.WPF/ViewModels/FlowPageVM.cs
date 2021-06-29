@@ -19,6 +19,8 @@ namespace LLNToAnki.WPF.ViewModels
 
         //ui bindings
         public FlowModel CurrentFlow { get; set; }
+        public ObservableCollection<TargetSequenceDto> CurrentSequences { get; set; }
+
 
         //commands
         public ICommand AddFlowCommand { get; set; }
@@ -35,6 +37,14 @@ namespace LLNToAnki.WPF.ViewModels
             var path = Path.Combine(@"C:\Tmp\", s);
 
             facadeClient.Flow_Create(path);
+
+            CurrentFlow = new FlowModel();
+
+            CurrentFlow.TargetSequences = new ObservableCollection<TargetSequenceDto>()
+            {
+                new TargetSequenceDto() { Sequence = "blabla" }
+            };
+            CurrentSequences = CurrentFlow.TargetSequences;
         }
     }
 }
