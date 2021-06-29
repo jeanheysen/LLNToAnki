@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LLNToAnki.Facade.Controllers;
+using LLNToAnki.Facade.Dto;
 using LLNToAnki.WPF.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,8 @@ namespace LLNToAnki.WPF.Client
 {
     public interface IFacadeClient
     {
-        FlowModel Flow_GetById(Guid id);
+        void Flow_Create(string path);
+        FlowModel Flow_Get(Guid id);
     }
 
     public class FacadeClient : IFacadeClient
@@ -27,11 +29,16 @@ namespace LLNToAnki.WPF.Client
             mapper = configuration.CreateMapper();
         }
 
-        public FlowModel Flow_GetById(Guid id)
+        public FlowModel Flow_Get(Guid id)
         {
-            var f = flowController.GetById(id);
+            var f = flowController.Get(id);
 
             return mapper.Map<FlowModel>(f);
+        }
+
+        public void Flow_Create(string path)
+        {
+            flowController.Create(path);
         }
     }
 }
