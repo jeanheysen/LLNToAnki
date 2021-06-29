@@ -20,9 +20,8 @@
               VerticalAlignment="Top"
               Height="30"
               Width="104"
-              Command="{Binding AddFlowCommand}"
-              CommandParameter="items.csv"
-              />
+              Command="{Binding Path=AddFlowCommand}"
+              CommandParameter="items.csv" />
       <ListView x:Name="TargetSequenceListView"
                 Grid.Row="1">
          <ListView.View>
