@@ -40,12 +40,12 @@ namespace LLNToAnki.Business.Logic
 
             flows.Add(flow);
 
-            flow.TargetSequences = GetSequences(path);
+            flow.TargetSequences = CreateSequences(path);
 
             return id;
         }
 
-        public List<TargetSequence> GetSequences(string filePath)
+        public List<TargetSequence> CreateSequences(string filePath)
         {
             var data = dataProvider.GetAllText(filePath);
 

@@ -1,7 +1,11 @@
-﻿namespace LLNToAnki.Domain
+﻿using System;
+
+namespace LLNToAnki.Domain
 {
     public class TargetSequence
     {
+        public Guid Id{ get; set; }
+        
         public string Sequence { get; set; }
 
         public string EpisodTitle { get; set; }

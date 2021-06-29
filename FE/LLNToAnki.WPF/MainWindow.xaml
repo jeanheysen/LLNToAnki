@@ -13,31 +13,45 @@
          <RowDefinition Height="50" />
          <RowDefinition Height="*" />
       </Grid.RowDefinitions>
-      <Button Content="Import"
-              Grid.Row="0"
-              HorizontalAlignment="Center"
-              Margin="0,10,0,0"
-              VerticalAlignment="Top"
-              Height="30"
-              Width="104"
-              Command="{Binding Path=AddFlowCommand}"
-              CommandParameter="items.csv" />
-      
+      <StackPanel Grid.Row="0"
+                  Orientation="Horizontal">
+         <Button Content="Import"
+                 HorizontalAlignment="Center"
+                 Margin="0,10,0,0"
+                 VerticalAlignment="Top"
+                 Height="30"
+                 Width="104"
+                 Command="{Binding Path=AddFlowCommand}"
+                 CommandParameter="items.csv" />
+         <Button Content="Send to Anki"
+                 HorizontalAlignment="Center"
+                 Margin="0,10,0,0"
+                 VerticalAlignment="Top"
+                 Height="30"
+                 Width="104"
+                 Command="{Binding Path=SendSequencesCommand}"
+                 CommandParameter="null"
+                 >
+
+         </Button>
+      </StackPanel>
+
+
       <ListView x:Name="TargetSequenceListView"
                 Grid.Row="1"
                 ItemsSource="{Binding CurrentFlow.TargetSequences, Mode=OneWay}">
          <ListView.View>
             <GridView>
                <GridView.Columns>
-                  
+
                   <GridViewColumn x:Name="TargetSequenceColumn">
                      <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                           <TextBlock Text="{Binding Sequence}"/>
+                           <TextBlock Text="{Binding Sequence}" />
                         </DataTemplate>
                      </GridViewColumn.CellTemplate>
                   </GridViewColumn>
-               
+
                </GridView.Columns>
             </GridView>
          </ListView.View>

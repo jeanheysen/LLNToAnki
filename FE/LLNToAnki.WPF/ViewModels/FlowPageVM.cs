@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
@@ -42,12 +43,21 @@ namespace LLNToAnki.WPF.ViewModels
 
         //commands
         public ICommand AddFlowCommand { get; set; }
+        public ICommand SendSequencesCommand { get; set; }
 
         public FlowPageVM(IFacadeClient facadeClient)
         {
             this.facadeClient = facadeClient;
 
             AddFlowCommand = new DelegateCommand<string>(s => AddFlow(s));
+            SendSequencesCommand = new DelegateCommand(SendSequences);
+        }
+
+        private void SendSequences()
+        {
+            foreach (var id in CurrentFlow.TargetSequences.Select(s=>s.Id))
+            {
+            }
         }
 
         private void AddFlow(string s)

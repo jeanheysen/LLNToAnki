@@ -1,5 +1,6 @@
 ﻿using LLNToAnki.Business.Ports;
 using LLNToAnki.Domain;
+using System;
 
 namespace LLNToAnki.Business.Logic
 {
@@ -29,6 +30,8 @@ namespace LLNToAnki.Business.Logic
 
             return new TargetSequence()
             {
+                Id = Guid.NewGuid(),
+
                 Sequence = GetWord(html),
 
                 EpisodTitle = GetTitle(html),
