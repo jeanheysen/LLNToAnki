@@ -1,6 +1,7 @@
 ﻿using LLNToAnki.Business.Logic;
 using LLNToAnki.Business.Ports;
 using LLNToAnki.Infrastructure.AnkiConnecting;
+using LLNToAnki.Infrastructure.DataStoring;
 using LLNToAnki.Infrastructure.HTMLScrapping;
 using LLNToAnki.Infrastructure.ReadingWriting;
 using LLNToAnki.Infrastructure.URLBuilding;
@@ -14,11 +15,12 @@ namespace ZXTests
         protected IDataWriter FileWriter { get; }
         protected IDataScraper HtmlScraper { get; }
         protected ITargetSequenceBuilder WordItemBuilder { get; }
-        protected AnkiNoteExporter AnkiNoteExporter { get; }
-        protected AnkiNoteBL AnkiNoteBL { get; }
+        protected IAnkiNoteExporter AnkiNoteExporter { get; }
+        protected IAnkiNoteBL AnkiNoteBL { get; }
         protected ISnapshotBL LLNItemsBuilder { get; }
         protected IConnectNoteBuilder ConnectNoteBuilder { get; }
         protected IConnectNotePoster ConnectNotePoster { get; }
+        protected IContextProvider ContextProvider { get; }
         protected Processor Processor { get; }
 
         protected Mock<ITranslationDetailer> TranslationsProviderMock { get; }
@@ -44,10 +46,11 @@ namespace ZXTests
             LLNItemsBuilder = new SnapshotBL();
             ConnectNoteBuilder = new ConnectNoteBuilder();
             ConnectNotePoster = new ConnectNotePoster();
+            ContextProvider = new ContextProvider();
 
             var snapshotBL = new SnapshotBL();
             var targetSequenceBuilder = new TargetSequenceBuilder(HtmlScraper);
-            var targetSequenceBL = new TargetSequenceBL(targetSequenceBuilder);
+            var targetSequenceBL = new TargetSequenceBL(ContextProvider, targetSequenceBuilder);
 
 
             Processor = new Processor(DataProvider, snapshotBL, targetSequenceBL, AnkiNoteBL, ConnectNoteBuilder, ConnectNotePoster);

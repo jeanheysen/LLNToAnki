@@ -16,7 +16,7 @@ namespace LLNToAnki.Business.Logic
     public class FlowBL : IFlowBL
     {
         //fields
-        private List<Flow> flows;
+        private readonly IContextProvider contextProvider;
 
         //services
         private readonly IDataProvider dataProvider;
@@ -24,9 +24,9 @@ namespace LLNToAnki.Business.Logic
         private readonly ITargetSequenceBL targetSequenceBL;
 
         [System.ComponentModel.Composition.ImportingConstructor]
-        public FlowBL(IDataProvider dataProvider, ISnapshotBL snapshotBL, ITargetSequenceBL targetSequenceBL)
+        public FlowBL(IContextProvider contextProvider, IDataProvider dataProvider, ISnapshotBL snapshotBL, ITargetSequenceBL targetSequenceBL)
         {
-            flows = new List<Flow>();
+            this.contextProvider = contextProvider;
             this.dataProvider = dataProvider;
             this.snapshotBL = snapshotBL;
             this.targetSequenceBL = targetSequenceBL;
@@ -38,7 +38,7 @@ namespace LLNToAnki.Business.Logic
 
             var flow = new Flow() { Id = id };
 
-            flows.Add(flow);
+            contextProvider.Context.Flows.Add(flow);
 
             flow.TargetSequences = CreateSequences(path);
 
@@ -64,7 +64,7 @@ namespace LLNToAnki.Business.Logic
 
         public Flow GetById(Guid id)
         {
-            return flows.FirstOrDefault(f => f.Id == id);
+            return contextProvider.Context.Flows.FirstOrDefault(f => f.Id == id);
         }
     }
 }

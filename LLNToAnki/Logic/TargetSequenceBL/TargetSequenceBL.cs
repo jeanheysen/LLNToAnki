@@ -1,4 +1,5 @@
-﻿using LLNToAnki.Domain;
+﻿using LLNToAnki.Business.Ports;
+using LLNToAnki.Domain;
 using System;
 
 namespace LLNToAnki.Business.Logic
@@ -12,13 +13,16 @@ namespace LLNToAnki.Business.Logic
     [System.ComponentModel.Composition.Export(typeof(ITargetSequenceBL)), System.Composition.Shared]
     public class TargetSequenceBL : ITargetSequenceBL
     {
+        private readonly IContextProvider contextProvider;
+
         //services
         private readonly ITargetSequenceBuilder targetSequenceBuilder;
 
         //constructor
         [System.ComponentModel.Composition.ImportingConstructor]
-        public TargetSequenceBL(ITargetSequenceBuilder targetSequenceBuilder)
+        public TargetSequenceBL(IContextProvider contextProvider, ITargetSequenceBuilder targetSequenceBuilder)
         {
+            this.contextProvider = contextProvider;
             this.targetSequenceBuilder = targetSequenceBuilder;
         }
 

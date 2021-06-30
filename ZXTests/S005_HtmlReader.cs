@@ -31,7 +31,7 @@ namespace ZXTests
         }
 
         [Test]
-        public void T002_DirectDownloadFromMWBSavesA26KoFileInLessThanASec()
+        public void T002_DirectDownloadFromMWBSavesA26KoFileInLessThan2Sec()
         {
             //Arrange
             var urlBuilder = new MijnWordenboekURLBuilder();
@@ -43,7 +43,7 @@ namespace ZXTests
 
             //Assert
             sw.Stop();
-            Assert.Less(sw.ElapsedMilliseconds, 1000);
+            Assert.Less(sw.ElapsedMilliseconds, 2000);
             Assert.Greater(File.ReadAllText(GetPathInTmp("brood.html")).Length, 26000);
         }
 
