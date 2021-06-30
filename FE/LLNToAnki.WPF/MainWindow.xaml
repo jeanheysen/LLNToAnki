@@ -16,6 +16,7 @@
       <Grid.RowDefinitions>
          <RowDefinition Height="50" />
          <RowDefinition Height="*" />
+         <RowDefinition Height="25" />
       </Grid.RowDefinitions>
       <StackPanel Grid.Row="0"
                   Orientation="Horizontal">
@@ -79,6 +80,14 @@
             </GridView>
          </ListView.View>
       </ListView>
+
+      <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+         <TextBlock Text="Progress Bar"/>
+         <ProgressBar Minimum="0"
+                      Maximum="100"
+                      Width="200"
+                      Value="{Binding Progress, Mode=OneWay}" />
+      </StackPanel>
 
    </Grid>
 </Window>

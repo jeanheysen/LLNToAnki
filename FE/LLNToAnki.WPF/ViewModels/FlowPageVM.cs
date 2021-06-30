@@ -42,12 +42,25 @@ namespace LLNToAnki.WPF.ViewModels
             }
         }
         public List<LanguageDto> Languages { get; set; }
+        private int progress;
+        public int Progress
+        {
+            get
+            {
+                return progress;
+            }
+            set
+            {
+                progress = value;
+                OnPropertyChanged("Progress");
+            }
+        }
 
         //commands
         public ICommand AddFlowCommand { get; set; }
         public ICommand SendSequencesCommand { get; set; }
         public ICommand ChangeLanguageCommand { get; set; }
-        
+
 
         public FlowPageVM(IFacadeClient facadeClient)
         {
@@ -62,7 +75,7 @@ namespace LLNToAnki.WPF.ViewModels
 
         private void ChangeLanguage(LanguageDto l)
         {
-            foreach (var item in CurrentFlow.TargetSequences.Select(s=>s.Snapshot))
+            foreach (var item in CurrentFlow.TargetSequences.Select(s => s.Snapshot))
             {
                 facadeClient.Snapshot_UpdateLanguage(item.Id, l.Id);
             }
@@ -70,9 +83,18 @@ namespace LLNToAnki.WPF.ViewModels
 
         private async Task SendSequences()
         {
+            Progress = 0;
+            var count = CurrentFlow.TargetSequences.Count;
+            var it = 0;
+
             foreach (var id in CurrentFlow.TargetSequences.Select(s => s.Id))
             {
                 await facadeClient.TargetSequence_PostToAnki(id);
+
+                it++;
+
+                double d = it * 100 / count;
+                Progress = (int)Math.Round(d, 0);
             }
         }
 
