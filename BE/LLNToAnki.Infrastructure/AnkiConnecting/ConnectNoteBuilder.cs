@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace LLNToAnki.Infrastructure.AnkiConnecting
 {
+    [System.ComponentModel.Composition.Export(typeof(IConnectNoteBuilder)), System.Composition.Shared]
     public class ConnectNoteBuilder : IConnectNoteBuilder
     {
         public IConnectNote Build(AnkiNote ankiNote)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace LLNToAnki.Infrastructure.AnkiConnecting
 {
+    [System.ComponentModel.Composition.Export(typeof(IConnectNotePoster)), System.Composition.Shared]
     public class ConnectNotePoster : IConnectNotePoster
     {
         private HttpClient client;

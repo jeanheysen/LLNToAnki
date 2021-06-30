@@ -4,12 +4,14 @@ using LLNToAnki.Infrastructure.URLBuilding;
 
 namespace LLNToAnki.Infrastructure.HTMLScrapping
 {
-    public class DetailerFactory
+    [System.ComponentModel.Composition.Export(typeof(IDictionaryAbstractFactory)), System.Composition.Shared]
+    public class DictionaryAbstractFactory : IDictionaryAbstractFactory
     {
         private readonly IDataScraper scraper;
-        private readonly htmlReader websiteReader;
+        private readonly IHtmlReader websiteReader;
 
-        public DetailerFactory( IDataScraper scraper, htmlReader websiteReader)
+        [System.ComponentModel.Composition.ImportingConstructor]
+        public DictionaryAbstractFactory(IDataScraper scraper, IHtmlReader websiteReader)
         {
             this.scraper = scraper;
             this.websiteReader = websiteReader;

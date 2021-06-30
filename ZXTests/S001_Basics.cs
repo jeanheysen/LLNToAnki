@@ -148,7 +148,7 @@ namespace ZXTests
             string text = DataProvider.GetAllText(GetPathInData("TwoWords_backbench_disregard.csv"));
 
             //Act
-            var llnItems = LLNItemsBuilder.Create(text);
+            var llnItems = SnapshotBL.Create(text);
 
             //Assert
             Assert.AreEqual(2, llnItems.Count);

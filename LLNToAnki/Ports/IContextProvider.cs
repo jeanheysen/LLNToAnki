@@ -12,5 +12,7 @@ namespace LLNToAnki.Business.Ports
     {
         List<Flow> Flows { get; }
         List<TargetSequence> TargetSequences { get; }
+        List<Snapshot> Snapshots { get; }
+        List<Language> Languages { get; }
     }
 }

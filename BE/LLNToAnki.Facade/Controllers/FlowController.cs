@@ -12,6 +12,7 @@ namespace LLNToAnki.Facade.Controllers
         FlowDto Get(Guid flowId);
     }
 
+    [System.ComponentModel.Composition.Export(typeof(IFlowController)), System.Composition.Shared]
     public class FlowController : IFlowController
     {
         private readonly IFlowBL flowBL;
@@ -19,7 +20,7 @@ namespace LLNToAnki.Facade.Controllers
 
         public FlowController()
         {
-            flowBL = Mef.Container.GetExportedValue<IFlowBL>();
+            flowBL = Mef.Container.GetExportedValue<IFlowBL>(); //todo dans le constructeur
 
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(typeof(MappingProfile)));
 

@@ -10,5 +10,7 @@ namespace LLNToAnki.Facade.Dto
         public string Sequence { get; set; }
 
         public string EpisodTitle { get; set; }
+
+        public SnapshotDto Snapshot { get; set; }
     }
 }

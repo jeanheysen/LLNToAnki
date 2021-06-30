@@ -11,6 +11,7 @@ namespace LLNToAnki.Business.Logic
         void Export(string path, IReadOnlyList<AnkiNote> notes);
     }
 
+    [System.ComponentModel.Composition.Export(typeof(IAnkiNoteBL)), System.Composition.Shared]
     public class AnkiNoteBL : IAnkiNoteBL
     {
         private readonly IAnkiNoteBuilder ankiNoteBuilder;

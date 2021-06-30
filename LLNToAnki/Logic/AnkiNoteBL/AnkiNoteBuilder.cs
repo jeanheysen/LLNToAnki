@@ -9,13 +9,15 @@ namespace LLNToAnki.Business.Logic
         AnkiNote Create(TargetSequence item);
     }
 
+    [System.ComponentModel.Composition.Export(typeof(IAnkiNoteBuilder)), System.Composition.Shared]
     public class AnkiNoteBuilder : IAnkiNoteBuilder
     {
-        private readonly ITranslationDetailer translationsProvider;
+        private readonly IDictionaryAbstractFactory dictionaryAbstractFactory;
 
-        public AnkiNoteBuilder(ITranslationDetailer translationsProvider)
+        [System.ComponentModel.Composition.ImportingConstructor]
+        public AnkiNoteBuilder(IDictionaryAbstractFactory dictionaryAbstractFactory)
         {
-            this.translationsProvider = translationsProvider;
+            this.dictionaryAbstractFactory = dictionaryAbstractFactory;
         }
 
         public AnkiNote Create(TargetSequence item)
@@ -29,27 +31,29 @@ namespace LLNToAnki.Business.Logic
 
             note.Audio = item.Audio;
 
-            note.Source = BuildSource(item.Sequence);
+            var translationsProvider = dictionaryAbstractFactory.Provide(item.SnapShot.Language);
 
-            note.After = BuildAfter(item.Translation, item.Sequence);
+            note.Source = BuildSource(item.Sequence, translationsProvider);
+
+            note.After = BuildAfter(item.Translation, item.Sequence, translationsProvider);
 
             return note;
         }
 
-        private string BuildSource(string word)
+        private string BuildSource(string word, ITranslationDetailer detailer)
         {
-            var url = translationsProvider.UrlBuilder.CreateURL(word);
+            var url = detailer.UrlBuilder.CreateURL(word);
 
             return $"<a href=\"{url}\">{url}</a>";
         }
 
-        private string BuildAfter(string sentence, string word)
+        private string BuildAfter(string sentence, string word, ITranslationDetailer detailer)
         {
             var sb = new StringBuilder();
 
             sb.Append($"Traduction Netflix : \"{sentence}\".");
 
-            var translations = translationsProvider.GetAll(word);
+            var translations = detailer.GetAll(word);
 
             sb.Append(translations);
 

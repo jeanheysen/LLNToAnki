@@ -8,11 +8,11 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
     public class MijnWordenboekDetailer : ITranslationDetailer
     {
         public IURLBuilder UrlBuilder { get; }
-        private htmlReader htmlReader;
+        private IHtmlReader htmlReader;
         private IDataScraper scraper;
 
 
-        public MijnWordenboekDetailer(IURLBuilder urlBuilder, IDataScraper scraper, htmlReader htmlReader)
+        public MijnWordenboekDetailer(IURLBuilder urlBuilder, IDataScraper scraper, IHtmlReader htmlReader)
         {
             this.UrlBuilder = urlBuilder;
 

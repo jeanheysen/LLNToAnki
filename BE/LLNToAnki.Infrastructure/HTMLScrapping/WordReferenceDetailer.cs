@@ -7,11 +7,11 @@ namespace LLNToAnki.Infrastructure.HTMLScrapping
     public class WordReferenceDetailer : ITranslationDetailer
     {
         public IURLBuilder UrlBuilder { get; }
-        private htmlReader websiteReader;
+        private IHtmlReader websiteReader;
         private IDataScraper scraper;
 
 
-        public WordReferenceDetailer(IURLBuilder urlBuilder, IDataScraper scraper, htmlReader websiteReader)
+        public WordReferenceDetailer(IURLBuilder urlBuilder, IDataScraper scraper, IHtmlReader websiteReader)
         {
             this.UrlBuilder = urlBuilder;
 

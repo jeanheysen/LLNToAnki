@@ -1,7 +1,9 @@
-﻿using LLNToAnki.Facade.Controllers;
+﻿using LLNToAnki.Business;
+using LLNToAnki.Facade.Controllers;
 using LLNToAnki.WPF.Client;
 using LLNToAnki.WPF.ViewModels;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace LLNToAnki.WPF
 {
@@ -13,8 +15,16 @@ namespace LLNToAnki.WPF
         {
             InitializeComponent();
 
-            DataContext = new FlowPageVM(new FacadeClient(new FlowController()));
+            var facadeClient = new FacadeClient();
+            
+            DataContext = new FlowPageVM(facadeClient);
         }
 
+        private void LanguageCombobox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var cb = sender as ComboBox;
+
+            ViewModel.ChangeLanguageCommand.Execute(cb.SelectedItem);
+        }
     }
 }

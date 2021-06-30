@@ -1,17 +1,17 @@
 ﻿using System;
 
-namespace LLNToAnki.Domain
+namespace LLNToAnki.Facade.Dto
 {
-    public class Snapshot
+    public class SnapshotDto
     {
         public Guid Id { get; set; }
-        
+
         public string HtmlContent { get; set; }
-        
+
         public string Audio { get; set; }
-        
+
         public string Tag { get; set; }
 
-        public Language Language { get; set; }
+        public LanguageDto Language { get; set; }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace LLNToAnki.Domain
+namespace LLNToAnki.Facade.Dto
 {
-    public class Language
+    public class LanguageDto
     {
         public Guid Id { get; set; }
-        
+
         public string Name { get; set; }
     }
 }
-

@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace LLNToAnki.WPF.ViewModels
@@ -40,23 +41,38 @@ namespace LLNToAnki.WPF.ViewModels
                 OnPropertyChanged("CurrentFlow");
             }
         }
+        public List<LanguageDto> Languages { get; set; }
 
         //commands
         public ICommand AddFlowCommand { get; set; }
         public ICommand SendSequencesCommand { get; set; }
+        public ICommand ChangeLanguageCommand { get; set; }
+        
 
         public FlowPageVM(IFacadeClient facadeClient)
         {
             this.facadeClient = facadeClient;
 
             AddFlowCommand = new DelegateCommand<string>(s => AddFlow(s));
-            SendSequencesCommand = new DelegateCommand(SendSequences);
+            SendSequencesCommand = new DelegateCommand(async () => await SendSequences());
+            ChangeLanguageCommand = new DelegateCommand<LanguageDto>(l => ChangeLanguage(l));
+
+            Languages = facadeClient.Language_GetAll();
         }
 
-        private void SendSequences()
+        private void ChangeLanguage(LanguageDto l)
         {
-            foreach (var id in CurrentFlow.TargetSequences.Select(s=>s.Id))
+            foreach (var item in CurrentFlow.TargetSequences.Select(s=>s.Snapshot))
             {
+                facadeClient.Snapshot_UpdateLanguage(item.Id, l.Id);
+            }
+        }
+
+        private async Task SendSequences()
+        {
+            foreach (var id in CurrentFlow.TargetSequences.Select(s => s.Id))
+            {
+                await facadeClient.TargetSequence_PostToAnki(id);
             }
         }
 

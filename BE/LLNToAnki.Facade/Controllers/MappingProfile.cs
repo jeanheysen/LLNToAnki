@@ -12,6 +12,12 @@ namespace LLNToAnki.Facade.Controllers
 
             CreateMap<TargetSequenceDto, TargetSequence>().MaxDepth(3);
             CreateMap<TargetSequence, TargetSequenceDto>().MaxDepth(3);
+
+            CreateMap<LanguageDto, Language>().MaxDepth(3);
+            CreateMap<Language, LanguageDto>().MaxDepth(3);
+
+            CreateMap<SnapshotDto, Snapshot>().MaxDepth(3);
+            CreateMap<Snapshot, SnapshotDto>().MaxDepth(3);
         }
     }
 }

@@ -2,6 +2,7 @@
 using LLNToAnki.Domain;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LLNToAnki.Business.Logic
@@ -9,34 +10,29 @@ namespace LLNToAnki.Business.Logic
     public interface ILanguageBL
     {
         List<Language> GetAll();
-        Language GetFromAcronymeOrDefault(string acronyme);
+        
+        Language GetById(Guid languageId);
     }
 
+    [System.ComponentModel.Composition.Export(typeof(ILanguageBL)), System.Composition.Shared]
     public class LanguageBL : ILanguageBL
     {
-        private Language defaultLanguage;
+        private readonly IContextProvider contextProvider;
 
-        public LanguageBL()
+        [System.ComponentModel.Composition.ImportingConstructor]
+        public LanguageBL(IContextProvider contextProvider)
         {
-            defaultLanguage = new Language() { Name = "English" };
+            this.contextProvider = contextProvider;
         }
 
         public List<Language> GetAll()
         {
-            return new List<Language>()
-            {
-                new Language(){Name="Dutch"},
-                new Language(){Name="English"}
-            };
+            return contextProvider.Context.Languages;
         }
 
-        public Language GetFromAcronymeOrDefault(string acronyme)
+        public Language GetById(Guid id)
         {
-            if (acronyme == "en") return new Language() { Name = "English" };
-            
-            else if (acronyme == "nl") return new Language() { Name = "Dutch" };
-            
-            else return defaultLanguage;
+            return contextProvider.Context.Languages.First(l => l.Id == id);
         }
     }
 }

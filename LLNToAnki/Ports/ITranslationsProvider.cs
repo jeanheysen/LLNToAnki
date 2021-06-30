@@ -6,9 +6,4 @@
 
         string GetAll(string word);
     }
-
-    public interface IURLBuilder
-    {
-        string CreateURL(string word);
-    }
 }

@@ -10,7 +10,7 @@ namespace ZXTests
 {
     public class S005_HtmlReader : BaseIntegrationTesting
     {
-        private htmlReader htmlreader;
+        private IHtmlReader htmlreader;
 
         [OneTimeSetUp]
         public void OneTimeSetup()

@@ -24,9 +24,9 @@ namespace LLNToAnki.Business.Logic
 
 
         //METHODS
-        public TargetSequence Build(Snapshot llnItem)
+        public TargetSequence Build(Snapshot snapshot)
         {
-            var html = llnItem.HtmlContent;
+            var html = snapshot.HtmlContent;
 
             return new TargetSequence()
             {
@@ -40,7 +40,9 @@ namespace LLNToAnki.Business.Logic
 
                 Translation = GetTranslation(html),
 
-                Audio = llnItem.Audio
+                Audio = snapshot.Audio,
+
+                SnapShot = snapshot
             };
         }
 
