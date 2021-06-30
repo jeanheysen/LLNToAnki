@@ -159,6 +159,7 @@ namespace ZXTests
         {
             //Arrange
             var item = new TargetSequence { Sequence = "bread" };
+            item.SnapShot = new Snapshot() { Language = ContextProvider.Context.Languages.First(l => l.Name == "English") };
 
             //Act
             var note = AnkiNoteBL.Create(item);
@@ -188,6 +189,7 @@ namespace ZXTests
         {
             //Arrange
             var item = new TargetSequence { Translation = "c'est la traduction" };
+            item.SnapShot = new Snapshot() { Language = ContextProvider.Context.Languages.First(l => l.Name == "English") };
 
             //Act
             var note = AnkiNoteBL.Create(item);
