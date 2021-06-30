@@ -1,6 +1,6 @@
 ﻿namespace LLNToAnki.Business.Ports
 {
-    public interface IDataProvider
+    public interface IDataImporter
     {
         string GetAllText(string url);
     }

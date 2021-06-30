@@ -8,14 +8,14 @@ namespace LLNToAnki.Business.Logic
 {
     public class Processor
     {
-        private readonly IDataProvider dataProvider;
+        private readonly IDataImporter dataImporter;
         private readonly ISnapshotBL snapshotBL;
         private readonly ITargetSequenceBL targetSequenceBL;
         private readonly IAnkiNoteBL ankiNoteBuilder;
         private readonly IConnectNoteBuilder connectNoteBuilder;
         private readonly IConnectNotePoster connectNotePoster;
 
-        public Processor(IDataProvider dataProvider,
+        public Processor(IDataImporter dataImporter,
             ISnapshotBL snapshotBL,
             ITargetSequenceBL targetSequenceBL,
             IAnkiNoteBL ankiNoteBuilder,
@@ -23,7 +23,7 @@ namespace LLNToAnki.Business.Logic
             IConnectNotePoster connectNotePoster
             )
         {
-            this.dataProvider = dataProvider;
+            this.dataImporter = dataImporter;
             this.snapshotBL = snapshotBL;
             this.targetSequenceBL = targetSequenceBL;
             this.ankiNoteBuilder = ankiNoteBuilder;
@@ -34,7 +34,7 @@ namespace LLNToAnki.Business.Logic
 
         public int PushToAnkiThroughAPI(string filePath, int nbOfItemsToParse)
         {
-            var data = dataProvider.GetAllText(filePath);
+            var data = dataImporter.GetAllText(filePath);
 
             var llnItems = snapshotBL.Create(data);
 

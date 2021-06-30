@@ -11,7 +11,7 @@ namespace ZXTests
 {
     public class BaseIntegrationTesting : BaseTesting
     {
-        protected IDataProvider DataProvider { get; }
+        protected IDataImporter DataProvider { get; }
         protected IDataWriter FileWriter { get; }
         protected IDataScraper HtmlScraper { get; }
         protected ITargetSequenceBuilder WordItemBuilder { get; }

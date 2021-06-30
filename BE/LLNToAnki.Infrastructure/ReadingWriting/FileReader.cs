@@ -3,8 +3,8 @@ using System.IO;
 
 namespace LLNToAnki.Infrastructure.ReadingWriting
 {
-    [System.ComponentModel.Composition.Export(typeof(IDataProvider)), System.Composition.Shared]
-    public class FileReader : IDataProvider
+    [System.ComponentModel.Composition.Export(typeof(IDataImporter)), System.Composition.Shared]
+    public class FileReader : IDataImporter
     {
         public string GetAllText(string url)
         {

@@ -19,15 +19,15 @@ namespace LLNToAnki.Business.Logic
         private readonly IContextProvider contextProvider;
 
         //services
-        private readonly IDataProvider dataProvider;
+        private readonly IDataImporter dataImporter;
         private readonly ISnapshotBL snapshotBL;
         private readonly ITargetSequenceBL targetSequenceBL;
 
         [System.ComponentModel.Composition.ImportingConstructor]
-        public FlowBL(IContextProvider contextProvider, IDataProvider dataProvider, ISnapshotBL snapshotBL, ITargetSequenceBL targetSequenceBL)
+        public FlowBL(IContextProvider contextProvider, IDataImporter dataProvider, ISnapshotBL snapshotBL, ITargetSequenceBL targetSequenceBL)
         {
             this.contextProvider = contextProvider;
-            this.dataProvider = dataProvider;
+            this.dataImporter = dataProvider;
             this.snapshotBL = snapshotBL;
             this.targetSequenceBL = targetSequenceBL;
         }
@@ -47,7 +47,7 @@ namespace LLNToAnki.Business.Logic
 
         public List<TargetSequence> CreateSequences(string filePath)
         {
-            var data = dataProvider.GetAllText(filePath);
+            var data = dataImporter.GetAllText(filePath);
 
             var llnItems = snapshotBL.Create(data);
 
