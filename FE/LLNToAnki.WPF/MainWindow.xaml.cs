@@ -26,5 +26,15 @@ namespace LLNToAnki.WPF
 
             ViewModel.ChangeLanguageCommand.Execute(cb.SelectedItem);
         }
+
+        private void CommandBinding_CanExecute(object sender, System.Windows.Input.CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void CommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
+        {
+            ViewModel.AddFlowCommand.Execute("items.csv");
+        }
     }
 }

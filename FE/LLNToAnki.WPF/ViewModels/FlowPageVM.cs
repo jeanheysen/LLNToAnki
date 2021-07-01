@@ -66,7 +66,7 @@ namespace LLNToAnki.WPF.ViewModels
         {
             this.facadeClient = facadeClient;
 
-            AddFlowCommand = new DelegateCommand<string>(s => AddFlow(s));
+            AddFlowCommand = new DelegateCommand<string>(s => AddFlow(s)); //todo essayer une relaycommand plutot c'est natif wpf
             SendSequencesCommand = new DelegateCommand(async () => await SendSequences());
             ChangeLanguageCommand = new DelegateCommand<LanguageDto>(l => ChangeLanguage(l));
 

@@ -12,32 +12,35 @@
    <Window.Resources>
       <converters:IsNotNullConverter x:Key="IsNotNullConverter" />
    </Window.Resources>
+
+   <Window.CommandBindings>
+      <CommandBinding Command="ApplicationCommands.Open"
+                      CanExecute="CommandBinding_CanExecute"
+                      Executed="CommandBinding_Executed">
+      </CommandBinding>
+   </Window.CommandBindings>
+
    <Grid x:Name="MainGrid">
       <Grid.RowDefinitions>
          <RowDefinition Height="20" />
-         <RowDefinition Height="50" />
+         <RowDefinition Height="40" />
          <RowDefinition Height="*" />
          <RowDefinition Height="20" />
       </Grid.RowDefinitions>
-      <Menu Grid.Row="0">
+
+      <Menu x:Name="PrincipalMenu"
+            Grid.Row="0">
          <MenuItem Header="_File">
             <MenuItem Header="_Open"
-                      Command="{Binding Path=AddFlowCommand}"
-                      CommandParameter="items.csv" />
+                      Command="ApplicationCommands.Open" />
             <Separator />
-            <MenuItem Header="_Exit" />
+            <MenuItem Header="_Exit"
+                      Command="ApplicationCommands.Close" />
          </MenuItem>
       </Menu>
-      <StackPanel Grid.Row="1"
+      <StackPanel x:Name="ButtonsPanel"
+                  Grid.Row="1"
                   Orientation="Horizontal">
-         <Button Content="Import"
-                 HorizontalAlignment="Center"
-                 Margin="10,10,0,0"
-                 VerticalAlignment="Top"
-                 Height="30"
-                 Width="104"
-                 Command="{Binding Path=AddFlowCommand}"
-                 CommandParameter="items.csv" />
 
          <ComboBox Name="LanguageCombobox"
                    ItemsSource="{Binding Languages}"
@@ -46,7 +49,7 @@
                    VerticalContentAlignment="Center"
                    HorizontalContentAlignment="Center"
                    SelectionChanged="LanguageCombobox_SelectionChanged"
-                   Height="30"
+                   Height="20"
                    Width="104">
 
             <ComboBox.ItemTemplate>
@@ -60,7 +63,7 @@
                  HorizontalAlignment="Center"
                  Margin="10,10,0,0"
                  VerticalAlignment="Top"
-                 Height="30"
+                 Height="20"
                  Width="104"
                  Command="{Binding Path=SendSequencesCommand}"
                  IsEnabled="{Binding ElementName=LanguageCombobox, Path=SelectedItem,Converter={StaticResource IsNotNullConverter}}"
@@ -90,7 +93,8 @@
          </ListView.View>
       </ListView>
 
-      <Grid Grid.Row="3">
+      <Grid x:Name="ProgressBarGrid"
+            Grid.Row="3">
          <ProgressBar Minimum="0"
                       Maximum="100"
                       Value="{Binding Progress, Mode=OneWay}"
@@ -99,8 +103,6 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center" />
       </Grid>
-
-
 
    </Grid>
 </Window>
