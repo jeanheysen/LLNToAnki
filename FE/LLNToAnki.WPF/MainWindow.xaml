@@ -14,11 +14,21 @@
    </Window.Resources>
    <Grid x:Name="MainGrid">
       <Grid.RowDefinitions>
+         <RowDefinition Height="20" />
          <RowDefinition Height="50" />
          <RowDefinition Height="*" />
          <RowDefinition Height="20" />
       </Grid.RowDefinitions>
-      <StackPanel Grid.Row="0"
+      <Menu Grid.Row="0">
+         <MenuItem Header="_File">
+            <MenuItem Header="_Open"
+                      Command="{Binding Path=AddFlowCommand}"
+                      CommandParameter="items.csv" />
+            <Separator />
+            <MenuItem Header="_Exit" />
+         </MenuItem>
+      </Menu>
+      <StackPanel Grid.Row="1"
                   Orientation="Horizontal">
          <Button Content="Import"
                  HorizontalAlignment="Center"
@@ -61,7 +71,7 @@
 
 
       <ListView x:Name="TargetSequenceListView"
-                Grid.Row="1"
+                Grid.Row="2"
                 ItemsSource="{Binding CurrentFlow.TargetSequences, Mode=OneWay}">
          <ListView.View>
             <GridView>
@@ -80,7 +90,7 @@
          </ListView.View>
       </ListView>
 
-      <Grid Grid.Row="2">
+      <Grid Grid.Row="3">
          <ProgressBar Minimum="0"
                       Maximum="100"
                       Value="{Binding Progress, Mode=OneWay}"
